@@ -20,7 +20,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import PROFILE_IMAGE from '/assets/IMG_4589.JPG';
 
 // Constants
-const RESUME_PATH = '/CV_Abderrahim_Boussyf_Data.pdf';
+const RESUME_PATH = '/assets/CV_Abderrahim_Boussyf_Data.pdf';
 
 const About = () => {
   const theme = useTheme();
