@@ -30,32 +30,29 @@ import LaunchIcon from '@mui/icons-material/Launch';
 import CloseIcon from '@mui/icons-material/Close';
 import StarIcon from '@mui/icons-material/Star';
 
+// Import project images
+import healthImage from '/assets/image.png';
+import mlImage from '/assets/image_el.png';
+import chessImage from '/assets/chesse_1.jpeg';
+import defaultImage from '/assets/react.svg';
+
 // Filter projects by featured status
 const featuredProjects = PROJECTS.filter(project => project.featured);
 const regularProjects = PROJECTS.filter(project => !project.featured);
 
 // Project image placeholders based on technologies
-// You can customize this function to use your own images by:
-// 1. Adding local images to your assets folder and replacing URLs with paths like "src/assets/llm-project.jpg"
-// 2. Or keeping these Unsplash image URLs or replacing with your preferred online images
 const getProjectImage = (technologies) => {
   // Priority order for determining the image
   if (technologies.includes('LLMs')) {
-    return 'https://images.unsplash.com/photo-1701174256478-58aa23e23db0?q=80&w=1974&auto=format&fit=crop';
+    return mlImage;
   } else if (technologies.includes('Healthcare Analytics') || technologies.includes('Health_Trackr')) {
-    return 'src/assets/image.png';
+    return healthImage;
   } else if (technologies.includes('TensorFlow') || technologies.includes('PyTorch')) {
-    return 'src/assets/image_el.png';
-  } else if (technologies.includes('Apache Spark')) {
-    return 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop';
-  } else if (technologies.includes('AWS')) {
-    return 'https://images.unsplash.com/photo-1609429019987-8fa5a0c7d165?q=80&w=1964&auto=format&fit=crop';
-  } else if (technologies.includes('Python')) {
-    return 'https://images.unsplash.com/photo-1526379879527-8559ecfcaec0?q=80&w=1974&auto=format&fit=crop';
+    return mlImage;
   } else if (technologies.includes('C#')) {
-    return 'src/assets/chesse_1.jpeg';
+    return chessImage;
   } else {
-    return 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1772&auto=format&fit=crop';
+    return defaultImage;
   }
 };
 

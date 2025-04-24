@@ -17,8 +17,10 @@ import SearchIcon from '@mui/icons-material/Search';
 import DownloadIcon from '@mui/icons-material/Download';
 
 // Import profile image properly
-import profileImageSrc from '../assets/IMG_4589.JPG';
-const resumePDF = 'src/assets/CV_Abderrahim_Boussyf_Data.pdf';
+import PROFILE_IMAGE from '/assets/IMG_4589.JPG';
+
+// Constants
+const RESUME_PATH = '/assets/CV_Abderrahim_Boussyf_Data.pdf';
 
 const About = () => {
   const theme = useTheme();
@@ -295,9 +297,9 @@ const About = () => {
                 
                 {/* Profile image */}
                 <Box
-                  component="img"
-                  src={profileImageSrc}
-                  alt="Abderrahim Boussyf - Computer Engineering Student"
+                  component={motion.img}
+                  src={PROFILE_IMAGE}
+                  alt="Profile"
                   loading="lazy"
                   sx={{ 
                     width: '100%',
@@ -372,11 +374,11 @@ const About = () => {
               } : {}}
             >
               <Button 
+                component="a"
+                href={RESUME_PATH}
+                download
                 variant="contained" 
                 color="primary" 
-                href={resumePDF}
-                target="_blank"
-                endIcon={<DownloadIcon />}
                 sx={{ 
                   mt: 4,
                   px: 4,
