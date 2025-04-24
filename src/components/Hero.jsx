@@ -1,309 +1,484 @@
-import React from 'react';
-import { Box, Container, Typography, Button, useTheme } from '@mui/material';
-import Particles from 'react-tsparticles';
-import { loadFull } from 'tsparticles';
+import React, { useEffect } from 'react';
+import { Box, Container, Typography, Button, Grid, useTheme } from '@mui/material';
+import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
-import { motion } from 'framer-motion';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import GitHubIcon from '@mui/icons-material/GitHub';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const Hero = () => {
   const theme = useTheme();
-  const particlesInit = async (engine) => { await loadFull(engine); };
-  const [text] = useTypewriter({ 
-    words: ['AI Engineer', 'Machine Learning Developer', 'Software Engineer', 'Data Scientist'], 
-    loop: 0, 
-    typeSpeed: 70, 
-    deleteSpeed: 50 
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  // Spring animations for smoother mouse follow
+  const springConfig = { damping: 15, stiffness: 150 };
+  const followX = useSpring(mouseX, springConfig);
+  const followY = useSpring(mouseY, springConfig);
+  
+  // Rotate based on mouse position
+  const rotateX = useTransform(followY, [-300, 300], [10, -10]);
+  const rotateY = useTransform(followX, [-300, 300], [-10, 10]);
+
+  // Handle mouse move for the entire hero section
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    mouseX.set(e.clientX - centerX);
+    mouseY.set(e.clientY - centerY);
+  };
+
+  // Typewriter effect
+  const [typewriterText] = useTypewriter({
+    words: ['Data Scientist', 'ML Engineer', 'AI Developer', 'Tech Enthusiast'],
+    loop: true,
+    delaySpeed: 2000,
   });
 
-  return (
-    <Box 
-      component={motion.div} 
-      initial={{ opacity: 0 }} 
-      animate={{ opacity: 1 }} 
-      transition={{ duration: 1 }} 
-      sx={{ 
-        position: 'relative', 
-        width: '100%', 
-        height: '100vh',
-        overflow: 'hidden',
-      }}
-    >
-      {/* Glowing orbs */}
-      <Box 
-        component={motion.div}
-        animate={{ 
-          y: [20, 0, 20],
-          rotate: [0, 5, 0],
-        }}
-        transition={{ 
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        sx={{ 
-          position: 'absolute',
-          top: '15%',
-          right: '10%',
-          width: { xs: 100, sm: 150, md: 200 },
-          height: { xs: 100, sm: 150, md: 200 },
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, rgba(99, 102, 241, 0) 70%)',
-          filter: 'blur(40px)',
-          opacity: 0.8,
-          zIndex: 0,
-        }}
-      />
-      
-      <Box 
-        component={motion.div}
-        animate={{ 
-          y: [0, 15, 0],
-          rotate: [0, -5, 0],
-        }}
-        transition={{ 
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 0.5,
-        }}
-        sx={{ 
-          position: 'absolute',
-          bottom: '20%',
-          left: '15%',
-          width: { xs: 120, sm: 180, md: 250 },
-          height: { xs: 120, sm: 180, md: 250 },
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(236, 72, 153, 0.3) 0%, rgba(236, 72, 153, 0) 70%)',
-          filter: 'blur(40px)',
-          opacity: 0.7,
-          zIndex: 0,
-        }}
-      />
+  // Generate random shape positions
+  const generateShapes = (count) => {
+    const shapes = [];
+    for (let i = 0; i < count; i++) {
+      shapes.push({
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: 10 + Math.random() * 40,
+        rotation: Math.random() * 360,
+        shape: Math.floor(Math.random() * 3), // 0: square, 1: circle, 2: triangle
+        color: i % 2 === 0 ? theme.palette.primary.main : theme.palette.secondary.main,
+        delay: i * 0.1,
+      });
+    }
+    return shapes;
+  };
 
-      {/* Glassmorphism effect layer */}
+  const shapes = generateShapes(8);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const childVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: 'spring',
+        bounce: 0.4,
+      },
+    },
+  };
+
+  // Neo-brutal elements animations
+  const brutalElementVariants = {
+    hover: {
+      scale: 1.05,
+      rotate: [0, -1, 1, -1, 0],
+      transition: {
+        duration: 0.3,
+      },
+    },
+  };
+
+  return (
+    <Box
+      component="section"
+      sx={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        position: 'relative',
+        overflow: 'hidden',
+        pt: { xs: 12, md: 8 },
+        pb: { xs: 8, md: 8 },
+      }}
+      onMouseMove={handleMouseMove}
+    >
+      {/* Background Elements */}
       <Box
         sx={{
           position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '80%',
-          height: '80%',
-          borderRadius: '30px',
-          background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.3) 0%, rgba(15, 23, 42, 0.1) 100%)',
-          backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255, 255, 255, 0.05)',
-          zIndex: 0,
-          display: { xs: 'none', md: 'block' },
-        }}
-      />
-
-      <Particles 
-        id="tsparticles" 
-        init={particlesInit} 
-        options={{
-          fpsLimit: 60,
-          particles: {
-            color: { value: theme.palette.primary.main },
-            links: { 
-              enable: true, 
-              color: 'rgba(99, 102, 241, 0.3)',
-              opacity: 0.5,
-              width: 1,
-              distance: 150,
-            },
-            move: { 
-              enable: true,
-              speed: 0.8,
-              direction: "none",
-              random: false,
-              outMode: "out",
-            },
-            number: { 
-              density: { enable: true, area: 1200 },
-              value: 60
-            },
-            opacity: {
-              value: 0.3,
-            },
-            size: {
-              value: { min: 1, max: 3 },
-            },
-          },
-          interactivity: { 
-            events: { 
-              onHover: { 
-                enable: true, 
-                mode: "grab",
-                parallax: {
-                  enable: true,
-                  force: 60,
-                  smooth: 20
-                }
-              },
-              onClick: {
-                enable: true,
-                mode: "push"
-              }
-            },
-            modes: {
-              grab: {
-                distance: 140,
-                links: {
-                  opacity: 0.8
-                }
-              },
-              push: {
-                quantity: 4
-              }
-            }
-          },
-          detectRetina: true,
-          background: {
-            color: {
-              value: "transparent"
-            }
-          }
-        }} 
-        style={{ 
-          position: 'absolute', 
-          width: '100%', 
-          height: '100%', 
-          top: 0, 
+          top: 0,
           left: 0,
-          zIndex: 1 
-        }} 
-      />
-      
-      <Box 
-        sx={{ 
-          position: 'relative', 
-          zIndex: 2, 
-          height: '100%', 
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'center', 
-          textAlign: 'center', 
-          px: 2 
+          right: 0,
+          bottom: 0,
+          zIndex: -1,
+          overflow: 'hidden',
         }}
       >
-        <Container maxWidth="lg">
+        {/* Decorative shapes */}
+        {shapes.map((shape, index) => (
           <motion.div
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <Typography 
-              variant="h2" 
-              gutterBottom 
-              sx={{ 
-                fontWeight: 800,
-                background: theme.customGradients.primaryToSecondary,
-                backgroundClip: 'text',
-                textFillColor: 'transparent',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                mb: 2,
-                textShadow: '0 0 40px rgba(99, 102, 241, 0.2)'
-              }}
-            >
-              {text}<Cursor cursorStyle="_" />
-            </Typography>
-          </motion.div>
-          
-          <motion.div
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <Typography 
-              variant="h5" 
-              gutterBottom 
-              sx={{ 
-                color: theme.palette.text.secondary, 
-                mb: 5,
-                maxWidth: '800px',
-                mx: 'auto',
-                lineHeight: 1.5
-              }}
-            >
-              Building intelligent systems that solve real-world problems
-            </Typography>
-          </motion.div>
-          
-          <motion.div
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            style={{ display: 'flex', gap: 16, justifyContent: 'center' }}
-          >
-            <Button 
-              variant="contained" 
-              color="primary" 
-              href="#projects"
-              size="large"
-              sx={{ 
-                px: 4, 
-                py: 1.5,
-                background: theme.customGradients.primary,
-                borderRadius: '12px',
-                boxShadow: '0 10px 25px rgba(99, 102, 241, 0.3)'
-              }}
-            >
-              Explore Projects
-            </Button>
-            <Button 
-              variant="outlined" 
-              color="primary" 
-              href="https://github.com/Boussyf0" 
-              target="_blank"
-              startIcon={<GitHubIcon />}
-              size="large"
-              sx={{
-                borderColor: 'rgba(99, 102, 241, 0.5)',
-                backdropFilter: 'blur(5px)',
-                background: 'rgba(99, 102, 241, 0.05)',
-                borderRadius: '12px',
-                borderWidth: '2px',
-                '&:hover': {
-                  borderColor: theme.palette.primary.main,
-                  background: 'rgba(99, 102, 241, 0.1)',
-                  borderWidth: '2px'
-                }
-              }}
-            >
-              GitHub
-            </Button>
-          </motion.div>
-        </Container>
+            key={index}
+            initial={{ 
+              opacity: 0, 
+              x: shape.x + '%', 
+              y: shape.y + '%', 
+              rotate: shape.rotation 
+            }}
+            animate={{ 
+              opacity: [0, 0.5, 0.3],
+              rotate: [shape.rotation, shape.rotation + 10, shape.rotation - 10],
+              scale: [0.9, 1.1, 0.9],
+            }}
+            transition={{
+              repeat: Infinity,
+              repeatType: 'reverse',
+              duration: 10 + Math.random() * 10,
+              delay: shape.delay,
+            }}
+            style={{
+              position: 'absolute',
+              width: shape.size,
+              height: shape.size,
+              backgroundColor: shape.color,
+              opacity: 0.3,
+              zIndex: -1,
+              borderRadius: shape.shape === 1 ? '50%' : shape.shape === 2 ? '0% 50% 50% 50%' : '0%',
+              filter: 'blur(2px)',
+            }}
+          />
+        ))}
+
+        {/* Grid overlay for neo-brutal effect */}
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)',
+            backgroundSize: '40px 40px',
+            opacity: 0.5,
+          }}
+        />
       </Box>
-      
-      {/* Scroll down indicator */}
-      <Box 
-        component={motion.div}
-        animate={{ y: [0, 10, 0] }}
-        transition={{ 
-          duration: 1.5, 
-          repeat: Infinity, 
-          repeatType: "reverse",
-        }}
-        sx={{ 
-          position: 'absolute', 
-          bottom: 30, 
-          left: '50%', 
-          transform: 'translateX(-50%)',
-          zIndex: 2,
-          textAlign: 'center',
-          color: theme.palette.text.secondary,
-        }}
-      >
-        <Typography variant="body2" sx={{ mb: 1, opacity: 0.7 }}>
-          Scroll Down
-        </Typography>
-        <ArrowDownwardIcon color="primary" />
-      </Box>
+
+      <Container maxWidth="lg">
+        <Grid
+          container
+          spacing={4}
+          alignItems="center"
+          component={motion.div}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <Grid item xs={12} md={7} order={{ xs: 2, md: 1 }}>
+            {/* Text Content */}
+            <Box sx={{ position: 'relative' }}>
+              {/* Neo-brutal decorative elements */}
+              <motion.div
+                style={{
+                  position: 'absolute',
+                  top: -30,
+                  left: -20,
+                  width: 80,
+                  height: 15,
+                  background: theme.palette.secondary.main,
+                  zIndex: -1,
+                }}
+                variants={brutalElementVariants}
+                whileHover="hover"
+              />
+
+              <motion.div
+                style={{
+                  position: 'absolute',
+                  top: 30,
+                  right: 100,
+                  width: 15,
+                  height: 80,
+                  background: theme.palette.primary.main,
+                  zIndex: -1,
+                }}
+                variants={brutalElementVariants}
+                whileHover="hover"
+              />
+
+              <motion.div
+                variants={childVariants}
+                className="neo-brutal-text"
+              >
+                <Typography
+                  variant="h2"
+                  component="h1"
+                  sx={{
+                    fontWeight: 800,
+                    mb: 2,
+                    fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4rem' },
+                    letterSpacing: '-0.02em',
+                    textTransform: 'uppercase',
+                    lineHeight: 1.1,
+                    textShadow: '3px 3px 0px rgba(0,0,0,0.2)',
+                    position: 'relative',
+                  }}
+                >
+                  <Box 
+                    sx={{ 
+                      color: theme.palette.text.primary,
+                      display: 'inline',
+                      position: 'relative',
+                      '&::after': {
+                        content: '""',
+                        position: 'absolute',
+                        width: '100%',
+                        height: '0.2em',
+                        background: theme.palette.primary.main,
+                        left: 0,
+                        bottom: '0.1em',
+                        zIndex: -1,
+                      }
+                    }}
+                  >
+                    Abderrahim
+                  </Box>{' '}
+                  <Box 
+                    component="span" 
+                    sx={{ 
+                      color: theme.palette.primary.main,
+                      textShadow: `2px 2px 0px ${theme.palette.secondary.main}`,
+                    }}
+                  >
+                    Boussyf
+                  </Box>
+                </Typography>
+              </motion.div>
+
+              <motion.div variants={childVariants}>
+                <Typography
+                  variant="h3"
+                  sx={{
+                    fontWeight: 600,
+                    mb: 3,
+                    fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
+                    position: 'relative',
+                    display: 'inline-block',
+                  }}
+                >
+                  <Box component="span">I'm a </Box>
+                  <Box 
+                    component="span" 
+                    sx={{ 
+                      color: theme.palette.secondary.main,
+                      position: 'relative',
+                      '&::before': {
+                        content: '""',
+                        position: 'absolute',
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        height: '0.3em',
+                        zIndex: -1,
+                        background: 'rgba(236, 72, 153, 0.3)',
+                      }
+                    }}
+                  >
+                    {typewriterText}
+                  </Box>
+                  <Cursor cursorStyle="_" />
+                </Typography>
+              </motion.div>
+
+              <motion.div variants={childVariants}>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: { xs: '1rem', md: '1.25rem' },
+                    mb: 4,
+                    maxWidth: '600px',
+                    position: 'relative',
+                    borderLeft: `4px solid ${theme.palette.primary.main}`,
+                    pl: 2,
+                    py: 1,
+                  }}
+                >
+                  I build intelligent systems that can understand, learn, and solve complex problems. 
+                  Passionate about pushing the boundaries of AI to create meaningful impact.
+                </Typography>
+              </motion.div>
+
+              <motion.div variants={childVariants} style={{ display: 'flex', gap: '20px' }}>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    href="#projects"
+                    sx={{
+                      py: 1.5,
+                      px: 4,
+                      fontSize: '1rem',
+                      position: 'relative',
+                      overflow: 'hidden',
+                      fontWeight: 600,
+                      boxShadow: '5px 5px 0px rgba(0,0,0,0.2)',
+                      border: '3px solid',
+                      borderColor: 'primary.dark',
+                      transition: 'all 0.2s',
+                      transform: 'skew(-3deg)',
+                      '&:hover': {
+                        transform: 'skew(-3deg) translateY(-5px)',
+                        boxShadow: '7px 7px 0px rgba(0,0,0,0.2)',
+                      }
+                    }}
+                  >
+                    See My Work
+                  </Button>
+                </motion.div>
+
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button
+                    variant="outlined"
+                    endIcon={<ArrowForwardIcon />}
+                    href="#contact"
+                    size="large"
+                    sx={{
+                      py: 1.5,
+                      px: 4,
+                      fontSize: '1rem',
+                      position: 'relative',
+                      fontWeight: 600,
+                      backgroundColor: 'transparent',
+                      border: '3px solid',
+                      transition: 'all 0.2s',
+                      '&:hover': {
+                        transform: 'translateY(-5px)',
+                        backgroundColor: 'rgba(255,255,255,0.05)',
+                      }
+                    }}
+                  >
+                    Contact Me
+                  </Button>
+                </motion.div>
+              </motion.div>
+            </Box>
+          </Grid>
+
+          <Grid
+            item
+            xs={12}
+            md={5}
+            order={{ xs: 1, md: 2 }}
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          >
+            {/* 3D Image Container with Neo-Brutal style */}
+            <motion.div
+              style={{
+                perspective: 800,
+                position: 'relative',
+                width: '100%',
+                maxWidth: 450,
+                height: 450,
+              }}
+              variants={childVariants}
+            >
+              <motion.div
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  rotateX,
+                  rotateY,
+                  position: 'relative',
+                }}
+              >
+                {/* Neo-brutal image frame with glitch effect */}
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '0',
+                    overflow: 'hidden',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    border: '10px solid',
+                    borderColor: 'background.paper',
+                    boxShadow: `
+                      20px 20px 0px ${theme.palette.primary.main},
+                      -20px -20px 0px ${theme.palette.secondary.main}
+                    `,
+                    '&::before': {
+                      content: '""',
+                      position: 'absolute',
+                      top: '10%',
+                      left: '5%',
+                      width: '30%',
+                      height: '5px',
+                      backgroundColor: theme.palette.primary.main,
+                      zIndex: 1,
+                    },
+                    '&::after': {
+                      content: '""',
+                      position: 'absolute',
+                      bottom: '15%',
+                      right: '10%',
+                      width: '5px',
+                      height: '25%',
+                      backgroundColor: theme.palette.secondary.main,
+                      zIndex: 1,
+                    }
+                  }}
+                >
+                  {/* Main image */}
+                  <Box
+                    component="img"
+                    src="/src/assets/IMG_4589.JPG"
+                    alt="Abderrahim Boussyf"
+                    sx={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: 'center top',
+                      filter: 'grayscale(0.2) contrast(1.1)',
+                    }}
+                  />
+                  
+                  {/* Glitch effect layers */}
+                  <Box
+                    component={motion.div}
+                    animate={{
+                      x: [0, -5, 5, -2, 0],
+                      opacity: [0, 0.5, 0.3, 0.7, 0],
+                    }}
+                    transition={{
+                      repeat: Infinity,
+                      repeatType: 'loop',
+                      duration: 5,
+                      repeatDelay: 3,
+                    }}
+                    sx={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      backgroundImage: 'url(/src/assets/IMG_4589.JPG)',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center top',
+                      mixBlendMode: 'color-dodge',
+                      filter: 'hue-rotate(90deg) contrast(1.5)',
+                      opacity: 0,
+                    }}
+                  />
+                </Box>
+              </motion.div>
+            </motion.div>
+          </Grid>
+        </Grid>
+      </Container>
     </Box>
   );
 };

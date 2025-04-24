@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Box, AppBar, Toolbar, Button, Stack, Container, useScrollTrigger, Slide, IconButton, Drawer, List, ListItem, ListItemButton, CssBaseline, useMediaQuery, Typography, Fab, ListItemText } from '@mui/material';
+import { Box, AppBar, Toolbar, Button, Container, useScrollTrigger, Slide, IconButton, Drawer, List, ListItem, CssBaseline, useMediaQuery, Typography, Fab, ListItemText } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import styled from '@emotion/styled';
 import Hero from './components/Hero';
@@ -8,14 +9,15 @@ import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import { ThemeProvider } from '@emotion/react';
-import theme from './theme';
 import { HashLink } from 'react-router-hash-link';
 import { BrowserRouter } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import ThemeToggle from './components/UI/ThemeToggle';
+import { createNeoBrutalTheme, createGlassTheme } from './themes';
+import Lab from './components/Lab';
 
-const NAV_ITEMS = ['Home', 'About', 'Skills', 'Projects', 'Contact'];
+const NAV_ITEMS = ['Home', 'About', 'Skills', 'Projects', 'Lab', 'Contact'];
 // Define common styles for navigation buttons
 const NavButton = styled(Button)`
   color: ${props => props.theme.palette.text.primary};
@@ -92,8 +94,64 @@ function ScrollTop(props) {
 
 function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  
+  const [themeMode, setThemeMode] = useState(() => {
+    // Get saved theme from localStorage or use system preference
+    const savedMode = localStorage.getItem('themeMode');
+    if (savedMode) return savedMode;
+    
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
+  });
+  
+  const [themeStyle, setThemeStyle] = useState(() => {
+    // Get saved theme style from localStorage or default to glass
+    return localStorage.getItem('themeStyle') || 'glass';
+  });
+  
+  // Create the appropriate theme based on mode and style
+  const theme = themeStyle === 'neoBrutal'
+    ? createNeoBrutalTheme(themeMode)
+    : createGlassTheme(themeMode);
+  
+  // Update HTML class for dark mode
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', themeMode === 'dark');
+  }, [themeMode]);
+  
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
   
+  // Save theme preferences to localStorage
+  useEffect(() => {
+    localStorage.setItem('themeMode', themeMode);
+    localStorage.setItem('themeStyle', themeStyle);
+  }, [themeMode, themeStyle]);
+  
+  // Listen for system theme changes
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    const handleChange = (e) => {
+      // Only update if user hasn't manually set a preference
+      if (!localStorage.getItem('themeMode')) {
+        setThemeMode(e.matches ? 'dark' : 'light');
+      }
+    };
+    
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
+  
+  // Toggle theme functions
+  const toggleThemeMode = () => {
+    setThemeMode(prevMode => prevMode === 'dark' ? 'light' : 'dark');
+  };
+  
+  const toggleThemeStyle = () => {
+    setThemeStyle(prevStyle => prevStyle === 'neoBrutal' ? 'glass' : 'neoBrutal');
+  };
+
   // Set viewport meta tag for better mobile rendering
   useEffect(() => {
     const meta = document.createElement('meta');
@@ -125,7 +183,7 @@ function App() {
         height: '100%', 
         display: 'flex', 
         flexDirection: 'column',
-        background: theme.customGradients.dark,
+        background: theme.palette.background.default,
         color: theme.palette.text.primary,
       }}
     >
@@ -136,7 +194,8 @@ function App() {
           justifyContent: 'space-between',
           py: 2, 
           px: 3,
-          borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+          borderBottom: '1px solid',
+          borderColor: 'divider',
         }}
       >
         <Typography variant="h6" component="div" sx={{ fontWeight: 'bold' }}>
@@ -187,52 +246,52 @@ function App() {
           overflowX: 'hidden',
           display: 'flex',
           flexDirection: 'column',
-          background: theme.customGradients.dark,
-          color: theme.palette.text.primary,
           position: 'relative',
         }}>
           {/* Glassmorphism background decorative elements */}
-          <Box 
-            sx={{ 
-              position: 'fixed',
-              top: '10%',
-              right: '5%',
-              width: { xs: 150, sm: 250, md: 400 },
-              height: { xs: 150, sm: 250, md: 400 },
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, rgba(99, 102, 241, 0) 70%)',
-              filter: 'blur(40px)',
-              zIndex: 0,
-            }}
-          />
-          
-          <Box 
-            sx={{ 
-              position: 'fixed',
-              bottom: '15%',
-              left: '10%',
-              width: { xs: 100, sm: 200, md: 300 },
-              height: { xs: 100, sm: 200, md: 300 },
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(236, 72, 153, 0.2) 0%, rgba(236, 72, 153, 0) 70%)',
-              filter: 'blur(40px)',
-              zIndex: 0,
-            }}
-          />
+          {themeStyle === 'glass' && (
+            <>
+              <Box 
+                sx={{ 
+                  position: 'fixed',
+                  top: '10%',
+                  right: '5%',
+                  width: { xs: 150, sm: 250, md: 400 },
+                  height: { xs: 150, sm: 250, md: 400 },
+                  borderRadius: '50%',
+                  background: 'radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, rgba(99, 102, 241, 0) 70%)',
+                  filter: 'blur(40px)',
+                  zIndex: 0,
+                }}
+              />
+              
+              <Box 
+                sx={{ 
+                  position: 'fixed',
+                  bottom: '15%',
+                  left: '10%',
+                  width: { xs: 100, sm: 200, md: 300 },
+                  height: { xs: 100, sm: 200, md: 300 },
+                  borderRadius: '50%',
+                  background: 'radial-gradient(circle, rgba(236, 72, 153, 0.2) 0%, rgba(236, 72, 153, 0) 70%)',
+                  filter: 'blur(40px)',
+                  zIndex: 0,
+                }}
+              />
+            </>
+          )}
           
           <HideOnScroll>
             <AppBar sx={{ 
-              background: 'rgba(15, 23, 42, 0.8)', 
+              bgcolor: 'background.paper',
               backdropFilter: 'blur(12px)',
-              boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
-              borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
             }}>
               <Container maxWidth="lg">
                 <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
                   <Button 
                     href="#home"
                     sx={{ 
-                      color: theme.palette.primary.main, 
+                      color: 'primary.main', 
                       fontWeight: 'bold', 
                       fontSize: '1.2rem',
                       textTransform: 'none',
@@ -256,10 +315,10 @@ function App() {
                           <Button 
                             sx={{ 
                               mx: 0.5,
-                              color: theme.palette.text.primary,
+                              color: 'text.primary',
                               '&:hover': {
                                 backgroundColor: 'rgba(99, 102, 241, 0.1)',
-                                color: theme.palette.primary.main
+                                color: 'primary.main'
                               }
                             }}
                           >
@@ -273,7 +332,7 @@ function App() {
                       aria-label="open drawer"
                       edge="start"
                       onClick={handleDrawerToggle}
-                      sx={{ color: theme.palette.primary.main }}
+                      sx={{ color: 'primary.main' }}
                     >
                       <MenuIcon />
                     </IconButton>
@@ -296,7 +355,7 @@ function App() {
                 '& .MuiDrawer-paper': { 
                   width: 240,
                   boxSizing: 'border-box',
-                  background: 'rgba(15, 23, 42, 0.9)',
+                  bgcolor: 'background.paper',
                   backdropFilter: 'blur(12px)',
                 },
               }}
@@ -326,6 +385,9 @@ function App() {
             <div id="projects">
               <Projects />
             </div>
+            <div id="lab">
+              <Lab />
+            </div>
             <div id="contact">
               <Contact />
             </div>
@@ -338,13 +400,54 @@ function App() {
               size="small" 
               aria-label="scroll back to top"
               sx={{ 
-                boxShadow: '0 4px 14px rgba(99, 102, 241, 0.3)',
-                background: theme.customGradients.primary,
+                boxShadow: '0 4px 14px rgba(0, 0, 0, 0.3)',
               }}
             >
               <KeyboardArrowUpIcon />
             </Fab>
           </ScrollTop>
+
+          {/* Theme Toggles */}
+          <ThemeToggle setMode={toggleThemeMode} mode={themeMode} />
+          
+          {/* Neo-Brutal Style Toggle */}
+          <Box
+            sx={{ 
+              position: 'fixed',
+              bottom: 30, 
+              left: 110,
+              zIndex: 1000,
+              backgroundColor: 'background.paper',
+              border: '3px solid',
+              borderColor: 'primary.main',
+              boxShadow: themeStyle === 'neoBrutal' 
+                ? '5px 5px 0 rgba(0,0,0,0.2)' 
+                : '0 4px 20px rgba(0,0,0,0.1)',
+              p: 0.5,
+              borderRadius: themeStyle === 'neoBrutal' ? 0 : 12,
+              display: { xs: 'none', md: 'flex' },
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              fontWeight: 700,
+              fontSize: '0.7rem',
+              textTransform: 'uppercase',
+              letterSpacing: 1,
+              transition: 'all 0.3s ease',
+              '&:hover': {
+                transform: 'translateY(-3px)',
+                boxShadow: themeStyle === 'neoBrutal' 
+                  ? '7px 7px 0 rgba(0,0,0,0.2)' 
+                  : '0 10px 30px rgba(0,0,0,0.15)',
+              },
+              color: 'text.primary',
+              px: 1,
+              py: 0.5,
+            }}
+            onClick={toggleThemeStyle}
+          >
+            {themeStyle}
+          </Box>
         </Box>
       </BrowserRouter>
     </ThemeProvider>
