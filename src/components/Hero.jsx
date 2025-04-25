@@ -4,6 +4,9 @@ import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
+// Use dynamic base URL for assets
+const PROFILE_IMAGE = `${import.meta.env.BASE_URL}assets/IMG_4589.JPG`;
+
 const Hero = () => {
   const theme = useTheme();
   const mouseX = useMotionValue(0);
@@ -435,7 +438,7 @@ const Hero = () => {
                   {/* Main image */}
                   <Box
                     component="img"
-                    src="/src/assets/IMG_4589.JPG"
+                    src={PROFILE_IMAGE}
                     alt="Abderrahim Boussyf"
                     sx={{
                       width: '100%',
@@ -465,7 +468,7 @@ const Hero = () => {
                       left: 0,
                       width: '100%',
                       height: '100%',
-                      backgroundImage: 'url(/src/assets/IMG_4589.JPG)',
+                      backgroundImage: `url(${PROFILE_IMAGE})`,
                       backgroundSize: 'cover',
                       backgroundPosition: 'center top',
                       mixBlendMode: 'color-dodge',
