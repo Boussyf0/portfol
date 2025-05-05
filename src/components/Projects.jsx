@@ -40,7 +40,7 @@ import jobSearchImage from '/assets/screenshots/job_search_platform.png'; // Imp
 
 // Add video URL for AI Interview Simulator project - use YouTube or other video hosting service
 const PROJECT_VIDEOS = {
-  'ai-interview-simulator': 'https://www.youtube.com/embed/dQw4w9WgXcQ' // Replace with the actual YouTube embed URL once you upload the video
+  'ai-interview-simulator': 'https://www.youtube.com/embed/f9XVrOYdezg' // AI Interview Simulator demo video
 };
 
 // Filter projects by featured status
