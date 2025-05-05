@@ -38,9 +38,9 @@ import chessImage from '/assets/chesse_1.jpeg';
 import defaultImage from '/assets/react.svg';
 import jobSearchImage from '/assets/screenshots/job_search_platform.png'; // Import the job search platform image
 
-// Add video URL for AI Interview Simulator project
+// Add video URL for AI Interview Simulator project - use YouTube or other video hosting service
 const PROJECT_VIDEOS = {
-  'ai-interview-simulator': '/assets/videos/Screen Recording 2025-05-05 at 12.10.14.mov' // Local video file path
+  'ai-interview-simulator': 'https://www.youtube.com/embed/dQw4w9WgXcQ' // Replace with the actual YouTube embed URL once you upload the video
 };
 
 // Filter projects by featured status
@@ -393,17 +393,22 @@ const Projects = () => {
               
               {/* Display video for AI Interview Simulator project, image for others */}
               {PROJECT_VIDEOS[selectedProject.id] ? (
-                <Box sx={{ width: '100%', mb: 3, borderRadius: 2, overflow: 'hidden' }}>
-                  <video
-                    controls
-                    width="100%"
-                    height="auto"
-                    style={{ borderRadius: '8px' }}
-                    poster={getProjectImage(selectedProject.technologies, selectedProject.id)}
-                  >
-                    <source src={PROJECT_VIDEOS[selectedProject.id]} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
+                <Box sx={{ position: 'relative', paddingTop: '56.25%', width: '100%', mb: 3, borderRadius: 2, overflow: 'hidden' }}>
+                  <iframe
+                    style={{ 
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      border: 0,
+                      borderRadius: '8px'
+                    }}
+                    src={PROJECT_VIDEOS[selectedProject.id]}
+                    title={`${selectedProject.title} Demo Video`}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
                 </Box>
               ) : (
                 <CardMedia
