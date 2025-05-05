@@ -37,7 +37,7 @@ import mlImage from '/assets/image_el.png';
 import chessImage from '/assets/chesse_1.jpeg';
 import defaultImage from '/assets/react.svg';
 import jobSearchImage from '/assets/screenshots/job_search_platform.png'; // Import the job search platform image
-import cvMatchingImage from '/assets/screenshots/cv_matching_tool.png'; // Import the CV matching tool image
+import cvAnalyzerImage from '/assets/cv_analyzer.png'; // Import CV analyzer image
 
 // Add video URL for AI Interview Simulator project - use YouTube or other video hosting service
 const PROJECT_VIDEOS = {
@@ -54,7 +54,7 @@ const getProjectImage = (technologies, projectId) => {
   if (projectId === 'ai-interview-simulator') {
     return jobSearchImage;
   } else if (projectId === 'job-matching') {
-    return cvMatchingImage;
+    return cvAnalyzerImage; // Using CV analyzer image for Job Matching Agent
   }
   
   // Then fall back to technology-based images
