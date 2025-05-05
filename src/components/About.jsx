@@ -16,7 +16,7 @@ import StorageRoundedIcon from '@mui/icons-material/StorageRounded';
 import SearchIcon from '@mui/icons-material/Search';
 import DownloadIcon from '@mui/icons-material/Download';
 
-// Import profile image properly with dynamic base URL
+// Profile image path with BASE_URL
 const PROFILE_IMAGE = `${import.meta.env.BASE_URL}assets/LOGO.png`;
 
 // Constants with dynamic base URL

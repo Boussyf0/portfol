@@ -29,20 +29,32 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LaunchIcon from '@mui/icons-material/Launch';
 import CloseIcon from '@mui/icons-material/Close';
 import StarIcon from '@mui/icons-material/Star';
+import VideocamIcon from '@mui/icons-material/Videocam';
 
 // Import project images
 import healthImage from '/assets/image.png';
 import mlImage from '/assets/image_el.png';
 import chessImage from '/assets/chesse_1.jpeg';
 import defaultImage from '/assets/react.svg';
+import jobSearchImage from '/assets/screenshots/job_search_platform.png'; // Import the job search platform image
+
+// Add video URL for AI Interview Simulator project
+const PROJECT_VIDEOS = {
+  'ai-interview-simulator': '/assets/videos/Screen Recording 2025-05-05 at 12.10.14.mov' // Local video file path
+};
 
 // Filter projects by featured status
 const featuredProjects = PROJECTS.filter(project => project.featured);
 const regularProjects = PROJECTS.filter(project => !project.featured);
 
 // Project image placeholders based on technologies
-const getProjectImage = (technologies) => {
-  // Priority order for determining the image
+const getProjectImage = (technologies, projectId) => {
+  // First check for specific project ID match
+  if (projectId === 'ai-interview-simulator') {
+    return jobSearchImage;
+  }
+  
+  // Then fall back to technology-based images
   if (technologies.includes('LLMs')) {
     return mlImage;
   } else if (technologies.includes('Healthcare Analytics') || technologies.includes('Health_Trackr')) {
@@ -190,9 +202,28 @@ const Projects = () => {
                     <CardMedia
                       component="img"
                       height={200}
-                      image={getProjectImage(project.technologies)}
+                      image={getProjectImage(project.technologies, project.id)}
                       alt={project.title}
                     />
+                    {PROJECT_VIDEOS[project.id] && (
+                      <Box 
+                        sx={{
+                          position: 'absolute',
+                          top: 10,
+                          right: 10,
+                          bgcolor: 'rgba(0, 0, 0, 0.6)',
+                          color: 'white',
+                          p: 0.5,
+                          borderRadius: 1,
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 0.5
+                        }}
+                      >
+                        <VideocamIcon fontSize="small" />
+                        <Typography variant="caption">Video</Typography>
+                      </Box>
+                    )}
                     <CardContent sx={{ flexGrow: 1, p: 3 }}>
                       <Typography 
                         variant="h5" 
@@ -360,13 +391,29 @@ const Projects = () => {
                 <CloseIcon />
               </IconButton>
               
-              <CardMedia
-                component="img"
-                height="240"
-                image={getProjectImage(selectedProject.technologies)}
-                alt={selectedProject.title}
-                sx={{ borderRadius: 2, mb: 3 }}
-              />
+              {/* Display video for AI Interview Simulator project, image for others */}
+              {PROJECT_VIDEOS[selectedProject.id] ? (
+                <Box sx={{ width: '100%', mb: 3, borderRadius: 2, overflow: 'hidden' }}>
+                  <video
+                    controls
+                    width="100%"
+                    height="auto"
+                    style={{ borderRadius: '8px' }}
+                    poster={getProjectImage(selectedProject.technologies, selectedProject.id)}
+                  >
+                    <source src={PROJECT_VIDEOS[selectedProject.id]} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </Box>
+              ) : (
+                <CardMedia
+                  component="img"
+                  height="240"
+                  image={getProjectImage(selectedProject.technologies, selectedProject.id)}
+                  alt={selectedProject.title}
+                  sx={{ borderRadius: 2, mb: 3 }}
+                />
+              )}
               
               <Typography variant="h4" component="h2" gutterBottom>
                 {selectedProject.title}
@@ -445,7 +492,7 @@ const ProjectCard = ({ project, onOpen, variants }) => {
         <CardMedia
           component="img"
           height="160"
-          image={getProjectImage(project.technologies)}
+          image={getProjectImage(project.technologies, project.id)}
           alt={project.title}
         />
         <CardContent sx={{ flexGrow: 1, pb: 1 }}>
