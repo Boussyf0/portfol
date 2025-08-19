@@ -41,7 +41,8 @@ import cvAnalyzerImage from '/assets/cv_analyzer.png'; // Import CV analyzer ima
 // Add video URLs for projects - use YouTube or other video hosting service
 const PROJECT_VIDEOS = {
   'ai-interview-simulator': 'https://www.youtube.com/embed/f9XVrOYdezg', // AI Interview Simulator demo video
-  'virt-iot': 'https://www.youtube.com/embed/tXKfjhWzEew' // IoT Platform demo video
+  'virt-iot': 'https://www.youtube.com/embed/tXKfjhWzEew', // IoT Platform demo video
+  'ml-pipeline-pro': 'https://www.youtube.com/embed/weX9Pq9YGBQ' // MLOps Platform demo video
 };
 
 // Filter projects by featured status
@@ -59,6 +60,9 @@ const getProjectImage = (technologies, projectId) => {
   }
   if (projectId === 'virt-iot') {
     return 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'; // IoT servers and data center
+  }
+  if (projectId === 'ml-pipeline-pro') {
+    return 'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80'; // MLOps pipeline and data flow visualization
   }
   
   // Then fall back to technology-based images

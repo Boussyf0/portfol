@@ -97,6 +97,15 @@ export const PROJECTS = [
     featured: true
   },
   { 
+    id: 'ml-pipeline-pro',
+    title: 'ML-Pipeline-Pro: Enterprise MLOps Platform', 
+    desc: 'Production-grade MLOps pipeline for Customer Churn Prediction with automated training, model registry, serving, and monitoring. Features Airflow orchestration, MLflow model registry, FastAPI serving, and comprehensive monitoring with Prometheus and Grafana.',
+    technologies: ['Python', 'MLflow', 'Airflow', 'FastAPI', 'Docker', 'Kubernetes', 'Redis', 'PostgreSQL', 'Prometheus', 'Grafana'],
+    link: 'https://github.com/Boussyf0/ML-Pipeline-Pro',
+    video: 'https://www.youtube.com/watch?v=weX9Pq9YGBQ',
+    featured: true
+  },
+  { 
     id: 'chess-game',
     title: 'Chess Game C#', 
     desc: 'Chess engine in C# with complete UI and AI logic implementation.',
