@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, IconButton, useTheme } from '@mui/material';
+import { Box, IconButton, useTheme, alpha } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
@@ -59,11 +59,12 @@ const ThemeToggle = ({ setMode, mode }) => {
             border: '3px solid',
             borderColor: 'primary.main',
             borderRadius: 0,
-            bgcolor: theme => theme.palette.mode === 'dark' 
-              ? 'rgba(30, 30, 30, 0.7)' 
-              : 'rgba(255, 255, 255, 0.7)',
-            backdropFilter: 'blur(10px)',
-            boxShadow: '5px 5px 0px rgba(0,0,0,0.2)',
+            background: `linear-gradient(135deg, 
+              ${alpha(theme.palette.background.paper, 0.9)} 0%, 
+              ${alpha(theme.palette.background.paper, 0.7)} 100%
+            )`,
+            backdropFilter: 'blur(20px) saturate(1.8)',
+            boxShadow: `5px 5px 0px rgba(0,0,0,0.2), 0 0 20px ${alpha(theme.palette.primary.main, 0.2)}`,
             color: 'text.primary',
             position: 'relative',
             transition: 'all 0.3s ease',

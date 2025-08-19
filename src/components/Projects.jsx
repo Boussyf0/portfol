@@ -15,7 +15,6 @@ import {
   IconButton,
   useTheme,
   useMediaQuery,
-  Backdrop,
   Divider,
   Grid,
   alpha
@@ -39,9 +38,10 @@ import defaultImage from '/assets/react.svg';
 import jobSearchImage from '/assets/screenshots/job_search_platform.png'; // Import the job search platform image
 import cvAnalyzerImage from '/assets/cv_analyzer.png'; // Import CV analyzer image
 
-// Add video URL for AI Interview Simulator project - use YouTube or other video hosting service
+// Add video URLs for projects - use YouTube or other video hosting service
 const PROJECT_VIDEOS = {
-  'ai-interview-simulator': 'https://www.youtube.com/embed/f9XVrOYdezg' // AI Interview Simulator demo video
+  'ai-interview-simulator': 'https://www.youtube.com/embed/f9XVrOYdezg', // AI Interview Simulator demo video
+  'virt-iot': 'https://www.youtube.com/embed/tXKfjhWzEew' // IoT Platform demo video
 };
 
 // Filter projects by featured status
@@ -50,25 +50,35 @@ const regularProjects = PROJECTS.filter(project => !project.featured);
 
 // Project image placeholders based on technologies
 const getProjectImage = (technologies, projectId) => {
-  // First check for specific project ID match
+  // First check for specific project ID match - this takes priority over technology-based matching
   if (projectId === 'ai-interview-simulator') {
     return jobSearchImage;
-  } else if (projectId === 'job-matching') {
+  }
+  if (projectId === 'job-matching') {
     return cvAnalyzerImage; // Using CV analyzer image for Job Matching Agent
+  }
+  if (projectId === 'virt-iot') {
+    return 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'; // IoT servers and data center
   }
   
   // Then fall back to technology-based images
+  if (technologies.includes('Kubernetes') || technologies.includes('Docker')) {
+    return '/assets/image_el.png';
+  }
   if (technologies.includes('LLMs')) {
     return mlImage;
-  } else if (technologies.includes('Healthcare Analytics') || technologies.includes('Health_Trackr')) {
-    return healthImage;
-  } else if (technologies.includes('TensorFlow') || technologies.includes('PyTorch')) {
-    return mlImage;
-  } else if (technologies.includes('C#')) {
-    return chessImage;
-  } else {
-    return defaultImage;
   }
+  if (technologies.includes('Healthcare Analytics') || technologies.includes('Health_Trackr')) {
+    return healthImage;
+  }
+  if (technologies.includes('TensorFlow') || technologies.includes('PyTorch')) {
+    return mlImage;
+  }
+  if (technologies.includes('C#')) {
+    return chessImage;
+  }
+  
+  return defaultImage;
 };
 
 const Projects = () => {
@@ -188,16 +198,48 @@ const Projects = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     height: '100%',
-                    background: alpha(theme.palette.background.paper, 0.8),
-                    backdropFilter: 'blur(10px)',
+                    background: `linear-gradient(135deg, 
+                      ${alpha(theme.palette.background.paper, 0.9)} 0%, 
+                      ${alpha(theme.palette.background.paper, 0.8)} 100%
+                    )`,
+                    backdropFilter: 'blur(20px) saturate(1.8)',
                     borderRadius: 4,
                     overflow: 'hidden',
-                    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.05)',
-                    border: '1px solid rgba(0, 0, 0, 0.05)',
-                    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                    boxShadow: `
+                      0 8px 32px rgba(0, 0, 0, 0.12),
+                      0 2px 16px rgba(0, 0, 0, 0.08),
+                      inset 0 0 0 1px ${alpha(theme.palette.primary.main, 0.1)}
+                    `,
+                    border: `1px solid ${alpha(theme.palette.common.white, 0.2)}`,
+                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                    position: 'relative',
+                    '&::before': {
+                      content: '""',
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      height: '1px',
+                      background: `linear-gradient(90deg, 
+                        transparent, 
+                        ${alpha(theme.palette.primary.main, 0.4)}, 
+                        transparent
+                      )`
+                    },
                     '&:hover': {
-                      transform: 'translateY(-8px)',
-                      boxShadow: '0 20px 40px rgba(0, 0, 0, 0.08)',
+                      transform: 'translateY(-12px) scale(1.02)',
+                      boxShadow: `
+                        0 16px 48px rgba(0, 0, 0, 0.15),
+                        0 8px 24px rgba(0, 0, 0, 0.12),
+                        inset 0 0 0 1px ${alpha(theme.palette.primary.main, 0.2)}
+                      `,
+                      '&::before': {
+                        background: `linear-gradient(90deg, 
+                          transparent, 
+                          ${alpha(theme.palette.primary.main, 0.8)}, 
+                          transparent
+                        )`
+                      }
                     },
                   }}
                 >
@@ -207,6 +249,9 @@ const Projects = () => {
                       height={200}
                       image={getProjectImage(project.technologies, project.id)}
                       alt={project.title}
+                      onError={(e) => {
+                        e.target.src = '/assets/react.svg'; // Fallback image
+                      }}
                     />
                     {PROJECT_VIDEOS[project.id] && (
                       <Box 
@@ -352,9 +397,14 @@ const Projects = () => {
         open={open}
         onClose={handleClose}
         closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
+        slotProps={{
+          backdrop: {
+            timeout: 500,
+            sx: {
+              backdropFilter: 'blur(8px)',
+              backgroundColor: 'rgba(0, 0, 0, 0.7)'
+            }
+          }
         }}
         sx={{
           display: 'flex',

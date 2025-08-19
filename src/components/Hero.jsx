@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Box, Container, Typography, Button, Grid, useTheme } from '@mui/material';
+import { Box, Container, Typography, Button, Grid, useTheme, alpha } from '@mui/material';
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -323,14 +323,16 @@ const Hero = () => {
                       position: 'relative',
                       overflow: 'hidden',
                       fontWeight: 600,
-                      boxShadow: '5px 5px 0px rgba(0,0,0,0.2)',
+                      boxShadow: `5px 5px 0px rgba(0,0,0,0.2), 0 0 20px ${alpha(theme.palette.primary.main, 0.3)}`,
                       border: '3px solid',
                       borderColor: 'primary.dark',
-                      transition: 'all 0.2s',
+                      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                       transform: 'skew(-3deg)',
+                      background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
                       '&:hover': {
-                        transform: 'skew(-3deg) translateY(-5px)',
-                        boxShadow: '7px 7px 0px rgba(0,0,0,0.2)',
+                        transform: 'skew(-3deg) translateY(-8px) scale(1.05)',
+                        boxShadow: `8px 8px 0px rgba(0,0,0,0.3), 0 0 30px ${alpha(theme.palette.primary.main, 0.5)}`,
+                        background: `linear-gradient(135deg, ${theme.palette.primary.light} 0%, ${theme.palette.primary.main} 100%)`,
                       }
                     }}
                   >
@@ -352,10 +354,14 @@ const Hero = () => {
                       fontWeight: 600,
                       backgroundColor: 'transparent',
                       border: '3px solid',
-                      transition: 'all 0.2s',
+                      borderColor: theme.palette.secondary.main,
+                      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                      backdropFilter: 'blur(10px)',
                       '&:hover': {
-                        transform: 'translateY(-5px)',
-                        backgroundColor: 'rgba(255,255,255,0.05)',
+                        transform: 'translateY(-8px) scale(1.05)',
+                        backgroundColor: alpha(theme.palette.secondary.main, 0.1),
+                        boxShadow: `0 0 30px ${alpha(theme.palette.secondary.main, 0.4)}`,
+                        borderColor: theme.palette.secondary.light,
                       }
                     }}
                   >

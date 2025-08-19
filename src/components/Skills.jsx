@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Typography, Grid, Card, CardContent, useTheme, Chip, Divider } from '@mui/material';
+import { Box, Container, Typography, Grid, Card, CardContent, useTheme, Chip, Divider, alpha } from '@mui/material';
 import { SKILL_CATEGORIES } from '../data/constants';
 import SectionTitle from './UI/SectionTitle';
 import { motion } from 'framer-motion';
@@ -124,15 +124,48 @@ const Skills = () => {
                 sx={{ 
                   p: 3,
                   height: '100%',
-                  background: 'rgba(255, 255, 255, 0.6)',
-                  backdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(0, 0, 0, 0.05)',
-                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
+                  background: `linear-gradient(135deg, 
+                    ${alpha(theme.palette.background.paper, 0.9)} 0%, 
+                    ${alpha(theme.palette.background.paper, 0.7)} 100%
+                  )`,
+                  backdropFilter: 'blur(20px) saturate(1.8)',
+                  border: `1px solid ${alpha(theme.palette.common.white, 0.2)}`,
+                  boxShadow: `
+                    0 8px 32px rgba(0, 0, 0, 0.1),
+                    0 2px 16px rgba(0, 0, 0, 0.08),
+                    inset 0 0 0 1px ${alpha(theme.palette.primary.main, 0.05)}
+                  `,
                   borderRadius: 4,
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                  position: 'relative',
+                  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                  '&::before': {
+                    content: '\"\"',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: '2px',
+                    background: `linear-gradient(90deg, 
+                      transparent, 
+                      ${alpha(theme.palette.primary.main, 0.4)}, 
+                      transparent
+                    )`,
+                    borderRadius: '4px 4px 0 0'
+                  },
                   '&:hover': {
-                    transform: 'translateY(-5px)',
-                    boxShadow: '0 8px 30px rgba(0, 0, 0, 0.1)',
+                    transform: 'translateY(-10px) scale(1.02)',
+                    boxShadow: `
+                      0 16px 48px rgba(0, 0, 0, 0.15),
+                      0 8px 24px rgba(0, 0, 0, 0.12),
+                      inset 0 0 0 1px ${alpha(theme.palette.primary.main, 0.1)}
+                    `,
+                    '&::before': {
+                      background: `linear-gradient(90deg, 
+                        transparent, 
+                        ${alpha(theme.palette.primary.main, 0.8)}, 
+                        transparent
+                      )`
+                    }
                   }
                 }}
               >

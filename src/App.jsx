@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, AppBar, Toolbar, Button, Container, useScrollTrigger, Slide, IconButton, Drawer, List, ListItem, CssBaseline, useMediaQuery, Typography, Fab, ListItemText } from '@mui/material';
+import { Box, AppBar, Toolbar, Button, Container, useScrollTrigger, Slide, IconButton, Drawer, List, ListItem, CssBaseline, useMediaQuery, Typography, Fab, ListItemText, alpha } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import styled from '@emotion/styled';
@@ -14,6 +14,7 @@ import { BrowserRouter } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import ThemeToggle from './components/UI/ThemeToggle';
+import ScrollProgress from './components/UI/ScrollProgress';
 import { createThemeMode } from './utils/theme';
 import Lab from './components/Lab';
 import DataDashboard from './components/DataDashboard';
@@ -147,9 +148,23 @@ function App() {
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <ScrollProgress />
         <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', overflow: 'visible' }}>
           <HideOnScroll>
-            <AppBar position="fixed" color="default" elevation={0}>
+            <AppBar 
+              position="fixed" 
+              color="default" 
+              elevation={0}
+              sx={{
+                background: `linear-gradient(135deg, 
+                  ${alpha(theme.palette.background.paper, 0.8)} 0%, 
+                  ${alpha(theme.palette.background.paper, 0.6)} 100%
+                )`,
+                backdropFilter: 'blur(20px) saturate(1.8)',
+                borderBottom: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+              }}
+            >
               <Toolbar>
                 <IconButton
                   color="inherit"
@@ -161,7 +176,7 @@ function App() {
                   <MenuIcon />
                 </IconButton>
                 <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}>
-                  {NAV_ITEMS.map((item) => (
+                  {NAV_ITEMS.map((item, index) => (
                     <HashLink
                       key={item}
                       to={`#${item.toLowerCase()}`}
@@ -171,7 +186,38 @@ function App() {
                       <Button
                         color="inherit"
                         onClick={handleNavClick}
-                        sx={{ mx: 1 }}
+                        sx={{ 
+                          mx: 1,
+                          position: 'relative',
+                          overflow: 'hidden',
+                          borderRadius: 3,
+                          px: 2,
+                          py: 1,
+                          fontWeight: 500,
+                          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                          '&::before': {
+                            content: '\"\"',
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            width: 0,
+                            height: 0,
+                            borderRadius: '50%',
+                            background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                            transition: 'all 0.6s ease',
+                            transform: 'translate(-50%, -50%)',
+                            zIndex: -1,
+                          },
+                          '&:hover': {
+                            color: 'white',
+                            transform: 'translateY(-2px)',
+                            boxShadow: `0 8px 25px ${alpha(theme.palette.primary.main, 0.3)}`,
+                            '&::before': {
+                              width: '120%',
+                              height: '120%',
+                            }
+                          }
+                        }}
                       >
                         {item}
                       </Button>
@@ -242,7 +288,23 @@ function App() {
           </Box>
 
           <ScrollTop>
-            <Fab size="small" aria-label="scroll back to top">
+            <Fab 
+              size="medium" 
+              aria-label="scroll back to top"
+              sx={{
+                background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                color: 'white',
+                backdropFilter: 'blur(10px)',
+                boxShadow: `0 8px 25px ${alpha(theme.palette.primary.main, 0.3)}`,
+                border: `1px solid ${alpha(theme.palette.common.white, 0.2)}`,
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                '&:hover': {
+                  transform: 'scale(1.1)',
+                  boxShadow: `0 12px 35px ${alpha(theme.palette.primary.main, 0.4)}`,
+                  background: `linear-gradient(135deg, ${theme.palette.primary.light}, ${theme.palette.secondary.light})`,
+                }
+              }}
+            >
               <KeyboardArrowUpIcon />
             </Fab>
           </ScrollTop>

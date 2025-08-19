@@ -88,6 +88,15 @@ export const PROJECTS = [
     link: 'https://github.com/Boussyf0/AI-Recruiter-LLM' 
   },
   { 
+    id: 'virt-iot',
+    title: 'Cloud-Native IoT Platform', 
+    desc: 'Scalable IoT platform on Kubernetes with MQTT broker, InfluxDB time-series storage, Grafana visualization, and Prometheus monitoring. Features TLS security, persistent storage, and high availability.',
+    technologies: ['Kubernetes', 'Docker', 'MQTT', 'InfluxDB', 'Grafana', 'Prometheus', 'Python'],
+    link: 'https://github.com/Boussyf0/Cloud-Native-IoT-Platform-on-Kubernetes',
+    video: 'https://www.youtube.com/watch?v=tXKfjhWzEew&t=3s',
+    featured: true
+  },
+  { 
     id: 'chess-game',
     title: 'Chess Game C#', 
     desc: 'Chess engine in C# with complete UI and AI logic implementation.',

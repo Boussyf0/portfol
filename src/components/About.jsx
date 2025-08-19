@@ -428,39 +428,45 @@ const About = () => {
                 variant="body1" 
                 paragraph 
                 sx={{ 
-                  mb: 2, 
-                  fontSize: '1.05rem',
-                  lineHeight: 1.7,
+                  mb: 3, 
+                  fontSize: { xs: '1.1rem', md: '1.15rem' },
+                  lineHeight: { xs: 1.8, md: 1.9 },
                   color: 'text.primary',
+                  fontWeight: 400,
+                  letterSpacing: '0.025em',
                 }}
               >
-                I'm a 4th-year Computer Engineering student at EMSI-MARRAKECH with a passion for AI and software development. Throughout my academic journey, I've acquired a solid foundation in programming, algorithms, and system design.
+                As a final-year Computer Engineering student at EMSI-MARRAKECH, I specialize in artificial intelligence and full-stack development with over 3 years of hands-on experience building production-ready applications. My academic foundation spans advanced algorithms, distributed systems, and software architecture patterns.
               </Typography>
               
               <Typography 
                 variant="body1" 
                 paragraph 
                 sx={{ 
-                  mb: 2, 
-                  fontSize: '1.05rem',
-                  lineHeight: 1.7,
+                  mb: 3, 
+                  fontSize: { xs: '1.1rem', md: '1.15rem' },
+                  lineHeight: { xs: 1.8, md: 1.9 },
                   color: 'text.primary',
+                  fontWeight: 400,
+                  letterSpacing: '0.025em',
                 }}
               >
-                My expertise lies in artificial intelligence and machine learning, where I've developed several projects including predictive models, computer vision applications, and natural language processing systems. I'm proficient in Python and have experience with various ML frameworks like TensorFlow and PyTorch.
+                I've successfully delivered enterprise-level solutions in machine learning and DevOps, including predictive analytics platforms, computer vision systems, and scalable cloud-native applications. My technical expertise encompasses Python, TensorFlow/PyTorch, Kubernetes, and modern web technologies, with proven experience in Agile development methodologies.
               </Typography>
 
               <Typography 
                 variant="body1" 
                 paragraph 
                 sx={{ 
-                  mb: 3, 
-                  fontSize: '1.05rem',
-                  lineHeight: 1.7,
+                  mb: 4, 
+                  fontSize: { xs: '1.1rem', md: '1.15rem' },
+                  lineHeight: { xs: 1.8, md: 1.9 },
                   color: 'text.primary',
+                  fontWeight: 400,
+                  letterSpacing: '0.025em',
                 }}
               >
-                I'm continuously expanding my skillset through self-directed learning and practical projects. I believe in creating technology that solves real-world problems and enhances people's lives.
+                Currently seeking opportunities in Data Science, Machine Learning Engineering, or AI Engineering roles where I can leverage my expertise in predictive analytics, deep learning, and data-driven solutions to drive innovation and deliver measurable business impact through intelligent automation and advanced analytics.
               </Typography>
               
               {/* Skills tags */}
