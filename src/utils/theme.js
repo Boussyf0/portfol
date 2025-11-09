@@ -1,62 +1,76 @@
 import { createTheme } from '@mui/material/styles';
 
-// Modern portfolio color palette
+// AI/ML themed color palette - Data Science & Neural Network aesthetics
 const lightColors = {
   primary: {
-    main: '#4361ee',
-    light: '#4895ef',
-    dark: '#3a0ca3',
-    contrastText: '#fff',
+    main: '#00d4ff', // Electric cyan - representing data flow
+    light: '#5dfdff',
+    dark: '#0099cc',
+    contrastText: '#000',
   },
   secondary: {
-    main: '#f72585',
-    light: '#ff4d6d',
-    dark: '#c9184a',
+    main: '#b24bf3', // Neural purple - representing AI/ML
+    light: '#d084ff',
+    dark: '#8b1bd4',
     contrastText: '#fff',
   },
+  accent: {
+    main: '#00ff88', // Matrix green - representing algorithms
+    light: '#5fffb3',
+    dark: '#00cc6e',
+  },
   background: {
-    default: '#f8f9fa',
+    default: '#f0f4f8',
     paper: '#ffffff',
-    accent: '#e9ecef',
+    accent: '#e6eef5',
   },
   text: {
-    primary: '#212529',
-    secondary: '#6c757d',
-    accent: '#4361ee',
+    primary: '#0f172a',
+    secondary: '#475569',
+    accent: '#00d4ff',
   },
   gradient: {
-    primary: 'linear-gradient(45deg, #4361ee 0%, #4895ef 100%)',
-    secondary: 'linear-gradient(45deg, #f72585 0%, #ff4d6d 100%)',
+    primary: 'linear-gradient(135deg, #00d4ff 0%, #b24bf3 100%)', // Data to AI
+    secondary: 'linear-gradient(135deg, #b24bf3 0%, #00ff88 100%)', // AI to Algorithm
+    neural: 'linear-gradient(135deg, #00d4ff 0%, #b24bf3 50%, #00ff88 100%)', // Complete ML pipeline
+    data: 'linear-gradient(90deg, #00d4ff 0%, #0099cc 100%)', // Data flow
   }
 };
 
-// Dark theme colors
+// Dark theme colors - Enhanced for data science/ML visualization
 const darkColors = {
   primary: {
-    main: '#4361ee',
-    light: '#4895ef',
-    dark: '#3a0ca3',
-    contrastText: '#fff',
+    main: '#00d4ff', // Electric cyan - high contrast for dark mode
+    light: '#5dfdff',
+    dark: '#0099cc',
+    contrastText: '#000',
   },
   secondary: {
-    main: '#f72585',
-    light: '#ff4d6d',
-    dark: '#c9184a',
+    main: '#b24bf3', // Neural purple
+    light: '#d084ff',
+    dark: '#8b1bd4',
     contrastText: '#fff',
   },
+  accent: {
+    main: '#00ff88', // Matrix green
+    light: '#5fffb3',
+    dark: '#00cc6e',
+  },
   background: {
-    default: '#121212',
-    paper: '#1e1e1e',
-    accent: '#2c2c2c',
+    default: '#0a0f1a', // Deep tech blue-black
+    paper: '#0f172a',
+    accent: '#1e293b',
   },
   text: {
-    primary: '#f5f5f5',
-    secondary: '#b0b0b0',
-    accent: '#4895ef',
+    primary: '#e2e8f0',
+    secondary: '#94a3b8',
+    accent: '#00d4ff',
   },
   gradient: {
-    primary: 'linear-gradient(45deg, #4361ee 0%, #4895ef 100%)',
-    secondary: 'linear-gradient(45deg, #f72585 0%, #ff4d6d 100%)',
+    primary: 'linear-gradient(135deg, #00d4ff 0%, #b24bf3 100%)',
+    secondary: 'linear-gradient(135deg, #b24bf3 0%, #00ff88 100%)',
+    neural: 'linear-gradient(135deg, #00d4ff 0%, #b24bf3 50%, #00ff88 100%)',
+    data: 'linear-gradient(90deg, #00d4ff 0%, #0099cc 100%)',
   }
 };
 
@@ -143,22 +157,38 @@ export const createThemeMode = (mode) => {
       mode,
       primary: colors.primary,
       secondary: colors.secondary,
+      accent: colors.accent,
       background: colors.background,
       text: colors.text,
     },
     typography: {
       fontFamily: [
+        'Inter',
+        'Space Grotesk',
         'Poppins',
         'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
+        '-apple-system',
+        'BlinkMacSystemFont',
         'sans-serif',
+      ].join(','),
+      monoFamily: [
+        'JetBrains Mono',
+        'Fira Code',
+        'Monaco',
+        'Consolas',
+        'monospace',
       ].join(','),
       h1: {
         fontWeight: 800,
-        letterSpacing: '-0.02em',
+        letterSpacing: '-0.03em',
+        fontFamily: 'Space Grotesk, Inter, sans-serif',
       },
       h2: {
+        fontWeight: 700,
+        letterSpacing: '-0.02em',
+        fontFamily: 'Space Grotesk, Inter, sans-serif',
+      },
+      h3: {
         fontWeight: 700,
         letterSpacing: '-0.01em',
       },
@@ -171,10 +201,15 @@ export const createThemeMode = (mode) => {
       },
       button: {
         fontWeight: 600,
+        letterSpacing: '0.02em',
+      },
+      code: {
+        fontFamily: 'JetBrains Mono, Fira Code, monospace',
+        fontSize: '0.875rem',
       }
     },
     shape: {
-      borderRadius: 12,
+      borderRadius: 16,
     },
     components: createThemeComponents(mode, colors),
     customGradients: colors.gradient,

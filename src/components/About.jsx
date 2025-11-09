@@ -17,10 +17,10 @@ import SearchIcon from '@mui/icons-material/Search';
 import DownloadIcon from '@mui/icons-material/Download';
 
 // Profile image path with BASE_URL
-const PROFILE_IMAGE = `${import.meta.env.BASE_URL}assets/LOGO.png`;
+const PROFILE_IMAGE = `${import.meta.env.BASE_URL}assets/IMG_4589.JPG`;
 
 // Constants with dynamic base URL
-const RESUME_PATH = `${import.meta.env.BASE_URL}assets/CV_Abderrahim_Boussyf_Data.pdf`;
+const RESUME_PATH = `${import.meta.env.BASE_URL}CV_2025_Abderrahim_Boussyf.pdf`;
 
 const About = () => {
   const theme = useTheme();

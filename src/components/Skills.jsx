@@ -3,6 +3,8 @@ import { Box, Container, Typography, Grid, Card, CardContent, useTheme, Chip, Di
 import { SKILL_CATEGORIES } from '../data/constants';
 import SectionTitle from './UI/SectionTitle';
 import { motion } from 'framer-motion';
+import DataParticles from './UI/DataParticles';
+import VisibilityWrapper from './UI/VisibilityWrapper';
 
 // Skill icons mapping
 import CodeIcon from '@mui/icons-material/Code';
@@ -25,14 +27,16 @@ const getCategoryIcon = (category) => {
     'Web & Tools': <WebIcon fontSize="large" />,
     'Databases': <DatabaseIcon fontSize="large" />,
     'Methodologies': <AgilityIcon fontSize="large" />,
+    'Data Analysis Tools': <AutoGraphIcon fontSize="large" />,
+    'Vector Databases': <DataObjectIcon fontSize="large" />,
   };
-  
+
   return iconMap[category] || <ScienceIcon fontSize="large" />;
 };
 
 const Skills = () => {
   const theme = useTheme();
-  
+
   // Animation variants
   const container = {
     hidden: { opacity: 0 },
@@ -44,11 +48,11 @@ const Skills = () => {
       }
     }
   };
-  
+
   const item = {
     hidden: { y: 20, opacity: 0 },
-    show: { 
-      y: 0, 
+    show: {
+      y: 0,
       opacity: 1,
       transition: {
         type: "spring",
@@ -58,28 +62,46 @@ const Skills = () => {
   };
 
   return (
-    <Box 
-      component="section" 
-      id="skills" 
-      sx={{ 
+    <Box
+      component="section"
+      id="skills"
+      sx={{
         py: { xs: 8, md: 12 },
-        backgroundImage: 'radial-gradient(circle at 90% 30%, rgba(67, 97, 238, 0.07) 0%, transparent 60%)',
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        background: `radial-gradient(circle at 20% 50%, ${alpha(theme.palette.primary.main, 0.05)} 0%, transparent 50%),
+                     radial-gradient(circle at 80% 80%, ${alpha(theme.palette.secondary.main, 0.05)} 0%, transparent 50%)`,
       }}
     >
-      {/* Decorative shapes */}
-      <Box 
-        component="div"
+      {/* Data Particles Background - Optimized with visibility detection */}
+      <VisibilityWrapper>
+        <DataParticles particleCount={15} speed={0.2} />
+      </VisibilityWrapper>
+
+      {/* Decorative gradient orbs */}
+      <Box
         sx={{
           position: 'absolute',
-          width: 300,
-          height: 300,
+          width: 400,
+          height: 400,
           borderRadius: '50%',
-          background: theme.customGradients.primary,
-          opacity: 0.03,
+          background: `radial-gradient(circle, ${alpha(theme.palette.primary.main, 0.08)} 0%, transparent 70%)`,
           top: -100,
+          right: -100,
+          filter: 'blur(80px)',
+          zIndex: 0,
+        }}
+      />
+      <Box
+        sx={{
+          position: 'absolute',
+          width: 350,
+          height: 350,
+          borderRadius: '50%',
+          background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.06)} 0%, transparent 70%)`,
+          bottom: -100,
           left: -100,
+          filter: 'blur(80px)',
           zIndex: 0,
         }}
       />
@@ -87,19 +109,23 @@ const Skills = () => {
       <Container maxWidth="lg">
         <SectionTitle title="Technical Skills" />
         
-        <Typography 
-          variant="h6" 
-          component="p" 
-          align="center" 
-          gutterBottom 
-          sx={{ 
-            mb: 6, 
-            maxWidth: '800px', 
+        <Typography
+          variant="h6"
+          component="p"
+          align="center"
+          gutterBottom
+          sx={{
+            mb: 6,
+            maxWidth: '850px',
             mx: 'auto',
-            color: theme.palette.text.secondary
+            color: theme.palette.text.secondary,
+            lineHeight: 1.8,
           }}
         >
-          With expertise across multiple domains, I combine programming prowess with AI, data science, and software engineering to create innovative solutions.
+          Mastering the complete <Box component="span" sx={{ color: theme.palette.primary.main, fontWeight: 600 }}>AI/ML pipeline</Box> from
+          {' '}<Box component="span" sx={{ color: theme.palette.secondary.main, fontWeight: 600 }}>data engineering</Box> to
+          {' '}<Box component="span" sx={{ color: theme.palette.accent?.main || '#00ff88', fontWeight: 600 }}>model deployment</Box>,
+          delivering production-ready solutions that drive business value.
         </Typography>
         
         <Grid 
@@ -120,23 +146,30 @@ const Skills = () => {
               component={motion.div}
               variants={item}
             >
-              <Card 
-                sx={{ 
+              <Card
+                sx={{
                   p: 3,
                   height: '100%',
-                  background: `linear-gradient(135deg, 
-                    ${alpha(theme.palette.background.paper, 0.9)} 0%, 
-                    ${alpha(theme.palette.background.paper, 0.7)} 100%
+                  background: `linear-gradient(135deg,
+                    ${alpha(theme.palette.background.paper, 0.95)} 0%,
+                    ${alpha(theme.palette.background.paper, 0.85)} 100%
                   )`,
                   backdropFilter: 'blur(20px) saturate(1.8)',
-                  border: `1px solid ${alpha(theme.palette.common.white, 0.2)}`,
+                  border: `2px solid transparent`,
+                  backgroundImage: `
+                    linear-gradient(${theme.palette.background.paper}, ${theme.palette.background.paper}) padding-box,
+                    ${theme.customGradients.neural} border-box
+                  `,
+                  backgroundOrigin: 'border-box',
+                  backgroundClip: 'padding-box, border-box',
                   boxShadow: `
-                    0 8px 32px rgba(0, 0, 0, 0.1),
-                    0 2px 16px rgba(0, 0, 0, 0.08),
-                    inset 0 0 0 1px ${alpha(theme.palette.primary.main, 0.05)}
+                    0 10px 40px ${alpha(theme.palette.primary.main, 0.15)},
+                    0 0 0 1px ${alpha(theme.palette.primary.main, 0.05)},
+                    inset 0 0 30px ${alpha(theme.palette.primary.main, 0.03)}
                   `,
                   borderRadius: 4,
                   position: 'relative',
+                  overflow: 'visible',
                   transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                   '&::before': {
                     content: '\"\"',
@@ -144,80 +177,117 @@ const Skills = () => {
                     top: 0,
                     left: 0,
                     right: 0,
-                    height: '2px',
-                    background: `linear-gradient(90deg, 
-                      transparent, 
-                      ${alpha(theme.palette.primary.main, 0.4)}, 
-                      transparent
-                    )`,
-                    borderRadius: '4px 4px 0 0'
+                    height: '3px',
+                    background: theme.customGradients.neural,
+                    borderRadius: '4px 4px 0 0',
+                    opacity: 0.6,
                   },
                   '&:hover': {
-                    transform: 'translateY(-10px) scale(1.02)',
+                    transform: 'translateY(-12px) scale(1.02)',
                     boxShadow: `
-                      0 16px 48px rgba(0, 0, 0, 0.15),
-                      0 8px 24px rgba(0, 0, 0, 0.12),
-                      inset 0 0 0 1px ${alpha(theme.palette.primary.main, 0.1)}
+                      0 20px 60px ${alpha(theme.palette.primary.main, 0.25)},
+                      0 0 0 1px ${alpha(theme.palette.primary.main, 0.15)},
+                      inset 0 0 40px ${alpha(theme.palette.primary.main, 0.05)}
                     `,
                     '&::before': {
-                      background: `linear-gradient(90deg, 
-                        transparent, 
-                        ${alpha(theme.palette.primary.main, 0.8)}, 
-                        transparent
-                      )`
+                      opacity: 1,
+                      boxShadow: `0 0 20px ${theme.palette.primary.main}`,
                     }
                   }
                 }}
               >
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                  <Box 
-                    sx={{ 
-                      mr: 2, 
-                      color: theme.palette.primary.main,
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
+                  <Box
+                    sx={{
+                      mr: 2,
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      width: 48,
-                      height: 48,
-                      borderRadius: '12px',
-                      background: 'rgba(67, 97, 238, 0.1)',
+                      width: 56,
+                      height: 56,
+                      borderRadius: '16px',
+                      background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.15)}, ${alpha(theme.palette.secondary.main, 0.15)})`,
+                      border: `1px solid ${alpha(theme.palette.primary.main, 0.2)}`,
+                      boxShadow: `0 4px 16px ${alpha(theme.palette.primary.main, 0.2)}`,
+                      color: theme.palette.primary.main,
+                      transition: 'all 0.3s ease',
+                      '&:hover': {
+                        transform: 'scale(1.1) rotate(5deg)',
+                        boxShadow: `0 6px 24px ${alpha(theme.palette.primary.main, 0.3)}`,
+                      }
                     }}
                   >
                     {getCategoryIcon(category.category)}
                   </Box>
-                  <Typography 
-                    variant="h5" 
-                    sx={{ 
-                      fontWeight: 600,
-                      background: theme.customGradients.primary,
-                      backgroundClip: 'text',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                    }}
-                  >
-                    {category.category}
-                  </Typography>
+                  <Box>
+                    <Typography
+                      variant="h5"
+                      sx={{
+                        fontWeight: 700,
+                        background: theme.customGradients.neural,
+                        backgroundClip: 'text',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        mb: 0.5,
+                      }}
+                    >
+                      {category.category}
+                    </Typography>
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        color: theme.palette.text.secondary,
+                        fontFamily: 'JetBrains Mono, monospace',
+                        fontSize: '0.7rem',
+                      }}
+                    >
+                      {category.skills.length} skills
+                    </Typography>
+                  </Box>
                 </Box>
                 
-                <Divider sx={{ mb: 2, mt: 1 }} />
-                
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                  {category.skills.map((skill) => (
-                    <Chip
-                      key={skill}
-                      label={skill}
-                      sx={{
-                        bgcolor: 'rgba(67, 97, 238, 0.05)',
-                        border: '1px solid rgba(67, 97, 238, 0.15)',
-                        fontWeight: 500,
-                        '&:hover': {
-                          bgcolor: 'rgba(67, 97, 238, 0.1)',
-                        },
-                        mb: 1,
-                        px: 0.5,
-                      }}
-                    />
-                  ))}
+                <Divider sx={{ mb: 3, opacity: 0.3 }} />
+
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5 }}>
+                  {category.skills.map((skill, index) => {
+                    // Alternate between gradient styles for visual interest
+                    const isHighlight = index % 3 === 0;
+
+                    return (
+                      <Chip
+                        key={skill}
+                        label={skill}
+                        sx={{
+                          px: 1.5,
+                          py: 2.5,
+                          fontSize: '0.875rem',
+                          fontWeight: 600,
+                          bgcolor: isHighlight
+                            ? alpha(theme.palette.primary.main, 0.1)
+                            : alpha(theme.palette.background.paper, 0.5),
+                          border: `1.5px solid ${
+                            isHighlight
+                              ? alpha(theme.palette.primary.main, 0.3)
+                              : alpha(theme.palette.text.secondary, 0.15)
+                          }`,
+                          color: theme.palette.text.primary,
+                          backdropFilter: 'blur(10px)',
+                          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                          '&:hover': {
+                            bgcolor: alpha(theme.palette.primary.main, 0.15),
+                            borderColor: theme.palette.primary.main,
+                            transform: 'translateY(-4px) scale(1.05)',
+                            boxShadow: `
+                              0 8px 24px ${alpha(theme.palette.primary.main, 0.25)},
+                              inset 0 0 20px ${alpha(theme.palette.primary.main, 0.1)}
+                            `,
+                            color: theme.palette.primary.main,
+                            fontWeight: 700,
+                          },
+                        }}
+                      />
+                    );
+                  })}
                 </Box>
               </Card>
             </Grid>

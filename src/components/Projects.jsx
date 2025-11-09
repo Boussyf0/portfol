@@ -59,10 +59,12 @@ const getProjectImage = (technologies, projectId) => {
     return cvAnalyzerImage; // Using CV analyzer image for Job Matching Agent
   }
   if (projectId === 'virt-iot') {
-    return 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'; // IoT servers and data center
+    // IoT Platform - Smart connected devices and sensor networks
+    return 'https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80';
   }
   if (projectId === 'ml-pipeline-pro') {
-    return 'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80'; // MLOps pipeline and data flow visualization
+    // MLOps Platform - AI/ML pipeline with neural networks and data flow
+    return 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80';
   }
   
   // Then fall back to technology-based images

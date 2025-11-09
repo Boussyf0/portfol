@@ -12,17 +12,35 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
-    sourcemap: true,
-    rollupOptions: {
-      output: {
-        manualChunks: undefined,
+    sourcemap: false, // Disable sourcemaps in production for smaller bundle
+    minify: 'terser', // Use terser for better minification
+    terserOptions: {
+      compress: {
+        drop_console: true, // Remove console.logs in production
+        drop_debugger: true,
       },
     },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Split vendor chunks for better caching
+          'react-vendor': ['react', 'react-dom'],
+          'mui-vendor': ['@mui/material', '@mui/icons-material'],
+          'motion-vendor': ['framer-motion'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000, // Increase warning limit
+    cssCodeSplit: true, // Split CSS for better loading
   },
   resolve: {
     alias: {
       '@': '/src', // This allows you to use @ to refer to the src directory
       '@assets': '/src/assets',
     },
+  },
+  // Optimize dependencies
+  optimizeDeps: {
+    include: ['react', 'react-dom', '@mui/material', 'framer-motion'],
   },
 })

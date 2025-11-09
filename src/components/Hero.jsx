@@ -3,6 +3,8 @@ import { Box, Container, Typography, Button, Grid, useTheme, alpha } from '@mui/
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import NeuralNetwork from './UI/NeuralNetwork';
+import DataParticles from './UI/DataParticles';
 
 // Use dynamic base URL for assets
 const PROFILE_IMAGE = `${import.meta.env.BASE_URL}assets/IMG_4589.JPG`;
@@ -30,11 +32,13 @@ const Hero = () => {
     mouseY.set(e.clientY - centerY);
   };
 
-  // Typewriter effect
+  // Typewriter effect - AI/ML focused
   const [typewriterText] = useTypewriter({
-    words: ['Data Scientist', 'ML Engineer', 'AI Developer', 'Tech Enthusiast'],
+    words: ['Data Scientist', 'ML Engineer', 'AI Developer', 'Deep Learning Specialist', 'MLOps Engineer'],
     loop: true,
     delaySpeed: 2000,
+    typeSpeed: 80,
+    deleteSpeed: 60,
   });
 
   // Generate random shape positions
@@ -104,7 +108,7 @@ const Hero = () => {
       }}
       onMouseMove={handleMouseMove}
     >
-      {/* Background Elements */}
+      {/* AI/ML Background Elements */}
       <Box
         sx={{
           position: 'absolute',
@@ -116,41 +120,49 @@ const Hero = () => {
           overflow: 'hidden',
         }}
       >
-        {/* Decorative shapes */}
-        {shapes.map((shape, index) => (
-          <motion.div
-            key={index}
-            initial={{ 
-              opacity: 0, 
-              x: shape.x + '%', 
-              y: shape.y + '%', 
-              rotate: shape.rotation 
-            }}
-            animate={{ 
-              opacity: [0, 0.5, 0.3],
-              rotate: [shape.rotation, shape.rotation + 10, shape.rotation - 10],
-              scale: [0.9, 1.1, 0.9],
-            }}
-            transition={{
-              repeat: Infinity,
-              repeatType: 'reverse',
-              duration: 10 + Math.random() * 10,
-              delay: shape.delay,
-            }}
-            style={{
-              position: 'absolute',
-              width: shape.size,
-              height: shape.size,
-              backgroundColor: shape.color,
-              opacity: 0.3,
-              zIndex: -1,
-              borderRadius: shape.shape === 1 ? '50%' : shape.shape === 2 ? '0% 50% 50% 50%' : '0%',
-              filter: 'blur(2px)',
-            }}
-          />
-        ))}
+        {/* Neural Network Animation - Optimized */}
+        <NeuralNetwork nodeCount={20} opacity={0.35} interactive={false} />
 
-        {/* Grid overlay for neo-brutal effect */}
+        {/* Data Particles - Optimized */}
+        <DataParticles particleCount={25} speed={0.3} />
+
+        {/* Gradient Orbs */}
+        <Box
+          sx={{
+            position: 'absolute',
+            width: '500px',
+            height: '500px',
+            borderRadius: '50%',
+            background: `radial-gradient(circle, ${alpha(theme.palette.primary.main, 0.15)} 0%, transparent 70%)`,
+            top: '-250px',
+            right: '-100px',
+            filter: 'blur(60px)',
+            animation: 'float 8s ease-in-out infinite',
+            '@keyframes float': {
+              '0%, 100%': { transform: 'translate(0, 0)' },
+              '50%': { transform: 'translate(-30px, 30px)' },
+            },
+          }}
+        />
+        <Box
+          sx={{
+            position: 'absolute',
+            width: '400px',
+            height: '400px',
+            borderRadius: '50%',
+            background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.12)} 0%, transparent 70%)`,
+            bottom: '-200px',
+            left: '-100px',
+            filter: 'blur(60px)',
+            animation: 'float2 10s ease-in-out infinite',
+            '@keyframes float2': {
+              '0%, 100%': { transform: 'translate(0, 0)' },
+              '50%': { transform: 'translate(30px, -30px)' },
+            },
+          }}
+        />
+
+        {/* Tech Grid Overlay */}
         <Box
           sx={{
             position: 'absolute',
@@ -158,9 +170,12 @@ const Hero = () => {
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)',
-            backgroundSize: '40px 40px',
-            opacity: 0.5,
+            backgroundImage: `
+              linear-gradient(to right, ${alpha(theme.palette.primary.main, 0.03)} 1px, transparent 1px),
+              linear-gradient(to bottom, ${alpha(theme.palette.primary.main, 0.03)} 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px',
+            opacity: 0.6,
           }}
         />
       </Box>
@@ -178,19 +193,31 @@ const Hero = () => {
           <Grid item xs={12} md={7} order={{ xs: 2, md: 1 }}>
             {/* Text Content */}
             <Box sx={{ position: 'relative' }}>
-              {/* Neo-brutal decorative elements */}
+              {/* AI/ML themed decorative elements */}
               <motion.div
                 style={{
                   position: 'absolute',
                   top: -30,
                   left: -20,
-                  width: 80,
-                  height: 15,
-                  background: theme.palette.secondary.main,
+                  width: 100,
+                  height: 5,
+                  background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                  boxShadow: `0 0 20px ${alpha(theme.palette.primary.main, 0.5)}`,
                   zIndex: -1,
                 }}
-                variants={brutalElementVariants}
-                whileHover="hover"
+                animate={{
+                  opacity: [0.5, 1, 0.5],
+                  boxShadow: [
+                    `0 0 20px ${alpha(theme.palette.primary.main, 0.5)}`,
+                    `0 0 30px ${alpha(theme.palette.primary.main, 0.8)}`,
+                    `0 0 20px ${alpha(theme.palette.primary.main, 0.5)}`,
+                  ],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
               />
 
               <motion.div
@@ -198,13 +225,26 @@ const Hero = () => {
                   position: 'absolute',
                   top: 30,
                   right: 100,
-                  width: 15,
-                  height: 80,
-                  background: theme.palette.primary.main,
+                  width: 5,
+                  height: 100,
+                  background: `linear-gradient(180deg, ${theme.palette.secondary.main}, ${theme.palette.accent?.main || '#00ff88'})`,
+                  boxShadow: `0 0 20px ${alpha(theme.palette.secondary.main, 0.5)}`,
                   zIndex: -1,
                 }}
-                variants={brutalElementVariants}
-                whileHover="hover"
+                animate={{
+                  opacity: [0.5, 1, 0.5],
+                  boxShadow: [
+                    `0 0 20px ${alpha(theme.palette.secondary.main, 0.5)}`,
+                    `0 0 30px ${alpha(theme.palette.secondary.main, 0.8)}`,
+                    `0 0 20px ${alpha(theme.palette.secondary.main, 0.5)}`,
+                  ],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                  delay: 1,
+                }}
               />
 
               <motion.div
@@ -217,38 +257,33 @@ const Hero = () => {
                   sx={{
                     fontWeight: 800,
                     mb: 2,
-                    fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4rem' },
-                    letterSpacing: '-0.02em',
-                    textTransform: 'uppercase',
+                    fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4.5rem' },
+                    letterSpacing: '-0.03em',
                     lineHeight: 1.1,
-                    textShadow: '3px 3px 0px rgba(0,0,0,0.2)',
                     position: 'relative',
                   }}
                 >
-                  <Box 
-                    sx={{ 
-                      color: theme.palette.text.primary,
+                  <Box
+                    sx={{
                       display: 'inline',
                       position: 'relative',
-                      '&::after': {
-                        content: '""',
-                        position: 'absolute',
-                        width: '100%',
-                        height: '0.2em',
-                        background: theme.palette.primary.main,
-                        left: 0,
-                        bottom: '0.1em',
-                        zIndex: -1,
-                      }
+                      background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                      backgroundClip: 'text',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      filter: `drop-shadow(0 0 20px ${alpha(theme.palette.primary.main, 0.3)})`,
                     }}
                   >
                     Abderrahim
                   </Box>{' '}
-                  <Box 
-                    component="span" 
-                    sx={{ 
-                      color: theme.palette.primary.main,
-                      textShadow: `2px 2px 0px ${theme.palette.secondary.main}`,
+                  <Box
+                    component="span"
+                    sx={{
+                      background: `linear-gradient(135deg, ${theme.palette.secondary.main}, ${theme.palette.accent?.main || '#00ff88'})`,
+                      backgroundClip: 'text',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      filter: `drop-shadow(0 0 20px ${alpha(theme.palette.secondary.main, 0.3)})`,
                     }}
                   >
                     Boussyf
@@ -267,27 +302,43 @@ const Hero = () => {
                     display: 'inline-block',
                   }}
                 >
-                  <Box component="span">I'm a </Box>
-                  <Box 
-                    component="span" 
-                    sx={{ 
-                      color: theme.palette.secondary.main,
+                  <Box component="span" sx={{ color: theme.palette.text.primary }}>I'm a </Box>
+                  <Box
+                    component="span"
+                    sx={{
                       position: 'relative',
+                      background: theme.customGradients.neural,
+                      backgroundClip: 'text',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      fontWeight: 700,
                       '&::before': {
                         content: '""',
                         position: 'absolute',
                         left: 0,
                         right: 0,
                         bottom: 0,
-                        height: '0.3em',
+                        height: '0.15em',
                         zIndex: -1,
-                        background: 'rgba(236, 72, 153, 0.3)',
+                        background: `linear-gradient(90deg, ${alpha(theme.palette.primary.main, 0.3)}, ${alpha(theme.palette.secondary.main, 0.3)})`,
+                        filter: `blur(4px)`,
                       }
                     }}
                   >
                     {typewriterText}
                   </Box>
-                  <Cursor cursorStyle="_" />
+                  <Box
+                    component="span"
+                    sx={{
+                      color: theme.palette.primary.main,
+                      animation: 'blink 1s step-end infinite',
+                      '@keyframes blink': {
+                        '50%': { opacity: 0 },
+                      },
+                    }}
+                  >
+                    |
+                  </Box>
                 </Typography>
               </motion.div>
 
@@ -295,21 +346,34 @@ const Hero = () => {
                 <Typography
                   variant="body1"
                   sx={{
-                    fontSize: { xs: '1rem', md: '1.25rem' },
+                    fontSize: { xs: '1rem', md: '1.2rem' },
                     mb: 4,
-                    maxWidth: '600px',
+                    maxWidth: '650px',
                     position: 'relative',
-                    borderLeft: `4px solid ${theme.palette.primary.main}`,
-                    pl: 2,
-                    py: 1,
+                    pl: 3,
+                    py: 2,
+                    color: theme.palette.text.secondary,
+                    lineHeight: 1.7,
+                    '&::before': {
+                      content: '""',
+                      position: 'absolute',
+                      left: 0,
+                      top: 0,
+                      bottom: 0,
+                      width: '4px',
+                      background: theme.customGradients.neural,
+                      borderRadius: '2px',
+                      boxShadow: `0 0 10px ${alpha(theme.palette.primary.main, 0.5)}`,
+                    },
                   }}
                 >
-                  I build intelligent systems that can understand, learn, and solve complex problems. 
-                  Passionate about pushing the boundaries of AI to create meaningful impact.
+                  Building intelligent systems that <Box component="span" sx={{ color: theme.palette.primary.main, fontWeight: 600 }}>transform data into insights</Box>,
+                  {' '}<Box component="span" sx={{ color: theme.palette.secondary.main, fontWeight: 600 }}>automate complex workflows</Box>, and
+                  {' '}<Box component="span" sx={{ color: theme.palette.accent?.main || '#00ff88', fontWeight: 600 }}>drive innovation</Box> through AI & Machine Learning.
                 </Typography>
               </motion.div>
 
-              <motion.div variants={childVariants} style={{ display: 'flex', gap: '20px' }}>
+              <motion.div variants={childVariants} style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Button
                     variant="contained"
@@ -323,20 +387,32 @@ const Hero = () => {
                       position: 'relative',
                       overflow: 'hidden',
                       fontWeight: 600,
-                      boxShadow: `5px 5px 0px rgba(0,0,0,0.2), 0 0 20px ${alpha(theme.palette.primary.main, 0.3)}`,
-                      border: '3px solid',
-                      borderColor: 'primary.dark',
-                      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                      transform: 'skew(-3deg)',
-                      background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+                      borderRadius: 3,
+                      background: theme.customGradients.primary,
+                      border: `2px solid ${alpha(theme.palette.primary.main, 0.3)}`,
+                      boxShadow: `0 8px 24px ${alpha(theme.palette.primary.main, 0.3)}, inset 0 0 20px ${alpha(theme.palette.primary.main, 0.1)}`,
+                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                      '&::before': {
+                        content: '""',
+                        position: 'absolute',
+                        top: 0,
+                        left: '-100%',
+                        width: '100%',
+                        height: '100%',
+                        background: `linear-gradient(90deg, transparent, ${alpha(theme.palette.common.white, 0.3)}, transparent)`,
+                        transition: 'left 0.5s',
+                      },
                       '&:hover': {
-                        transform: 'skew(-3deg) translateY(-8px) scale(1.05)',
-                        boxShadow: `8px 8px 0px rgba(0,0,0,0.3), 0 0 30px ${alpha(theme.palette.primary.main, 0.5)}`,
-                        background: `linear-gradient(135deg, ${theme.palette.primary.light} 0%, ${theme.palette.primary.main} 100%)`,
+                        transform: 'translateY(-4px)',
+                        boxShadow: `0 12px 32px ${alpha(theme.palette.primary.main, 0.5)}, inset 0 0 30px ${alpha(theme.palette.primary.main, 0.2)}`,
+                        background: theme.customGradients.secondary,
+                        '&::before': {
+                          left: '100%',
+                        }
                       }
                     }}
                   >
-                    See My Work
+                    Explore Projects
                   </Button>
                 </motion.div>
 
@@ -352,20 +428,23 @@ const Hero = () => {
                       fontSize: '1rem',
                       position: 'relative',
                       fontWeight: 600,
+                      borderRadius: 3,
                       backgroundColor: 'transparent',
-                      border: '3px solid',
-                      borderColor: theme.palette.secondary.main,
-                      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                      border: `2px solid ${theme.palette.secondary.main}`,
+                      color: theme.palette.secondary.main,
                       backdropFilter: 'blur(10px)',
+                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                      boxShadow: `0 4px 16px ${alpha(theme.palette.secondary.main, 0.2)}`,
                       '&:hover': {
-                        transform: 'translateY(-8px) scale(1.05)',
+                        transform: 'translateY(-4px)',
                         backgroundColor: alpha(theme.palette.secondary.main, 0.1),
-                        boxShadow: `0 0 30px ${alpha(theme.palette.secondary.main, 0.4)}`,
                         borderColor: theme.palette.secondary.light,
+                        boxShadow: `0 0 30px ${alpha(theme.palette.secondary.main, 0.5)}`,
+                        color: theme.palette.secondary.light,
                       }
                     }}
                   >
-                    Contact Me
+                    Let's Connect
                   </Button>
                 </motion.div>
               </motion.div>
@@ -382,10 +461,10 @@ const Hero = () => {
               justifyContent: 'center',
             }}
           >
-            {/* 3D Image Container with Neo-Brutal style */}
+            {/* AI/ML themed profile image container */}
             <motion.div
               style={{
-                perspective: 800,
+                perspective: 1000,
                 position: 'relative',
                 width: '100%',
                 maxWidth: 450,
@@ -402,71 +481,69 @@ const Hero = () => {
                   position: 'relative',
                 }}
               >
-                {/* Neo-brutal image frame with glitch effect */}
+                {/* AI/ML themed image frame */}
                 <Box
                   sx={{
                     position: 'absolute',
                     width: '100%',
                     height: '100%',
-                    borderRadius: '0',
+                    borderRadius: 4,
                     overflow: 'hidden',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    border: '10px solid',
-                    borderColor: 'background.paper',
+                    border: `3px solid`,
+                    borderColor: 'transparent',
+                    background: `
+                      linear-gradient(${theme.palette.background.paper}, ${theme.palette.background.paper}) padding-box,
+                      ${theme.customGradients.neural} border-box
+                    `,
                     boxShadow: `
-                      20px 20px 0px ${theme.palette.primary.main},
-                      -20px -20px 0px ${theme.palette.secondary.main}
+                      0 20px 60px ${alpha(theme.palette.primary.main, 0.3)},
+                      0 0 0 1px ${alpha(theme.palette.primary.main, 0.1)},
+                      inset 0 0 40px ${alpha(theme.palette.primary.main, 0.05)}
                     `,
                     '&::before': {
                       content: '""',
                       position: 'absolute',
-                      top: '10%',
-                      left: '5%',
-                      width: '30%',
-                      height: '5px',
-                      backgroundColor: theme.palette.primary.main,
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      height: '100%',
+                      background: theme.customGradients.neural,
+                      opacity: 0.1,
                       zIndex: 1,
+                      mixBlendMode: 'overlay',
                     },
-                    '&::after': {
-                      content: '""',
-                      position: 'absolute',
-                      bottom: '15%',
-                      right: '10%',
-                      width: '5px',
-                      height: '25%',
-                      backgroundColor: theme.palette.secondary.main,
-                      zIndex: 1,
-                    }
                   }}
                 >
-                  {/* Main image */}
+                  {/* Main image - Optimized loading */}
                   <Box
                     component="img"
                     src={PROFILE_IMAGE}
-                    alt="Abderrahim Boussyf"
+                    alt="Abderrahim Boussyf - AI/ML Engineer"
+                    loading="eager"
                     sx={{
                       width: '100%',
                       height: '100%',
                       objectFit: 'cover',
                       objectPosition: 'center top',
-                      filter: 'grayscale(0.2) contrast(1.1)',
+                      filter: 'brightness(1.05) contrast(1.05)',
                     }}
                   />
-                  
-                  {/* Glitch effect layers */}
+
+                  {/* Glitch effect layers - AI themed */}
                   <Box
                     component={motion.div}
                     animate={{
-                      x: [0, -5, 5, -2, 0],
-                      opacity: [0, 0.5, 0.3, 0.7, 0],
+                      x: [0, -3, 3, -1, 0],
+                      opacity: [0, 0.4, 0.2, 0.5, 0],
                     }}
                     transition={{
                       repeat: Infinity,
                       repeatType: 'loop',
-                      duration: 5,
-                      repeatDelay: 3,
+                      duration: 6,
+                      repeatDelay: 4,
                     }}
                     sx={{
                       position: 'absolute',
@@ -477,12 +554,92 @@ const Hero = () => {
                       backgroundImage: `url(${PROFILE_IMAGE})`,
                       backgroundSize: 'cover',
                       backgroundPosition: 'center top',
-                      mixBlendMode: 'color-dodge',
-                      filter: 'hue-rotate(90deg) contrast(1.5)',
+                      mixBlendMode: 'screen',
+                      filter: `hue-rotate(180deg)`,
                       opacity: 0,
                     }}
                   />
+
+                  {/* Scan line effect - Optimized */}
+                  <Box
+                    component={motion.div}
+                    animate={{
+                      top: ['0%', '100%'],
+                    }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 4,
+                      ease: 'linear',
+                    }}
+                    sx={{
+                      position: 'absolute',
+                      left: 0,
+                      right: 0,
+                      height: '2px',
+                      background: `linear-gradient(90deg, transparent, ${theme.palette.primary.main}, transparent)`,
+                      boxShadow: `0 0 10px ${theme.palette.primary.main}`,
+                      opacity: 0.5,
+                      zIndex: 2,
+                      willChange: 'top', // Optimize for transform
+                    }}
+                  />
                 </Box>
+
+                {/* Floating tech badges */}
+                <motion.div
+                  style={{
+                    position: 'absolute',
+                    top: 20,
+                    right: -10,
+                    padding: '8px 16px',
+                    borderRadius: '8px',
+                    background: alpha(theme.palette.primary.main, 0.9),
+                    backdropFilter: 'blur(10px)',
+                    boxShadow: `0 4px 16px ${alpha(theme.palette.primary.main, 0.4)}`,
+                    fontSize: '0.75rem',
+                    fontWeight: 700,
+                    color: theme.palette.mode === 'dark' ? '#000' : '#fff',
+                    border: `1px solid ${alpha(theme.palette.primary.light, 0.5)}`,
+                  }}
+                  animate={{
+                    y: [0, -10, 0],
+                  }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 3,
+                    ease: 'easeInOut',
+                  }}
+                >
+                  AI/ML
+                </motion.div>
+
+                <motion.div
+                  style={{
+                    position: 'absolute',
+                    bottom: 30,
+                    left: -10,
+                    padding: '8px 16px',
+                    borderRadius: '8px',
+                    background: alpha(theme.palette.secondary.main, 0.9),
+                    backdropFilter: 'blur(10px)',
+                    boxShadow: `0 4px 16px ${alpha(theme.palette.secondary.main, 0.4)}`,
+                    fontSize: '0.75rem',
+                    fontWeight: 700,
+                    color: '#fff',
+                    border: `1px solid ${alpha(theme.palette.secondary.light, 0.5)}`,
+                  }}
+                  animate={{
+                    y: [0, 10, 0],
+                  }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 3,
+                    ease: 'easeInOut',
+                    delay: 1.5,
+                  }}
+                >
+                  Data Science
+                </motion.div>
               </motion.div>
             </motion.div>
           </Grid>
