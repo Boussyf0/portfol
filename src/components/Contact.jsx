@@ -1,16 +1,19 @@
-import React from 'react';
-import { 
-  Box, 
-  Container, 
-  Typography, 
-  IconButton, 
-  Link as MuiLink, 
-  Button, 
-  TextField, 
-  Grid, 
-  Paper, 
+import React, { useState } from 'react';
+import {
+  Box,
+  Container,
+  Typography,
+  IconButton,
+  Link as MuiLink,
+  Button,
+  TextField,
+  Grid,
+  Paper,
   useTheme,
-  alpha
+  alpha,
+  Snackbar,
+  Alert,
+  CircularProgress
 } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -20,15 +23,151 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { SOCIAL_LINKS } from '../data/constants';
 import SectionTitle from './UI/SectionTitle';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
+import { EMAILJS_CONFIG } from '../config/emailjs.config';
 
 const Contact = () => {
   const theme = useTheme();
-  
-  const handleSubmit = (e) => {
+
+  // Form state
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+
+  // Error state
+  const [errors, setErrors] = useState({});
+
+  // Loading state
+  const [loading, setLoading] = useState(false);
+
+  // Notification state
+  const [notification, setNotification] = useState({
+    open: false,
+    message: '',
+    severity: 'success'
+  });
+
+  // Handle input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    // Clear error for this field when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
+  };
+
+  // Validate form
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) {
+      newErrors.email = 'Invalid email address';
+    }
+
+    if (!formData.subject.trim()) {
+      newErrors.subject = 'Subject is required';
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // This would typically handle form submission
-    // For now, just open the mail client
-    window.open(`mailto:${SOCIAL_LINKS.email}`);
+
+    // Validate form
+    if (!validateForm()) {
+      setNotification({
+        open: true,
+        message: 'Please fix the errors in the form',
+        severity: 'error'
+      });
+      return;
+    }
+
+    // Check if EmailJS is configured
+    if (EMAILJS_CONFIG.SERVICE_ID === 'YOUR_SERVICE_ID') {
+      setNotification({
+        open: true,
+        message: 'EmailJS is not configured yet. Please check the setup instructions.',
+        severity: 'warning'
+      });
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      // Send email using EmailJS
+      await emailjs.send(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID,
+        {
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          time: new Date().toLocaleString(),
+        },
+        EMAILJS_CONFIG.PUBLIC_KEY
+      );
+
+      // Success
+      setNotification({
+        open: true,
+        message: 'Message sent successfully! I\'ll get back to you soon.',
+        severity: 'success'
+      });
+
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      setNotification({
+        open: true,
+        message: 'Failed to send message. Please try again or contact me directly via email.',
+        severity: 'error'
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Handle notification close
+  const handleCloseNotification = () => {
+    setNotification(prev => ({
+      ...prev,
+      open: false
+    }));
   };
   
   // Common styles for form fields
@@ -285,8 +424,13 @@ const Contact = () => {
                       id="name"
                       label="Your Name"
                       name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      error={!!errors.name}
+                      helperText={errors.name}
                       variant="outlined"
                       sx={textFieldStyles}
+                      disabled={loading}
                       InputLabelProps={{
                         sx: { color: 'text.primary' }
                       }}
@@ -303,8 +447,13 @@ const Contact = () => {
                       label="Your Email"
                       name="email"
                       type="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      error={!!errors.email}
+                      helperText={errors.email}
                       variant="outlined"
                       sx={textFieldStyles}
+                      disabled={loading}
                       InputLabelProps={{
                         sx: { color: 'text.primary' }
                       }}
@@ -320,8 +469,13 @@ const Contact = () => {
                       id="subject"
                       label="Subject"
                       name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      error={!!errors.subject}
+                      helperText={errors.subject}
                       variant="outlined"
                       sx={textFieldStyles}
+                      disabled={loading}
                       InputLabelProps={{
                         sx: { color: 'text.primary' }
                       }}
@@ -339,8 +493,13 @@ const Contact = () => {
                       name="message"
                       multiline
                       rows={4}
+                      value={formData.message}
+                      onChange={handleChange}
+                      error={!!errors.message}
+                      helperText={errors.message}
                       variant="outlined"
                       sx={textFieldStyles}
+                      disabled={loading}
                       InputLabelProps={{
                         sx: { color: 'text.primary' }
                       }}
@@ -355,10 +514,11 @@ const Contact = () => {
                       variant="contained"
                       color="primary"
                       size="large"
-                      endIcon={<SendIcon />}
-                      sx={{ 
-                        mt: 2, 
-                        py: 1.5, 
+                      disabled={loading}
+                      endIcon={loading ? <CircularProgress size={20} sx={{ color: '#fff' }} /> : <SendIcon />}
+                      sx={{
+                        mt: 2,
+                        py: 1.5,
                         px: 4,
                         borderRadius: 8,
                         color: 'primary.contrastText',
@@ -368,10 +528,14 @@ const Contact = () => {
                           background: theme.customGradients.primary,
                           transform: 'translateY(-2px)',
                           boxShadow: theme => `0 12px 25px ${alpha(theme.palette.primary.main, 0.4)}`,
+                        },
+                        '&:disabled': {
+                          background: theme => alpha(theme.palette.primary.main, 0.5),
+                          color: '#fff',
                         }
                       }}
                     >
-                      Send Message
+                      {loading ? 'Sending...' : 'Send Message'}
                     </Button>
                   </Grid>
                 </Grid>
@@ -380,6 +544,23 @@ const Contact = () => {
           </Grid>
         </Grid>
       </Container>
+
+      {/* Notification Snackbar */}
+      <Snackbar
+        open={notification.open}
+        autoHideDuration={6000}
+        onClose={handleCloseNotification}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert
+          onClose={handleCloseNotification}
+          severity={notification.severity}
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+          {notification.message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
