@@ -19,7 +19,7 @@ This is the source code for my personal portfolio website showcasing my projects
 
 ## Deployment
 
-This portfolio is deployed using GitHub Pages and can be accessed at: https://boussyf0.github.io/portfolio/
+This portfolio is deployed using GitHub Pages and can be accessed at: https://boussyf0.github.io/portfol/
 
 ## Local Development
 
