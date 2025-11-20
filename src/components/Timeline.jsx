@@ -6,6 +6,7 @@ import WorkIcon from '@mui/icons-material/Work';
 import CodeIcon from '@mui/icons-material/Code';
 import TerminalIcon from '@mui/icons-material/Terminal';
 import AutoGraphIcon from '@mui/icons-material/AutoGraph';
+import BoltIcon from '@mui/icons-material/Bolt';
 
 const Timeline = () => {
   const theme = useTheme();
@@ -18,38 +19,38 @@ const Timeline = () => {
   // Timeline items
   const timelineItems = [
     {
-      year: '2023',
-      title: 'Data Science Internship',
-      description: 'Developed machine learning models for predictive analytics at a tech startup, focusing on customer behavior prediction.',
+      year: '2025',
+      title: 'Intelligent Web Platform & RAG Intern',
+      description: 'Developed an intelligent web platform at Brain Gen Technology, integrating a RAG-based chatbot (Llama, Mistral) to optimize lead qualification and customer interaction.',
       icon: <AutoGraphIcon />,
       color: theme.palette.secondary.main,
     },
     {
-      year: '2022',
-      title: 'Started Computer Engineering',
-      description: 'Enrolled in Computer Engineering at EMSI-MARRAKECH, focusing on AI, machine learning, and software development.',
+      year: '2024',
+      title: 'Technical Loss Analysis Intern',
+      description: 'Analyzed technical losses in the electrical distribution network at ONEEP-DAKHLA, identifying key factors responsible for 40% of losses and proposing reduction strategies.',
+      icon: <BoltIcon />,
+      color: theme.palette.primary.main,
+    },
+    {
+      year: '2023',
+      title: 'Process Verification Intern',
+      description: 'Monitored NISSAN process parameters at OCP SAFI to optimize phosphoric acid production, studying industrial flows from grinding to storage.',
+      icon: <WorkIcon />,
+      color: theme.palette.secondary.main,
+    },
+    {
+      year: '2021 - 2023',
+      title: 'Engineering Cycle (GPM)',
+      description: 'Studied Process and Materials Engineering at ENSA Safi, gaining a strong foundation in industrial processes.',
       icon: <SchoolIcon />,
       color: theme.palette.primary.main,
     },
     {
-      year: '2022',
-      title: 'Web Development Project',
-      description: 'Built a full-stack web application using React, Node.js, and MongoDB, implementing RESTful API services.',
-      icon: <CodeIcon />,
-      color: theme.palette.secondary.main,
-    },
-    {
-      year: '2021',
-      title: 'Machine Learning Certification',
-      description: 'Completed an intensive machine learning course, covering neural networks, computer vision, and NLP techniques.',
-      icon: <TerminalIcon />,
-      color: theme.palette.primary.main,
-    },
-    {
-      year: '2020',
-      title: 'First Programming Project',
-      description: 'Developed a data analysis tool in Python, implementing statistical methods and visualization techniques.',
-      icon: <WorkIcon />,
+      year: '2018 - 2020',
+      title: 'CPGE',
+      description: 'Completed Preparatory Classes for Great Engineering Schools at Ad Dakhla, focusing on Mathematics and Physics.',
+      icon: <SchoolIcon />,
       color: theme.palette.secondary.main,
     },
   ];
@@ -160,13 +161,13 @@ const TimelineItem = ({ item, index, isLeft }) => {
 
   // Animation variants
   const itemVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       x: isLeft ? -50 : 50,
       y: 20,
     },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       x: 0,
       y: 0,
       transition: {

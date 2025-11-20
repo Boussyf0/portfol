@@ -1,0 +1,79 @@
+                                                          Abderrahim Boussyf
+                                           FUTUR INGÉNIEUR EN SCIENCE DES
+                                         DONNÉES ET INTELLIGENCE ARTIFICIELLE
+
+
+
+
+ +212 632-187305
+                                           Étudiant finissant en Génie Informatique, doté de solides compétences académiques et
+ Boussyf0@gmail.com                       pratiques en développement logiciel, data engineering et intelligence artificielle. Je suis
+  MARRAKECH                               actuellement en quête d'un stage de fin d'études (PFE) d'une durée de 4 à 6 mois, visant à
+                                           intégrer un environnement dynamique pour contribuer à des projets innovants et y
+  National
+                                           déployer mes compétences techniques et analytiques.
+  https://boussyf0.github.io/portfol/
+
+                                           Diplômes et Formations
+Réseaux sociaux
+                                                CYCLE INGÉNIEUR INFORMATIQUE
+ @Boussyf0
+                                                Depuis septembre 2023 EMSI Marrakesh, Morocco
+ @abderrahim boussyf
+                                                CYCLE INGÉNIEUR GPM (GÉNIE DES PROCÉDÉS ET MATÉRIAUX)
+Compétences                                     De septembre 2021 à juillet 2023 ENSA Safi, Morocco
+
+Techniques                                      SCIENCES DE LA MATIÈRE PHYSIQUE
+Langages de Programmation                       De septembre 2020 à juillet 2021 FSSM Marrakesh, Morocco
+- Python, Java, C++, C#, PHP
+Intelligence Artificielle & Machine             CLASSES PRÉPARATOIRES AUX GRANDES ÉCOLES D'INGENIEUR
+Learning                                        De septembre 2018 à juillet 2020 CPGE Ad Dakhla
+- Modèles de langage (LLM), Natural
+Language Processing (NLP)
+                                           Expériences professionnelles
+- Système RAG (Retrieval-Augmented
+Generation)
+                                                Stagiaire – Développement d’une plateforme web intelligente
+- Chatbot intelligent et agents
+conversationnels                                De juillet 2025 à septembre 2025 BRAIN GEN TECHNOLOGY Casablanca, Morocco
+- Scikit-learn, XGBoost                             Développer une plateforme web intelligente intégrant un agent
+Data Science & Analyse de Données                   conversationnel basé sur un système RAG, optimisant l’interaction client et
+- Nettoyage et visualisation: Pandas,               l’automatisation de la qualification des prospects.
+Matplotlib, Seaborn                                 Augmenter de 50% le taux de qualification des leads grâce à l’intégration d’un
+- Modélisation prédictive et analyse                chatbot intelligent et d’un système d’analyse automatisée.
+statistique                                         Réduire de 60% le coût d’acquisition client (CAC) en exploitant les données
+- Automatisation de processus data-                 collectées lors des interactions et en améliorant le ciblage.
+driven                                              Améliorer de 40% le taux de conversion lead-to-customer, renforçant
+                                                    l’efficacité du processus commercial.
+Transversales
+- Gestion de projet : connaissance des          Stagiaire - Analyse des données relatives aux pertes techniques dans le réseau
+méthodologies Agile et Scrum.                   de distribution élect
+- Analyse et résolution de problèmes .          De juillet 2024 à août 2024 L'ONEEP-DAKHLA Ad Dakhla
+- Travail en équipe .
+                                                    Développer une application d’analyse des pertes techniques dans le réseau
+                                                    électrique, réduisant le temps d’analyse de 30%.
+Langues                                             Analyser les pertes techniques sur les réseaux MT et BT, identifiant 3 facteurs
+                                                    clés responsables de plus de 40% des pertes.
+Arabe                                               Proposer des recommandations permettant de réduire les pertes de 5 à 10%
+Langue maternelle                                   dans le réseau.
+Français                                        Stagiaire – Vérification des processus de production d’acide phosphorique
+Courant
+                                                De juillet 2023 à août 2023 OCP (MP1) SAFI
+Anglais
+                                                    Suivre des paramètres techniques du procédé NISSAN (températures,
+Professionnel
+                                                    concentrations d’acide phosphorique, fonctionnement des pompes
+                                                    hydrauliques) pour optimiser la production.
+Centres d'intérêt                                   Étudier les étapes de fabrication (broyage, réaction, filtration, concentration,
+                                                    stockage) pour comprendre les flux industriels.
+Football
+Lecture (littérature classique et          Projet Academic
+philosophie)
+                                           Système local de simulation d’entretien technique basé sur un LLM
+                                           Développement d’un simulateur d’entretien technique local intégrant des LLMs open-
+                                           source (Llama, Mistral) via l'écosystème Hugging Face pour générer des questions
+                                           personnalisées et évaluer les réponses (Python, Streamlit, NLP).
+                                           ChessGame
+                                           Développement d’un jeu d'échecs en C# permettant de jouer contre une IA, incluant la
+                                           gestion des mouvements, la logique du jeu et l'interface utilisateur.
+

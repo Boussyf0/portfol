@@ -1,0 +1,65 @@
+                                             Abderrahim Boussyf
+                                       Data Scientist & Machine Learning Engineer
+                               📍 Marrakesh, Morocco • 📞 +212 632-187305 • ✉ Boussyf0@gmail.com
+                     💼 linkedin.com/in/abderrahim-boussyf • 🔗 github.com/Boussyf0 • 🌐 boussyf0.github.io/portfol
+
+Professional Summary
+Results-driven Computer Engineering student specializing in Machine Learning and Data Science. Proven track record in
+developing AI systems with measurable business impact: 50% increase in lead qualification, 60% CAC reduction, and 40%
+conversion improvement. Seeking Machine Learning / Data Science Internship in an innovative global environment.
+Skills
+Technical
+  •    Programming & Tools: Python (Advanced), SQL, Java, C++, C#,Git, Docker
+  •    Machine Learning: Scikit-learn, XGBoost, LightGBM, TensorFlow, PyTorch, Feature Engineering, Model Optimization
+  •    AI & NLP: LLMs, RAG Systems, Transformers, BERT, GPT, Conversational AI, Prompt Engineering
+  •    Data Science: Pandas, NumPy, Matplotlib, Seaborn, Plotly, Statistical Analysis, Predictive Modeling, A/B Testing
+  •    Development: Streamlit, Flask, FastAPI, REST APIs, ETL Pipelines, AWS & Azure (Fundamentals), CI/CD
+Soft
+  •    Problem-Solving & Analytical Thinking: Strong ability to break down complex technical challenges into actionable solutions
+  •    Team Collaboration: Proven experience working in cross-functional teams (engineers, data scientists, business stakeholders)
+  •    Communication: Effective at presenting technical concepts to non-technical audiences and documenting solutions
+  •    Adaptability & Learning: Quick learner with demonstrated ability to master new technologies and methodologies
+       independently.
+
+Professional Experience
+Machine Learning Engineer Intern                                                                                Jul 2025 – Sep 2025
+Brain Gen Technology                                                                                           Casablanca, Morocco
+  •    Designed and deployed a RAG-based conversational AI platform, improving lead qualification by 50%
+  •    Reduced Customer Acquisition Cost (CAC) by 60% through conversational analytics and data-driven targeting
+  •    Enhanced customer conversion by 40% via NLP-powered chatbot with ML-based lead scoring
+Data Analyst Intern                                                                                                Jul 2024 – Aug 2024
+L'ONEEP - Dakhla                                                                                                   Ad Dakhla, Morocco
+  •    Built an analytics tool for electrical grid loss analysis, cutting reporting time by 30%
+  •    Identified 3 factors responsible for over 40% of technical losses through exploratory data analysis
+  •    Proposed actions projected to reduce network losses by 5–10%
+Process Engineering Intern                                                                                         Jul 2023 – Aug 2023
+OCP Group (MPI)                                                                                                           Safi, Morocco
+  •    Monitored NISSAN process parameters to optimize phosphoric acid production efficiency
+  •    Collaborated with multidisciplinary teams to identify and implement process improvements
+Projects
+  •    AeroIntelliCAD AI-Powered Aerospace Design Platform
+       Leading development of intelligent CAD platform with 3D visualization (Three.js), AI assistant (PyTorch/TensorFlow),
+       and CFD simulation (OpenFOAM). Targeting aerospace industry to reduce design errors and $10B+ annual losses
+       from accidents.
+  •    Real-Time Predictive Maintenance Platform for Smart Factories
+       Designed end-to-end microservices architecture integrating IIoT data ingestion (MQTT/OPC UA), anomaly detection,
+       and RUL prediction (LSTM/GRU). Deployed with Docker/Kubernetes, Kafka streaming, TimescaleDB, and MLflow for
+       production ML pipelines.
+  •    AI-Powered Technical Interview Simulator
+       Built a local LLM-based application for personalized interview training with dynamic question generation and response
+       evaluation (Python, Streamlit, NLP).
+  •    Intelligent Chess Engine (C#)
+       Developed a chess AI using minimax algorithm and alpha-beta pruning to evaluate optimal moves.
+Education
+Master's in Computer Engineering                                                                                    Sep 2023 – Present
+École Marocaine des Sciences de l'Ingénieur (EMSI)                                                                 Marrakesh, Morocco
+Engineering Diploma – Process & Materials                                                                          Sep 2021 – Jul 2023
+École Nationale des Sciences Appliquées (ENSA)                                                                           Safi, Morocco
+Preparatory Classes (Maths & Physics)                                                                              Sep 2018 – Jul 2020
+Classes Préparatoires aux Grandes Écoles                                                                           Ad Dakhla, Morocco
+
+
+Languages & Interests
+Languages: Arabic (Native), French (Fluent), English (Intermediate)
+Interests: Football, AI Innovation, Data Visualization, Reading() , Industrial IoT, Aerospace Engineering.
+

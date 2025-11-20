@@ -8,34 +8,46 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Satoshi', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
-        display: ['Orbitron', 'sans-serif'],
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        display: ['Playfair Display', 'Georgia', 'serif'],
+        mono: ['JetBrains Mono', 'Consolas', 'Monaco', 'monospace'],
       },
       colors: {
         primary: {
-          50: '#e6f1ff',
-          100: '#cce3ff',
-          200: '#99c7ff',
-          300: '#66abff',
-          400: '#338fff',
-          500: '#0073ff', // Neon Blue
-          600: '#005ccc',
-          700: '#004599',
-          800: '#002e66',
-          900: '#001733',
+          50: '#f0f4f9',
+          100: '#d9e4f0',
+          200: '#b3c9e1',
+          300: '#8daed2',
+          400: '#5682b3',
+          500: '#1a365d', // Navy Blue
+          600: '#162c4d',
+          700: '#12223d',
+          800: '#0e192e',
+          900: '#0a0f1f',
         },
         secondary: {
-          50: '#f3e5ff',
-          100: '#e7ccff',
-          200: '#cf99ff',
-          300: '#b766ff',
-          400: '#9f33ff',
-          500: '#8700ff', // Neon Violet
-          600: '#6c00cc',
-          700: '#510099',
-          800: '#360066',
-          900: '#1b0033',
+          50: '#e8f3f8',
+          100: '#d1e7f1',
+          200: '#a3cfe3',
+          300: '#75b7d5',
+          400: '#479fc7',
+          500: '#0f4c75', // Deep Teal
+          600: '#0c3d5e',
+          700: '#092e47',
+          800: '#061f30',
+          900: '#030f18',
+        },
+        accent: {
+          50: '#faf6f0',
+          100: '#f5ede1',
+          200: '#ebdbc3',
+          300: '#e1c9a5',
+          400: '#d7b787',
+          500: '#d4a574', // Warm Gold
+          600: '#b88d5f',
+          700: '#9c754a',
+          800: '#805d35',
+          900: '#644520',
         },
         dark: {
           50: '#f8fafc',
@@ -67,10 +79,10 @@ export default {
           '100%': { transform: 'translateY(0)', opacity: 1 },
         },
         neonGlow: {
-          '0%, 100%': { 
+          '0%, 100%': {
             textShadow: '0 0 7px #0073ff, 0 0 10px #0073ff, 0 0 21px #0073ff, 0 0 42px #8700ff',
           },
-          '50%': { 
+          '50%': {
             textShadow: '0 0 10px #0073ff, 0 0 20px #0073ff, 0 0 30px #0073ff, 0 0 40px #8700ff',
           },
         },

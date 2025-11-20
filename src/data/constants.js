@@ -13,7 +13,7 @@ export const SKILL_CATEGORIES = [
   },
   {
     category: "AI & Machine Learning",
-    skills: ["LLMs", "TensorFlow", "PyTorch", "scikit-learn", "NLP", "Computer Vision", "XGBoost"]
+    skills: ["LLMs", "RAG", "Llama", "Mistral", "TensorFlow", "PyTorch", "scikit-learn", "NLP", "Computer Vision", "XGBoost"]
   },
   {
     category: "Big Data & Cloud",

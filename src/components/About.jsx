@@ -27,13 +27,13 @@ const About = () => {
   const containerRef = useRef(null);
   const profileRef = useRef(null);
   const isProfileInView = useInView(profileRef, { once: false, amount: 0.2 });
-  
+
   // Parallax effect for scrolling
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
   });
-  
+
   const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.9, 1], [0.6, 1, 1, 0.6]);
 
@@ -44,7 +44,7 @@ const About = () => {
     { x: -180, y: 150, size: 50, color: alpha(theme.palette.primary.light, 0.1), delay: 1 },
     { x: 100, y: -120, size: 30, color: alpha(theme.palette.secondary.light, 0.2), delay: 1.5 },
   ];
-  
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -72,64 +72,64 @@ const About = () => {
   // 3D Image Tilt effect
   const handleMouseMove = (e) => {
     if (!profileRef.current) return;
-    
+
     const rect = profileRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
+
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    
+
     const rotateX = (y - centerY) / 20;
     const rotateY = (centerX - x) / 20;
-    
+
     profileRef.current.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
   };
-  
+
   const handleMouseLeave = () => {
     if (!profileRef.current) return;
     profileRef.current.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
   };
 
   const focusAreas = [
-    { 
-      title: 'AI & Machine Learning', 
+    {
+      title: 'AI & Machine Learning',
       icon: <SmartToyIcon sx={{ color: 'primary.main' }} />,
-      description: 'I implement AI systems from concept to deployment, with expertise in designing machine learning pipelines and optimizing model performance for production environments.' 
+      description: 'I implement AI systems from concept to deployment, with expertise in designing machine learning pipelines and optimizing model performance for production environments.'
     },
-    { 
-      title: 'Predictive Analytics', 
+    {
+      title: 'Predictive Analytics',
       icon: <AutoGraphIcon sx={{ color: 'primary.main' }} />,
-      description: 'I develop data-driven solutions to extract insights from complex datasets, using statistical methods and machine learning algorithms to deliver actionable intelligence.' 
+      description: 'I develop data-driven solutions to extract insights from complex datasets, using statistical methods and machine learning algorithms to deliver actionable intelligence.'
     },
-    { 
-      title: 'Big Data & Cloud', 
+    {
+      title: 'Big Data & Cloud',
       icon: <StorageIcon sx={{ color: 'primary.main' }} />,
-      description: 'I architect scalable systems for processing large datasets, utilizing distributed computing frameworks and cloud infrastructure for efficient big data solutions.' 
+      description: 'I architect scalable systems for processing large datasets, utilizing distributed computing frameworks and cloud infrastructure for efficient big data solutions.'
     },
-    { 
-      title: 'Software Engineering', 
+    {
+      title: 'Software Engineering',
       icon: <CodeIcon sx={{ color: 'primary.main' }} />,
-      description: 'I build robust applications following best practices in software development, from architecture design to code quality and testing methodologies.' 
+      description: 'I build robust applications following best practices in software development, from architecture design to code quality and testing methodologies.'
     },
-    { 
-      title: 'Vector Database for Embedding Storage and Search', 
+    {
+      title: 'Vector Database for Embedding Storage and Search',
       icon: <SearchIcon sx={{ color: 'primary.main' }} />,
-      description: 'I developed vector databases to store and retrieve high-dimensional embeddings for fast similarity searches, optimized for semantic search, recommendation systems, and image retrieval.' 
+      description: 'I developed vector databases to store and retrieve high-dimensional embeddings for fast similarity searches, optimized for semantic search, recommendation systems, and image retrieval.'
     },
   ];
 
   const skills = [
-    "Python", "TensorFlow", "PyTorch", "Scikit-learn", "SQL", "JavaScript", 
-    "React", "Node.js", "Docker", "AWS", "GCP", "Git", "MLOps", 
+    "Python", "TensorFlow", "PyTorch", "Scikit-learn", "SQL", "JavaScript",
+    "React", "Node.js", "Docker", "AWS", "GCP", "Git", "MLOps",
     "Computer Vision", "NLP", "Recommendation Systems"
   ];
 
   return (
-    <Box 
-      component="section" 
-      id="about" 
-      sx={{ 
+    <Box
+      component="section"
+      id="about"
+      sx={{
         py: { xs: 8, md: 12 },
         position: 'relative',
         overflow: 'hidden',
@@ -139,36 +139,36 @@ const About = () => {
       ref={containerRef}
     >
       {/* Background elements */}
-      <Box 
-        sx={{ 
+      <Box
+        sx={{
           position: 'absolute',
           width: '100%',
           height: '100%',
           top: 0,
           left: 0,
-          background: theme => theme.palette.mode === 'dark' 
+          background: theme => theme.palette.mode === 'dark'
             ? 'radial-gradient(circle at 15% 50%, rgba(67, 97, 238, 0.15), transparent 25%), radial-gradient(circle at 85% 30%, rgba(247, 37, 133, 0.1), transparent 25%)'
             : 'radial-gradient(circle at 15% 50%, rgba(67, 97, 238, 0.1), transparent 25%), radial-gradient(circle at 85% 30%, rgba(247, 37, 133, 0.07), transparent 25%)',
           zIndex: -1,
         }}
       />
-      
+
       {/* Floating animated shapes */}
       {shapes.map((shape, index) => (
         <motion.div
           key={index}
           initial={{ opacity: 0, scale: 0 }}
-          animate={{ 
-            opacity: 1, 
+          animate={{
+            opacity: 1,
             scale: 1,
             x: [shape.x - 10, shape.x + 10, shape.x - 10],
             y: [shape.y - 10, shape.y + 10, shape.y - 10],
             rotate: [0, 5, -5, 0]
           }}
-          transition={{ 
+          transition={{
             delay: shape.delay,
-            duration: 8, 
-            repeat: Infinity, 
+            duration: 8,
+            repeat: Infinity,
             ease: "easeInOut"
           }}
           style={{
@@ -184,13 +184,13 @@ const About = () => {
           }}
         />
       ))}
-      
+
       <Container maxWidth="lg">
         <SectionTitle title="About Me" />
-        
-        <Grid 
-          container 
-          spacing={6} 
+
+        <Grid
+          container
+          spacing={6}
           alignItems="center"
           component={motion.div}
           style={{ opacity, y }}
@@ -200,14 +200,14 @@ const About = () => {
           viewport={{ once: true, amount: 0.2 }}
         >
           {/* Profile Image Column */}
-          <Grid 
-            item 
-            xs={12} 
-            md={5} 
-            component={motion.div} 
+          <Grid
+            item
+            xs={12}
+            md={5}
+            component={motion.div}
             variants={itemVariants}
-            sx={{ 
-              display: 'flex', 
+            sx={{
+              display: 'flex',
               justifyContent: 'center',
               flexDirection: 'column',
               alignItems: { xs: 'center', md: 'flex-start' },
@@ -227,12 +227,12 @@ const About = () => {
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
                 initial={{ opacity: 0, scale: 0.95 }}
-                animate={isProfileInView ? { 
-                  opacity: 1, 
+                animate={isProfileInView ? {
+                  opacity: 1,
                   scale: 1,
-                  transition: { duration: 0.5, ease: "easeOut" } 
+                  transition: { duration: 0.5, ease: "easeOut" }
                 } : {}}
-                style={{ 
+                style={{
                   position: 'relative',
                   width: '100%',
                   height: '100%',
@@ -241,8 +241,8 @@ const About = () => {
                 }}
               >
                 {/* Decorative elements behind the image */}
-                <Box 
-                  sx={{ 
+                <Box
+                  sx={{
                     position: 'absolute',
                     top: -15,
                     left: -15,
@@ -256,8 +256,8 @@ const About = () => {
                     transform: 'translateZ(-10px)',
                   }}
                 />
-                <Box 
-                  sx={{ 
+                <Box
+                  sx={{
                     position: 'absolute',
                     bottom: -15,
                     right: -15,
@@ -271,20 +271,20 @@ const About = () => {
                     transform: 'translateZ(-20px)',
                   }}
                 />
-                
+
                 {/* Pulse effect */}
                 <motion.div
                   initial={{ opacity: 0.5, scale: 0.9 }}
-                  animate={{ 
-                    opacity: [0.2, 0.5, 0.2], 
+                  animate={{
+                    opacity: [0.2, 0.5, 0.2],
                     scale: [0.98, 1.03, 0.98],
                   }}
-                  transition={{ 
-                    duration: 4, 
-                    repeat: Infinity, 
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
                     ease: "easeInOut"
                   }}
-                  style={{ 
+                  style={{
                     position: 'absolute',
                     width: '100%',
                     height: '100%',
@@ -294,14 +294,14 @@ const About = () => {
                     zIndex: -1,
                   }}
                 />
-                
+
                 {/* Profile image */}
                 <Box
                   component={motion.img}
                   src={PROFILE_IMAGE}
                   alt="Profile"
                   loading="lazy"
-                  sx={{ 
+                  sx={{
                     width: '100%',
                     height: '100%',
                     objectFit: 'cover',
@@ -315,10 +315,10 @@ const About = () => {
                     transform: 'translateZ(0px)',
                   }}
                 />
-                
+
                 {/* 3D depth effects */}
-                <Box 
-                  sx={{ 
+                <Box
+                  sx={{
                     position: 'absolute',
                     top: '5%',
                     right: '-8%',
@@ -334,14 +334,14 @@ const About = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <SmartToyIcon sx={{ 
+                  <SmartToyIcon sx={{
                     color: theme => theme.palette.mode === 'dark' ? 'common.white' : 'primary.main',
-                    fontSize: { xs: 25, sm: 30 } 
+                    fontSize: { xs: 25, sm: 30 }
                   }} />
                 </Box>
-                
-                <Box 
-                  sx={{ 
+
+                <Box
+                  sx={{
                     position: 'absolute',
                     bottom: '10%',
                     left: '-8%',
@@ -357,30 +357,30 @@ const About = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <CodeIcon sx={{ 
+                  <CodeIcon sx={{
                     color: theme => theme.palette.mode === 'dark' ? 'common.white' : 'primary.main',
-                    fontSize: { xs: 20, sm: 25 } 
+                    fontSize: { xs: 20, sm: 25 }
                   }} />
                 </Box>
               </motion.div>
             </Box>
-            
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={isProfileInView ? { 
-                opacity: 1, 
+              animate={isProfileInView ? {
+                opacity: 1,
                 y: 0,
-                transition: { delay: 0.3, duration: 0.5 } 
+                transition: { delay: 0.3, duration: 0.5 }
               } : {}}
             >
-              <Button 
+              <Button
                 component="a"
                 href={RESUME_PATH}
                 download
                 target="_blank"
-                variant="contained" 
-                color="primary" 
-                sx={{ 
+                variant="contained"
+                color="primary"
+                sx={{
                   mt: 4,
                   px: 4,
                   py: 1.5,
@@ -403,7 +403,7 @@ const About = () => {
               </Button>
             </motion.div>
           </Grid>
-          
+
           {/* About Text Column */}
           <Grid item xs={12} md={7} component={motion.div} variants={itemVariants}>
             <motion.div
@@ -412,10 +412,10 @@ const About = () => {
               transition={{ duration: 0.6, ease: "easeOut" }}
               viewport={{ once: true }}
             >
-              <Typography 
-                variant="h4" 
-                gutterBottom 
-                sx={{ 
+              <Typography
+                variant="h4"
+                gutterBottom
+                sx={{
                   fontWeight: 700,
                   color: 'text.primary',
                   mb: 2,
@@ -423,12 +423,12 @@ const About = () => {
               >
                 Computer Engineering Student
               </Typography>
-              
-              <Typography 
-                variant="body1" 
-                paragraph 
-                sx={{ 
-                  mb: 3, 
+
+              <Typography
+                variant="body1"
+                paragraph
+                sx={{
+                  mb: 3,
                   fontSize: { xs: '1.1rem', md: '1.15rem' },
                   lineHeight: { xs: 1.8, md: 1.9 },
                   color: 'text.primary',
@@ -438,12 +438,12 @@ const About = () => {
               >
                 As a final-year Computer Engineering student at EMSI-MARRAKECH, I specialize in artificial intelligence and full-stack development with over 3 years of hands-on experience building production-ready applications. My academic foundation spans advanced algorithms, distributed systems, and software architecture patterns.
               </Typography>
-              
-              <Typography 
-                variant="body1" 
-                paragraph 
-                sx={{ 
-                  mb: 3, 
+
+              <Typography
+                variant="body1"
+                paragraph
+                sx={{
+                  mb: 3,
                   fontSize: { xs: '1.1rem', md: '1.15rem' },
                   lineHeight: { xs: 1.8, md: 1.9 },
                   color: 'text.primary',
@@ -454,11 +454,11 @@ const About = () => {
                 I've successfully delivered enterprise-level solutions in machine learning and DevOps, including predictive analytics platforms, computer vision systems, and scalable cloud-native applications. My technical expertise encompasses Python, TensorFlow/PyTorch, Kubernetes, and modern web technologies, with proven experience in Agile development methodologies.
               </Typography>
 
-              <Typography 
-                variant="body1" 
-                paragraph 
-                sx={{ 
-                  mb: 4, 
+              <Typography
+                variant="body1"
+                paragraph
+                sx={{
+                  mb: 4,
                   fontSize: { xs: '1.1rem', md: '1.15rem' },
                   lineHeight: { xs: 1.8, md: 1.9 },
                   color: 'text.primary',
@@ -466,9 +466,9 @@ const About = () => {
                   letterSpacing: '0.025em',
                 }}
               >
-                Currently seeking opportunities in Data Science, Machine Learning Engineering, or AI Engineering roles where I can leverage my expertise in predictive analytics, deep learning, and data-driven solutions to drive innovation and deliver measurable business impact through intelligent automation and advanced analytics.
+                Currently seeking an **End-of-studies Internship (PFE)** (4-6 months) in Data Science, Machine Learning Engineering, or AI Engineering roles. I am eager to leverage my expertise in predictive analytics, deep learning, and data-driven solutions to drive innovation and deliver measurable business impact through intelligent automation and advanced analytics.
               </Typography>
-              
+
               {/* Skills tags */}
               <Typography variant="h6" sx={{ mb: 2, fontWeight: 600, color: 'text.primary' }}>Key Skills</Typography>
               <Box sx={{ mb: 4 }}>
@@ -491,16 +491,16 @@ const About = () => {
                             borderRadius: '12px',
                             fontSize: '0.85rem',
                             fontWeight: 500,
-                            background: theme => alpha(theme.palette.primary.main, 
+                            background: theme => alpha(theme.palette.primary.main,
                               theme.palette.mode === 'dark' ? 0.2 : 0.1),
                             color: 'primary.main',
                             cursor: 'pointer',
                             transition: 'all 0.2s ease',
                             border: '1px solid',
-                            borderColor: theme => alpha(theme.palette.primary.main, 
+                            borderColor: theme => alpha(theme.palette.primary.main,
                               theme.palette.mode === 'dark' ? 0.3 : 0.2),
                             '&:hover': {
-                              background: theme => alpha(theme.palette.primary.main, 
+                              background: theme => alpha(theme.palette.primary.main,
                                 theme.palette.mode === 'dark' ? 0.3 : 0.2),
                               transform: 'translateY(-3px)',
                               boxShadow: theme => `0 4px 8px ${alpha(theme.palette.primary.main, 0.2)}`,
@@ -517,7 +517,7 @@ const About = () => {
             </motion.div>
           </Grid>
         </Grid>
-        
+
         {/* Timeline Section */}
         <Box
           component={motion.div}
@@ -525,13 +525,13 @@ const About = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          sx={{ 
-            mt: 12, 
+          sx={{
+            mt: 12,
             position: 'relative',
           }}
         >
-          <Divider 
-            sx={{ 
+          <Divider
+            sx={{
               my: 6,
               '&::before, &::after': {
                 borderColor: theme => alpha(theme.palette.primary.main, theme.palette.mode === 'dark' ? 0.4 : 0.3),
@@ -561,9 +561,9 @@ const About = () => {
               }
             }}
           >
-            <Box 
-              component="span" 
-              sx={{ 
+            <Box
+              component="span"
+              sx={{
                 px: 3,
                 py: 0.75,
                 color: 'text.primary',
@@ -580,22 +580,22 @@ const About = () => {
               TIMELINE
             </Box>
           </Divider>
-          
+
           <Timeline />
         </Box>
-        
+
         {/* Focus Areas Section */}
         <Box sx={{ mt: 10 }}>
-          <Typography 
-            variant="h5" 
-            align="center" 
-            gutterBottom 
+          <Typography
+            variant="h5"
+            align="center"
+            gutterBottom
             component={motion.div}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            sx={{ 
+            sx={{
               fontWeight: 600,
               mb: 6,
               color: 'text.primary',
@@ -603,9 +603,9 @@ const About = () => {
           >
             Areas of Focus
           </Typography>
-          
-          <Grid 
-            container 
+
+          <Grid
+            container
             spacing={3}
             component={motion.div}
             variants={containerVariants}
@@ -614,10 +614,10 @@ const About = () => {
             viewport={{ once: true, amount: 0.1 }}
           >
             {focusAreas.map((area, index) => (
-              <Grid 
-                item 
-                xs={12} 
-                sm={6} 
+              <Grid
+                item
+                xs={12}
+                sm={6}
                 key={index}
                 component={motion.div}
                 variants={itemVariants}
@@ -626,7 +626,7 @@ const About = () => {
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Card 
+                  <Card
                     sx={{
                       borderRadius: 4,
                       bgcolor: 'background.paper',
@@ -634,7 +634,7 @@ const About = () => {
                       boxShadow: theme => `0 10px 20px ${alpha(theme.palette.common.black, theme.palette.mode === 'dark' ? 0.2 : 0.1)}`,
                       backdropFilter: 'blur(10px)',
                       border: '1px solid',
-                      borderColor: theme => theme.palette.mode === 'dark' 
+                      borderColor: theme => theme.palette.mode === 'dark'
                         ? alpha(theme.palette.common.white, 0.1)
                         : alpha(theme.palette.common.black, 0.05),
                       height: '100%',
@@ -665,8 +665,8 @@ const About = () => {
                   >
                     <CardContent sx={{ p: 3, position: 'relative', zIndex: 1 }}>
                       <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                        <Box 
-                          sx={{ 
+                        <Box
+                          sx={{
                             mr: 2,
                             display: 'flex',
                             alignItems: 'center',
@@ -682,9 +682,9 @@ const About = () => {
                         >
                           {area.icon}
                         </Box>
-                        <Typography 
-                          variant="h6" 
-                          sx={{ 
+                        <Typography
+                          variant="h6"
+                          sx={{
                             fontWeight: 600,
                             color: 'text.primary',
                           }}
@@ -692,9 +692,9 @@ const About = () => {
                           {area.title}
                         </Typography>
                       </Box>
-                      <Typography 
-                        variant="body2" 
-                        sx={{ 
+                      <Typography
+                        variant="body2"
+                        sx={{
                           color: 'text.secondary',
                           lineHeight: 1.7,
                           opacity: theme => theme.palette.mode === 'dark' ? 0.9 : 0.8,
