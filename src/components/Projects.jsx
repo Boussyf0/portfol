@@ -268,6 +268,7 @@ const Projects = () => {
                       height={200}
                       image={getProjectImage(project.technologies, project.id)}
                       alt={project.title}
+                      loading="lazy"
                       onError={(e) => {
                         e.target.src = '/assets/react.svg'; // Fallback image
                       }}
@@ -488,6 +489,7 @@ const Projects = () => {
                   height="240"
                   image={getProjectImage(selectedProject.technologies, selectedProject.id)}
                   alt={selectedProject.title}
+                  loading="lazy"
                   sx={{ borderRadius: 2, mb: 3 }}
                 />
               )}
@@ -594,6 +596,7 @@ const ProjectCard = ({ project, onOpen, variants }) => {
           height="160"
           image={getProjectImage(project.technologies, project.id)}
           alt={project.title}
+          loading="lazy"
         />
         <CardContent sx={{ flexGrow: 1, pb: 1 }}>
           <Typography

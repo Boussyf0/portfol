@@ -184,6 +184,7 @@ const Certifications = () => {
                                                 component="img"
                                                 src={getAssetPath(cert.logo)}
                                                 alt={cert.issuer}
+                                                loading="lazy"
                                                 sx={{
                                                     width: '100%',
                                                     height: '100%',
