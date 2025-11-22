@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { 
-  Box, 
-  Container, 
-  Typography, 
-  Card, 
-  CardContent, 
-  CardActions, 
-  Button, 
-  Chip, 
+import {
+  Box,
+  Container,
+  Typography,
+  Card,
+  CardContent,
+  CardActions,
+  Button,
+  Chip,
   Stack,
   CardMedia,
   CardActionArea,
@@ -29,6 +29,8 @@ import LaunchIcon from '@mui/icons-material/Launch';
 import CloseIcon from '@mui/icons-material/Close';
 import StarIcon from '@mui/icons-material/Star';
 import VideocamIcon from '@mui/icons-material/Videocam';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import ArticleIcon from '@mui/icons-material/Article';
 
 // Import project images
 import healthImage from '/assets/image.png';
@@ -37,12 +39,17 @@ import chessImage from '/assets/chesse_1.jpeg';
 import defaultImage from '/assets/react.svg';
 import jobSearchImage from '/assets/screenshots/job_search_platform.png'; // Import the job search platform image
 import cvAnalyzerImage from '/assets/cv_analyzer.png'; // Import CV analyzer image
+import ragThumbnail from '/assets/rag_thumbnail.png'; // Import RAG Agent thumbnail
+import ragArchitecture from '/assets/rag_architecture.svg'; // Import RAG Architecture diagram
+import salesforceLogo from '/assets/salesforce.svg'; // Import Salesforce logo
 
 // Add video URLs for projects - use YouTube or other video hosting service
 const PROJECT_VIDEOS = {
   'ai-interview-simulator': 'https://www.youtube.com/embed/f9XVrOYdezg', // AI Interview Simulator demo video
   'virt-iot': 'https://www.youtube.com/embed/tXKfjhWzEew', // IoT Platform demo video
-  'ml-pipeline-pro': 'https://www.youtube.com/embed/weX9Pq9YGBQ' // MLOps Platform demo video
+  'ml-pipeline-pro': 'https://www.youtube.com/embed/weX9Pq9YGBQ', // MLOps Platform demo video
+  'rag-agent': 'https://www.youtube.com/embed/VOIHbKwAkPA', // RAG Agent demo video
+  'salesforce-agent': 'https://drive.google.com/file/d/1-SfIybgs1yHurukla-Wu3deggE1mpoHc5zExartZS1k/preview' // Salesforce Agent demo video
 };
 
 // Filter projects by featured status
@@ -66,7 +73,13 @@ const getProjectImage = (technologies, projectId) => {
     // MLOps Platform - AI/ML pipeline with neural networks and data flow
     return 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80';
   }
-  
+  if (projectId === 'rag-agent') {
+    return ragThumbnail;
+  }
+  if (projectId === 'salesforce-agent') {
+    return salesforceLogo;
+  }
+
   // Then fall back to technology-based images
   if (technologies.includes('Kubernetes') || technologies.includes('Docker')) {
     return '/assets/image_el.png';
@@ -83,7 +96,7 @@ const getProjectImage = (technologies, projectId) => {
   if (technologies.includes('C#')) {
     return chessImage;
   }
-  
+
   return defaultImage;
 };
 
@@ -125,18 +138,18 @@ const Projects = () => {
   };
 
   return (
-    <Box 
-      component="section" 
-      id="projects" 
-      sx={{ 
+    <Box
+      component="section"
+      id="projects"
+      sx={{
         py: { xs: 8, md: 12 },
         position: 'relative',
         overflow: 'hidden',
       }}
     >
       {/* Decorative background patterns */}
-      <Box 
-        sx={{ 
+      <Box
+        sx={{
           position: 'absolute',
           bottom: 0,
           right: 0,
@@ -147,16 +160,16 @@ const Projects = () => {
           zIndex: -1,
         }}
       />
-      
+
       <Container maxWidth="lg">
         <SectionTitle title="Projects" />
-        
+
         {/* Featured Projects Section */}
         <Box sx={{ mb: 8 }}>
-          <Box 
-            sx={{ 
-              display: 'flex', 
-              alignItems: 'center', 
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
               mb: 4,
               gap: 1
             }}
@@ -167,9 +180,9 @@ const Projects = () => {
             transition={{ duration: 0.5 }}
           >
             <StarIcon sx={{ color: theme.palette.secondary.main }} />
-            <Typography 
-              variant="h5" 
-              sx={{ 
+            <Typography
+              variant="h5"
+              sx={{
                 fontWeight: 600,
                 background: theme.customGradients.secondary,
                 backgroundClip: 'text',
@@ -180,9 +193,9 @@ const Projects = () => {
               Featured Projects
             </Typography>
           </Box>
-          
-          <Grid 
-            container 
+
+          <Grid
+            container
             spacing={3}
             component={motion.div}
             variants={containerVariants}
@@ -191,10 +204,10 @@ const Projects = () => {
             viewport={{ once: true, amount: 0.1 }}
           >
             {featuredProjects.map((project) => (
-              <Grid 
-                item 
-                xs={12} 
-                md={6} 
+              <Grid
+                item
+                xs={12}
+                md={6}
                 key={project.id}
                 component={motion.div}
                 variants={itemVariants}
@@ -260,7 +273,7 @@ const Projects = () => {
                       }}
                     />
                     {PROJECT_VIDEOS[project.id] && (
-                      <Box 
+                      <Box
                         sx={{
                           position: 'absolute',
                           top: 10,
@@ -279,11 +292,11 @@ const Projects = () => {
                       </Box>
                     )}
                     <CardContent sx={{ flexGrow: 1, p: 3 }}>
-                      <Typography 
-                        variant="h5" 
-                        component="h3" 
+                      <Typography
+                        variant="h5"
+                        component="h3"
                         gutterBottom
-                        sx={{ 
+                        sx={{
                           fontWeight: 700,
                           background: theme.customGradients.primary,
                           backgroundClip: 'text',
@@ -293,22 +306,22 @@ const Projects = () => {
                       >
                         {project.title}
                       </Typography>
-                      <Typography 
-                        variant="body1" 
-                        color="text.secondary" 
+                      <Typography
+                        variant="body1"
+                        color="text.secondary"
                         sx={{ mb: 2 }}
                       >
                         {project.desc}
                       </Typography>
                       <Stack direction="row" spacing={1} flexWrap="wrap" gap={1} sx={{ mt: 2 }}>
-                        {project.technologies.map((tech) => (
-                          <Chip 
-                            key={tech} 
-                            label={tech} 
-                            size="small" 
-                            color="primary" 
-                            variant="outlined" 
-                            sx={{ 
+                        {project.technologies?.map((tech) => (
+                          <Chip
+                            key={tech}
+                            label={tech}
+                            size="small"
+                            color="primary"
+                            variant="outlined"
+                            sx={{
                               background: 'rgba(67, 97, 238, 0.05)',
                               fontWeight: 500,
                             }}
@@ -320,7 +333,7 @@ const Projects = () => {
                   <Divider />
                   <CardActions sx={{ p: 2 }}>
                     <MuiLink href={project.link} target="_blank" underline="none">
-                      <Button 
+                      <Button
                         startIcon={<GitHubIcon />}
                         variant="outlined"
                         color="primary"
@@ -330,8 +343,8 @@ const Projects = () => {
                         GitHub
                       </Button>
                     </MuiLink>
-                    <Button 
-                      size="small" 
+                    <Button
+                      size="small"
                       onClick={() => handleOpen(project)}
                       sx={{ ml: 'auto' }}
                     >
@@ -343,12 +356,12 @@ const Projects = () => {
             ))}
           </Grid>
         </Box>
-        
+
         {/* Other Projects Section */}
         <Box sx={{ mb: 4 }}>
-          <Typography 
-            variant="h5" 
-            sx={{ 
+          <Typography
+            variant="h5"
+            sx={{
               fontWeight: 600,
               mb: 4
             }}
@@ -360,7 +373,7 @@ const Projects = () => {
           >
             Other Projects
           </Typography>
-          
+
           <Box
             component={motion.div}
             variants={containerVariants}
@@ -372,10 +385,10 @@ const Projects = () => {
               // Stack layout for mobile
               <Stack spacing={3}>
                 {regularProjects.map((proj) => (
-                  <ProjectCard 
-                    key={proj.id} 
-                    project={proj} 
-                    onOpen={handleOpen} 
+                  <ProjectCard
+                    key={proj.id}
+                    project={proj}
+                    onOpen={handleOpen}
                     variants={itemVariants}
                   />
                 ))}
@@ -397,7 +410,7 @@ const Projects = () => {
           </Box>
         </Box>
       </Container>
-      
+
       {/* Project Detail Modal */}
       <Modal
         open={open}
@@ -449,12 +462,12 @@ const Projects = () => {
               >
                 <CloseIcon />
               </IconButton>
-              
+
               {/* Display video for AI Interview Simulator project, image for others */}
               {PROJECT_VIDEOS[selectedProject.id] ? (
                 <Box sx={{ position: 'relative', paddingTop: '56.25%', width: '100%', mb: 3, borderRadius: 2, overflow: 'hidden' }}>
                   <iframe
-                    style={{ 
+                    style={{
                       position: 'absolute',
                       top: 0,
                       left: 0,
@@ -478,30 +491,53 @@ const Projects = () => {
                   sx={{ borderRadius: 2, mb: 3 }}
                 />
               )}
-              
+
               <Typography variant="h4" component="h2" gutterBottom>
                 {selectedProject.title}
               </Typography>
-              
+
               <Typography variant="body1" paragraph>
                 {selectedProject.desc}
               </Typography>
-              
+
+              {/* Display Architecture Diagram for RAG Agent */}
+              {selectedProject.id === 'rag-agent' && (
+                <Box sx={{ mb: 3, mt: 2 }}>
+                  <Typography variant="h6" gutterBottom>
+                    System Architecture
+                  </Typography>
+                  <Box
+                    component="img"
+                    src={ragArchitecture}
+                    alt="RAG Agent Architecture"
+                    sx={{
+                      width: '100%',
+                      height: 'auto',
+                      borderRadius: 2,
+                      border: '1px solid',
+                      borderColor: 'divider',
+                      bgcolor: 'background.default',
+                      p: 1
+                    }}
+                  />
+                </Box>
+              )}
+
               <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
                 Technologies Used
               </Typography>
-              
+
               <Stack direction="row" spacing={1} flexWrap="wrap" gap={1} sx={{ mb: 3 }}>
                 {selectedProject.technologies.map((tech) => (
-                  <Chip 
-                    key={tech} 
-                    label={tech} 
-                    color="primary" 
-                    variant="outlined" 
+                  <Chip
+                    key={tech}
+                    label={tech}
+                    color="primary"
+                    variant="outlined"
                   />
                 ))}
               </Stack>
-              
+
               <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
                 <Button
                   variant="contained"
@@ -535,18 +571,18 @@ const Projects = () => {
 // Project Card Component
 const ProjectCard = ({ project, onOpen, variants }) => {
   const theme = useTheme();
-  
+
   return (
     <Card
       component={motion.div}
       variants={variants}
-      whileHover={{ 
+      whileHover={{
         y: -10,
-        transition: { duration: 0.3 } 
+        transition: { duration: 0.3 }
       }}
-      sx={{ 
-        display: 'flex', 
-        flexDirection: 'column', 
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
         minHeight: 320,
         position: 'relative',
         overflow: 'hidden',
@@ -560,10 +596,10 @@ const ProjectCard = ({ project, onOpen, variants }) => {
           alt={project.title}
         />
         <CardContent sx={{ flexGrow: 1, pb: 1 }}>
-          <Typography 
-            variant="h6" 
-            gutterBottom 
-            sx={{ 
+          <Typography
+            variant="h6"
+            gutterBottom
+            sx={{
               background: theme.customGradients.primary,
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
@@ -578,13 +614,13 @@ const ProjectCard = ({ project, onOpen, variants }) => {
           </Typography>
           <Stack direction="row" spacing={1} flexWrap="wrap" gap={1} sx={{ mt: 2 }}>
             {project.technologies.slice(0, 3).map((tech) => (
-              <Chip 
-                key={tech} 
-                label={tech} 
-                size="small" 
-                color="primary" 
-                variant="outlined" 
-                sx={{ 
+              <Chip
+                key={tech}
+                label={tech}
+                size="small"
+                color="primary"
+                variant="outlined"
+                sx={{
                   background: 'rgba(67, 97, 238, 0.05)',
                   fontWeight: 500,
                   fontSize: '0.7rem',
@@ -592,10 +628,10 @@ const ProjectCard = ({ project, onOpen, variants }) => {
               />
             ))}
             {project.technologies.length > 3 && (
-              <Chip 
-                label={`+${project.technologies.length - 3}`} 
-                size="small" 
-                sx={{ 
+              <Chip
+                label={`+${project.technologies.length - 3}`}
+                size="small"
+                sx={{
                   background: 'rgba(67, 97, 238, 0.05)',
                   fontWeight: 500,
                   fontSize: '0.7rem',
@@ -607,16 +643,28 @@ const ProjectCard = ({ project, onOpen, variants }) => {
       </CardActionArea>
       <CardActions sx={{ p: 2, pt: 0 }}>
         <MuiLink href={project.link} target="_blank" underline="none">
-          <Button 
-            size="small" 
+          <Button
+            size="small"
             startIcon={<GitHubIcon />}
             sx={{ borderRadius: 6, textTransform: 'none' }}
           >
             GitHub
           </Button>
         </MuiLink>
-        <Button 
-          size="small" 
+        {project.acceptanceLetter && (
+          <Button
+            size="small"
+            color="secondary"
+            href={`${import.meta.env.BASE_URL}${project.acceptanceLetter.startsWith('/') ? project.acceptanceLetter.slice(1) : project.acceptanceLetter}`}
+            target="_blank"
+            startIcon={<ArticleIcon />}
+            sx={{ borderRadius: 6, textTransform: 'none', ml: 1 }}
+          >
+            Acceptance Letter
+          </Button>
+        )}
+        <Button
+          size="small"
           onClick={() => onOpen(project)}
           sx={{ ml: 'auto', borderRadius: 6, textTransform: 'none' }}
         >

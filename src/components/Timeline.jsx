@@ -40,6 +40,13 @@ const Timeline = () => {
       color: theme.palette.secondary.main,
     },
     {
+      year: '2023 - Present',
+      title: 'Computer Engineering Student',
+      description: 'Specializing in Artificial Intelligence and Digital Engineering at EMSI Marrakech.',
+      icon: <SchoolIcon />,
+      color: theme.palette.primary.main,
+    },
+    {
       year: '2021 - 2023',
       title: 'Engineering Cycle (GPM)',
       description: 'Studied Process and Materials Engineering at ENSA Safi, gaining a strong foundation in industrial processes.',

@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
-import { Box, Container, Typography, Grid, Button, Avatar, Card, CardContent, useTheme, alpha, Stack, Tooltip, Divider } from '@mui/material';
+import React, { useRef, useState } from 'react';
+import { Box, Container, Typography, Grid, Button, Avatar, Card, CardContent, useTheme, alpha, Stack, Tooltip, Divider, Menu, MenuItem } from '@mui/material';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import SectionTitle from './UI/SectionTitle';
 import Timeline from './Timeline';
+import Certifications from './Certifications';
 
 // Icons
 import CodeIcon from '@mui/icons-material/Code';
@@ -15,18 +16,32 @@ import ArchitectureIcon from '@mui/icons-material/Architecture';
 import StorageRoundedIcon from '@mui/icons-material/StorageRounded';
 import SearchIcon from '@mui/icons-material/Search';
 import DownloadIcon from '@mui/icons-material/Download';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 // Profile image path with BASE_URL
 const PROFILE_IMAGE = `${import.meta.env.BASE_URL}assets/IMG_4589.JPG`;
 
 // Constants with dynamic base URL
-const RESUME_PATH = `${import.meta.env.BASE_URL}CV_2025_Abderrahim_Boussyf.pdf`;
+const RESUME_PATH_FR = `${import.meta.env.BASE_URL}CV_2025_Abderrahim_Boussyf.pdf`;
+const RESUME_PATH_EN = `${import.meta.env.BASE_URL}CV_Abderrahim_Boussyf_intern.pdf`;
 
 const About = () => {
   const theme = useTheme();
   const containerRef = useRef(null);
   const profileRef = useRef(null);
   const isProfileInView = useInView(profileRef, { once: false, amount: 0.2 });
+
+  // Resume Menu State
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   // Parallax effect for scrolling
   const { scrollYProgress } = useScroll({
@@ -93,29 +108,39 @@ const About = () => {
 
   const focusAreas = [
     {
-      title: 'AI & Machine Learning',
+      title: 'Agentic AI Systems',
       icon: <SmartToyIcon sx={{ color: 'primary.main' }} />,
-      description: 'I implement AI systems from concept to deployment, with expertise in designing machine learning pipelines and optimizing model performance for production environments.'
+      description: 'I design and implement autonomous AI agents that can reason, plan, and execute tasks. Using frameworks like LangChain and custom architectures, I build agents that handle complex workflows from lead qualification to automated decision-making.'
     },
     {
-      title: 'Predictive Analytics',
-      icon: <AutoGraphIcon sx={{ color: 'primary.main' }} />,
-      description: 'I develop data-driven solutions to extract insights from complex datasets, using statistical methods and machine learning algorithms to deliver actionable intelligence.'
-    },
-    {
-      title: 'Big Data & Cloud',
-      icon: <StorageIcon sx={{ color: 'primary.main' }} />,
-      description: 'I architect scalable systems for processing large datasets, utilizing distributed computing frameworks and cloud infrastructure for efficient big data solutions.'
-    },
-    {
-      title: 'Software Engineering',
-      icon: <CodeIcon sx={{ color: 'primary.main' }} />,
-      description: 'I build robust applications following best practices in software development, from architecture design to code quality and testing methodologies.'
-    },
-    {
-      title: 'Vector Database for Embedding Storage and Search',
+      title: 'RAG & Knowledge Systems',
       icon: <SearchIcon sx={{ color: 'primary.main' }} />,
-      description: 'I developed vector databases to store and retrieve high-dimensional embeddings for fast similarity searches, optimized for semantic search, recommendation systems, and image retrieval.'
+      description: 'I develop Retrieval-Augmented Generation systems that combine vector databases, embeddings, and LLMs to enable intelligent information retrieval and context-aware responses for enterprise applications.'
+    },
+    {
+      title: 'LLM Integration & Production AI',
+      icon: <AutoGraphIcon sx={{ color: 'primary.main' }} />,
+      description: 'I build production-ready LLM applications with proper prompt engineering, safety guardrails, and performance optimization. From fine-tuning to deployment, I ensure AI systems are scalable and reliable.'
+    },
+    {
+      title: 'Data Science & Analytics',
+      icon: <DataObjectIcon sx={{ color: 'primary.main' }} />,
+      description: 'I extract actionable insights from complex datasets using advanced statistical methods, machine learning algorithms, and predictive modeling. From exploratory analysis to production models, I turn data into strategic business value.'
+    },
+    {
+      title: 'Data Infrastructure & Engineering',
+      icon: <ArchitectureIcon sx={{ color: 'primary.main' }} />,
+      description: 'I build scalable data pipelines and infrastructure for processing large-scale datasets. Using technologies like Apache Spark, cloud platforms, and modern data warehousing solutions, I ensure reliable and efficient data flow.'
+    },
+    {
+      title: 'MLOps & AI Infrastructure',
+      icon: <StorageIcon sx={{ color: 'primary.main' }} />,
+      description: 'I architect end-to-end MLOps pipelines with automated training, model registry, monitoring, and serving. Using tools like MLflow, Airflow, and Kubernetes, I ensure ML models transition smoothly from development to production.'
+    },
+    {
+      title: 'Full-Stack AI Development',
+      icon: <CodeIcon sx={{ color: 'primary.main' }} />,
+      description: 'I bridge AI and software engineering by building complete AI-powered applications. From FastAPI backends to React frontends, I create seamless user experiences that leverage cutting-edge AI capabilities.'
     },
   ];
 
@@ -374,12 +399,14 @@ const About = () => {
               } : {}}
             >
               <Button
-                component="a"
-                href={RESUME_PATH}
-                download
-                target="_blank"
+                id="resume-button"
+                aria-controls={open ? 'resume-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+                onClick={handleClick}
                 variant="contained"
                 color="primary"
+                endIcon={<KeyboardArrowDownIcon />}
                 sx={{
                   mt: 4,
                   px: 4,
@@ -401,6 +428,64 @@ const About = () => {
               >
                 Download Resume
               </Button>
+              <Menu
+                id="resume-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                  'aria-labelledby': 'resume-button',
+                }}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'center',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'center',
+                }}
+                PaperProps={{
+                  elevation: 3,
+                  sx: {
+                    mt: 1,
+                    borderRadius: 4,
+                    minWidth: 180,
+                    overflow: 'visible',
+                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.15))',
+                    '&:before': {
+                      content: '""',
+                      display: 'block',
+                      position: 'absolute',
+                      top: 0,
+                      right: '50%',
+                      width: 10,
+                      height: 10,
+                      bgcolor: 'background.paper',
+                      transform: 'translate(50%, -50%) rotate(45deg)',
+                      zIndex: 0,
+                    },
+                  },
+                }}
+              >
+                <MenuItem
+                  component="a"
+                  href={RESUME_PATH_EN}
+                  download
+                  onClick={handleClose}
+                  sx={{ py: 1.5, px: 3 }}
+                >
+                  English Version
+                </MenuItem>
+                <MenuItem
+                  component="a"
+                  href={RESUME_PATH_FR}
+                  download
+                  onClick={handleClose}
+                  sx={{ py: 1.5, px: 3 }}
+                >
+                  French Version
+                </MenuItem>
+              </Menu>
             </motion.div>
           </Grid>
 
@@ -583,6 +668,9 @@ const About = () => {
 
           <Timeline />
         </Box>
+
+        {/* Certifications Section */}
+        <Certifications />
 
         {/* Focus Areas Section */}
         <Box sx={{ mt: 10 }}>

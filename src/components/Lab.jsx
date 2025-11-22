@@ -27,14 +27,15 @@ const lossData = [
   { zone: 'Zone D', loss: 15.1, target: 10 },
 ];
 
-// RAG Chatbot Demo
-const RAGChatbot = () => {
+// Agent Playground with Reasoning Visualization
+const AgentPlayground = () => {
   const theme = useTheme();
   const [messages, setMessages] = useState([
-    { role: 'assistant', content: 'Hi! I\'m a RAG-powered chatbot. Ask me about Abderrahim\'s experience, skills, or projects!' }
+    { role: 'assistant', content: 'Hi! I\'m an autonomous agent. I can analyze your request, search my knowledge base, and reason before answering. Try asking about Abderrahim\'s projects!' }
   ]);
   const [input, setInput] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [logs, setLogs] = useState([]);
 
   const knowledgeBase = {
     'experience': 'Brain Gen Technology (2025): Developed intelligent web platform with RAG-based chatbot. ONEEP (2024): Analyzed technical losses in electrical networks. OCP (2023): Monitored production processes.',
@@ -43,94 +44,176 @@ const RAGChatbot = () => {
     'education': 'Computer Engineering at EMSI-MARRAKECH, Process Engineering at ENSA Safi, CPGE at Ad Dakhla'
   };
 
-  const handleSend = () => {
+  const addLog = (step, detail) => {
+    setLogs(prev => [...prev, { step, detail, timestamp: new Date().toLocaleTimeString() }]);
+  };
+
+  const handleSend = async () => {
     if (!input.trim()) return;
 
     const userMessage = { role: 'user', content: input };
     setMessages(prev => [...prev, userMessage]);
     setInput('');
-    setIsTyping(true);
+    setIsProcessing(true);
+    setLogs([]); // Clear previous logs
 
-    setTimeout(() => {
-      let response = 'I can help you learn about Abderrahim\'s experience, skills, projects, or education. Try asking about those!';
+    // Simulate Agent Reasoning Steps
+    try {
+      // Step 1: Intent Analysis
+      addLog('Input Received', `Analyzing user query: "${input}"`);
+      await new Promise(r => setTimeout(r, 800));
 
       const query = input.toLowerCase();
-      for (const [key, value] of Object.entries(knowledgeBase)) {
-        if (query.includes(key)) {
-          response = value;
-          break;
-        }
+      let intent = 'general_chat';
+      let topic = 'unknown';
+
+      if (query.includes('project')) { intent = 'query_projects'; topic = 'projects'; }
+      else if (query.includes('skill') || query.includes('tech')) { intent = 'query_skills'; topic = 'skills'; }
+      else if (query.includes('experience') || query.includes('work')) { intent = 'query_experience'; topic = 'experience'; }
+      else if (query.includes('education') || query.includes('study')) { intent = 'query_education'; topic = 'education'; }
+
+      addLog('Intent Classification', `Detected intent: ${intent} (Confidence: 0.98)`);
+      await new Promise(r => setTimeout(r, 800));
+
+      // Step 2: Tool Selection & Execution
+      let response = 'I can help you learn about Abderrahim\'s experience, skills, projects, or education. Try asking about those!';
+
+      if (topic !== 'unknown') {
+        addLog('Tool Selection', `Selected tool: KnowledgeBase_Retriever for topic "${topic}"`);
+        await new Promise(r => setTimeout(r, 800));
+
+        addLog('Data Retrieval', `Querying vector database for "${topic}"...`);
+        await new Promise(r => setTimeout(r, 800));
+
+        response = knowledgeBase[topic];
+        addLog('Context Retrieval', `Found relevant context: "${response.substring(0, 40)}..."`);
+      } else {
+        addLog('Reasoning', 'No specific topic detected. Falling back to general response.');
       }
 
+      await new Promise(r => setTimeout(r, 600));
+
+      // Step 3: Response Generation
+      addLog('Response Generation', 'Synthesizing final answer using LLM...');
+      await new Promise(r => setTimeout(r, 600));
+
       setMessages(prev => [...prev, { role: 'assistant', content: response }]);
-      setIsTyping(false);
-    }, 1000);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   return (
-    <Box sx={{ height: 450, display: 'flex', flexDirection: 'column' }}>
-      <Box sx={{
-        flexGrow: 1,
-        overflowY: 'auto',
-        mb: 2,
-        p: 2,
-        bgcolor: alpha(theme.palette.background.paper, 0.5),
-        borderRadius: 2,
-        border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`
-      }}>
-        {messages.map((msg, idx) => (
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <Box sx={{
-              display: 'flex',
-              justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start',
-              mb: 2
-            }}>
+    <Box sx={{ height: 500, display: 'flex', gap: 2, flexDirection: { xs: 'column', md: 'row' } }}>
+      {/* Chat Area */}
+      <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <Box sx={{
+          flexGrow: 1,
+          overflowY: 'auto',
+          mb: 2,
+          p: 2,
+          bgcolor: alpha(theme.palette.background.paper, 0.5),
+          borderRadius: 2,
+          border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`
+        }}>
+          {messages.map((msg, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+            >
               <Box sx={{
-                maxWidth: '75%',
-                p: 2,
-                borderRadius: 2,
-                bgcolor: msg.role === 'user'
-                  ? theme.palette.primary.main
-                  : alpha(theme.palette.secondary.main, 0.1),
-                color: msg.role === 'user' ? 'white' : 'text.primary'
+                display: 'flex',
+                justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start',
+                mb: 2
               }}>
-                <Typography variant="body2">{msg.content}</Typography>
+                <Box sx={{
+                  maxWidth: '85%',
+                  p: 2,
+                  borderRadius: 2,
+                  bgcolor: msg.role === 'user'
+                    ? theme.palette.primary.main
+                    : alpha(theme.palette.secondary.main, 0.1),
+                  color: msg.role === 'user' ? 'white' : 'text.primary'
+                }}>
+                  <Typography variant="body2">{msg.content}</Typography>
+                </Box>
               </Box>
+            </motion.div>
+          ))}
+          {isProcessing && (
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 2 }}>
+              <LinearProgress sx={{ width: 100, borderRadius: 2 }} />
             </Box>
-          </motion.div>
-        ))}
-        {isTyping && (
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <SmartToyIcon sx={{ color: 'primary.main' }} />
-            <Typography variant="body2" color="text.secondary">Thinking...</Typography>
-          </Box>
-        )}
+          )}
+        </Box>
+        <Box sx={{ display: 'flex', gap: 1 }}>
+          <TextField
+            fullWidth
+            size="small"
+            placeholder="Ask about projects, skills..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+            disabled={isProcessing}
+          />
+          <IconButton
+            color="primary"
+            onClick={handleSend}
+            disabled={isProcessing}
+            sx={{
+              background: theme.customGradients?.primary,
+              color: 'white',
+              '&:hover': { background: theme.customGradients?.secondary }
+            }}
+          >
+            <SendIcon />
+          </IconButton>
+        </Box>
       </Box>
-      <Box sx={{ display: 'flex', gap: 1 }}>
-        <TextField
-          fullWidth
-          size="small"
-          placeholder="Ask about experience, skills, projects..."
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-        />
-        <IconButton
-          color="primary"
-          onClick={handleSend}
-          sx={{
-            background: theme.customGradients?.primary,
-            color: 'white',
-            '&:hover': { background: theme.customGradients?.secondary }
-          }}
-        >
-          <SendIcon />
-        </IconButton>
+
+      {/* Reasoning Log Area */}
+      <Box sx={{
+        width: { xs: '100%', md: 300 },
+        bgcolor: '#1e1e1e',
+        borderRadius: 2,
+        p: 2,
+        overflowY: 'auto',
+        fontFamily: 'monospace',
+        border: `1px solid ${alpha(theme.palette.divider, 0.1)}`
+      }}>
+        <Typography variant="subtitle2" sx={{ color: '#fff', mb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
+          <SmartToyIcon fontSize="small" /> Agent Reasoning Log
+        </Typography>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+          <AnimatePresence>
+            {logs.map((log, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Box sx={{ borderLeft: `2px solid ${theme.palette.primary.main}`, pl: 1.5 }}>
+                  <Typography variant="caption" sx={{ color: alpha('#fff', 0.5), display: 'block', mb: 0.5 }}>
+                    [{log.timestamp}] {log.step}
+                  </Typography>
+                  <Typography variant="caption" sx={{ color: '#a5d6a7', fontFamily: 'monospace' }}>
+                    {log.detail}
+                  </Typography>
+                </Box>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+          {logs.length === 0 && !isProcessing && (
+            <Typography variant="caption" sx={{ color: alpha('#fff', 0.3), textAlign: 'center', mt: 4 }}>
+              Waiting for input...
+            </Typography>
+          )}
+        </Box>
       </Box>
     </Box>
   );
@@ -196,17 +279,25 @@ const EnergyForecasting = () => {
   );
 };
 
+import StorageIcon from '@mui/icons-material/Storage';
+import ModelTrainingIcon from '@mui/icons-material/ModelTraining';
+import FactCheckIcon from '@mui/icons-material/FactCheck';
+import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
+import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
+
+// ... existing imports ...
+
 // MLOps Pipeline Visualizer
 const MLOpsPipeline = () => {
   const theme = useTheme();
   const [activeStage, setActiveStage] = useState(0);
 
   const stages = [
-    { name: 'Data Ingestion', icon: '📊', status: 'completed' },
-    { name: 'Training', icon: '🧠', status: 'completed' },
-    { name: 'Validation', icon: '✅', status: 'running' },
-    { name: 'Deployment', icon: '🚀', status: 'pending' },
-    { name: 'Monitoring', icon: '📈', status: 'pending' }
+    { name: 'Data Ingestion', icon: <StorageIcon />, status: 'completed' },
+    { name: 'Training', icon: <ModelTrainingIcon />, status: 'completed' },
+    { name: 'Validation', icon: <FactCheckIcon />, status: 'running' },
+    { name: 'Deployment', icon: <RocketLaunchIcon />, status: 'pending' },
+    { name: 'Monitoring', icon: <MonitorHeartIcon />, status: 'pending' }
   ];
 
   useEffect(() => {
@@ -336,10 +427,10 @@ const Lab = () => {
 
   const sections = [
     {
-      title: 'RAG Chatbot',
+      title: 'Agent Playground',
       icon: <SmartToyIcon />,
-      content: <RAGChatbot />,
-      description: 'Brain Gen Technology Project'
+      content: <AgentPlayground />,
+      description: 'Interactive Agent Reasoning Demo'
     },
     {
       title: 'Energy Forecasting',

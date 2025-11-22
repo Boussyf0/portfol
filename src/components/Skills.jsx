@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Typography, Grid, useTheme, alpha } from '@mui/material';
+import { Box, Container, Typography, Grid, useTheme, alpha, Paper } from '@mui/material';
 import { SKILL_CATEGORIES } from '../data/constants';
 import SectionTitle from './UI/SectionTitle';
 import { motion } from 'framer-motion';
@@ -13,6 +13,8 @@ import DatabaseIcon from '@mui/icons-material/Storage';
 import AgilityIcon from '@mui/icons-material/Psychology';
 import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import DataObjectIcon from '@mui/icons-material/DataObject';
+import MemoryIcon from '@mui/icons-material/Memory';
+import HubIcon from '@mui/icons-material/Hub';
 
 const getCategoryIcon = (category) => {
   const iconMap = {
@@ -37,6 +39,14 @@ const getCategoryColor = (index, theme) => {
   ];
   return colors[index % colors.length];
 };
+
+// Special Agentic AI Stack
+const AGENTIC_STACK = [
+  { name: 'Large Language Models', icon: <SmartToyIcon />, tools: ['GPT-4', 'Llama 3', 'Mistral', 'Claude'] },
+  { name: 'Agent Frameworks', icon: <HubIcon />, tools: ['LangChain', 'LangGraph', 'AutoGPT', 'Agentforce'] },
+  { name: 'Vector Memory', icon: <MemoryIcon />, tools: ['Pinecone', 'ChromaDB', 'FAISS', 'Weaviate'] },
+  { name: 'RAG Systems', icon: <DataObjectIcon />, tools: ['Hybrid Search', 'Re-ranking', 'Knowledge Graphs'] }
+];
 
 const Skills = () => {
   const theme = useTheme();
@@ -107,8 +117,70 @@ const Skills = () => {
             lineHeight: 1.7,
           }}
         >
-          A comprehensive toolkit spanning the entire data science and ML engineering pipeline
+          Specialized in building autonomous AI agents and enterprise-grade RAG systems, supported by a strong foundation in full-stack engineering.
         </Typography>
+
+        {/* Agentic AI Stack Highlight */}
+        <Box sx={{ mb: 10 }}>
+          <Typography variant="h5" sx={{ mb: 4, fontWeight: 700, textAlign: 'center', color: theme.palette.primary.main }}>
+            Agentic AI Core Stack
+          </Typography>
+          <Grid container spacing={3}>
+            {AGENTIC_STACK.map((stack, index) => (
+              <Grid item xs={12} md={6} lg={3} key={stack.name}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <Paper
+                    elevation={0}
+                    sx={{
+                      p: 3,
+                      height: '100%',
+                      background: alpha(theme.palette.background.paper, 0.4),
+                      backdropFilter: 'blur(10px)',
+                      border: `1px solid ${alpha(theme.palette.primary.main, 0.2)}`,
+                      borderRadius: 4,
+                      transition: 'all 0.3s ease',
+                      '&:hover': {
+                        transform: 'translateY(-5px)',
+                        boxShadow: `0 10px 30px ${alpha(theme.palette.primary.main, 0.15)}`,
+                        borderColor: theme.palette.primary.main
+                      }
+                    }}
+                  >
+                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 2, color: theme.palette.primary.main }}>
+                      {stack.icon}
+                      <Typography variant="h6" sx={{ ml: 1.5, fontWeight: 600, fontSize: '1rem' }}>
+                        {stack.name}
+                      </Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                      {stack.tools.map((tool) => (
+                        <Box
+                          key={tool}
+                          sx={{
+                            px: 1.5,
+                            py: 0.5,
+                            borderRadius: 1.5,
+                            bgcolor: alpha(theme.palette.primary.main, 0.1),
+                            color: theme.palette.text.primary,
+                            fontSize: '0.85rem',
+                            fontWeight: 500
+                          }}
+                        >
+                          {tool}
+                        </Box>
+                      ))}
+                    </Box>
+                  </Paper>
+                </motion.div>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
 
         <Box
           component={motion.div}
