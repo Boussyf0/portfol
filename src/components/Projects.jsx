@@ -33,13 +33,13 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import ArticleIcon from '@mui/icons-material/Article';
 
 // Import project images
-import healthImage from '/assets/image.png';
-import mlImage from '/assets/image_el.png';
+import healthImage from '/assets/image.webp';
+import mlImage from '/assets/image_el.webp';
 import chessImage from '/assets/chesse_1.jpeg';
 import defaultImage from '/assets/react.svg';
-import jobSearchImage from '/assets/screenshots/job_search_platform.png'; // Import the job search platform image
-import cvAnalyzerImage from '/assets/cv_analyzer.png'; // Import CV analyzer image
-import ragThumbnail from '/assets/rag_thumbnail.png'; // Import RAG Agent thumbnail
+import jobSearchImage from '/assets/screenshots/job_search_platform.webp'; // Import the job search platform image
+import cvAnalyzerImage from '/assets/cv_analyzer.webp'; // Import CV analyzer image
+import ragThumbnail from '/assets/rag_thumbnail.webp'; // Import RAG Agent thumbnail
 import ragArchitecture from '/assets/rag_architecture.svg'; // Import RAG Architecture diagram
 import salesforceLogo from '/assets/salesforce.svg'; // Import Salesforce logo
 

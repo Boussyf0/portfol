@@ -68,6 +68,114 @@ html[data-theme="dark"] {
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg-accent);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-text-accent);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
+  }
+
+  /* Mobile Performance & Accessibility Optimizations */
+  @media (max-width: 768px) {
+
+    /* Simplify animations on mobile */
+    * {
+      animation-duration: 0.3s !important;
+      transition-duration: 0.2s !important;
+    }
+
+    /* Touch target size improvements */
+    button,
+    a,
+    [role="button"] {
+      min-height: 48px;
+      min-width: 48px;
+      padding: 12px;
+    }
+
+    /* Icon buttons specifically */
+    .MuiIconButton-root {
+      min-width: 48px;
+      min-height: 48px;
+      padding: 12px;
+    }
+
+    /* Improve form input sizes */
+    input,
+    select,
+    textarea {
+      min-height: 48px;
+      font-size: 16px;
+      /* Prevents zoom on iOS */
+    }
+
+    /* Disable complex transforms on mobile for performance */
+    .reduce-motion {
+      transform: none !important;
+    }
+  }
+
+  /* Touch device specific */
+  @media (pointer: coarse) {
+
+    /* Ensure touch targets are large enough */
+    button,
+    a[href],
+    input,
+    select,
+    textarea {
+      min-height: 44px;
+      padding: 12px 16px;
+    }
+
+    /* Add spacing between touch targets */
+    button+button,
+    a+button,
+    button+a {
+      margin-left: 12px;
+    }
+  }
+
+  /* Reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Performance optimizations */
+  img,
+  video {
+    content-visibility: auto;
+  }
+
+  /* Optimize repaints */
+  .will-change-transform {
+    will-change: transform;
+  }
+
+  .will-change-opacity {
+    will-change: opacity;
+  }
+
   h1,
   h2,
   h3,
