@@ -13,12 +13,12 @@ const Hero = () => {
   const theme = useTheme();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  
+
   // Spring animations for smoother mouse follow
   const springConfig = { damping: 15, stiffness: 150 };
   const followX = useSpring(mouseX, springConfig);
   const followY = useSpring(mouseY, springConfig);
-  
+
   // Rotate based on mouse position
   const rotateX = useTransform(followY, [-300, 300], [10, -10]);
   const rotateY = useTransform(followX, [-300, 300], [-10, 10]);
@@ -257,8 +257,8 @@ const Hero = () => {
                   sx={{
                     fontWeight: 800,
                     mb: 2,
-                    fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4.5rem' },
-                    letterSpacing: '-0.03em',
+                    fontSize: { xs: '2rem', sm: '3rem', md: '4.5rem' },
+                    letterSpacing: { xs: '-0.02em', md: '-0.03em' },
                     lineHeight: 1.1,
                     position: 'relative',
                   }}
@@ -297,7 +297,7 @@ const Hero = () => {
                   sx={{
                     fontWeight: 600,
                     mb: 3,
-                    fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
+                    fontSize: { xs: '1.25rem', sm: '1.75rem', md: '2.5rem' },
                     position: 'relative',
                     display: 'inline-block',
                   }}
@@ -346,11 +346,11 @@ const Hero = () => {
                 <Typography
                   variant="body1"
                   sx={{
-                    fontSize: { xs: '1rem', md: '1.2rem' },
+                    fontSize: { xs: '0.95rem', sm: '1rem', md: '1.2rem' },
                     mb: 4,
                     maxWidth: '650px',
                     position: 'relative',
-                    pl: 3,
+                    pl: { xs: 2, md: 3 },
                     py: 2,
                     color: theme.palette.text.secondary,
                     lineHeight: 1.7,
@@ -373,17 +373,18 @@ const Hero = () => {
                 </Typography>
               </motion.div>
 
-              <motion.div variants={childVariants} style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <motion.div variants={childVariants} style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', width: '100%' }}>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} style={{ flex: { xs: '1 1 100%', sm: '0 1 auto' } }}>
                   <Button
                     variant="contained"
                     color="primary"
                     size="large"
                     href="#projects"
+                    fullWidth
                     sx={{
-                      py: 1.5,
-                      px: 4,
-                      fontSize: '1rem',
+                      py: { xs: 1.25, md: 1.5 },
+                      px: { xs: 3, md: 4 },
+                      fontSize: { xs: '0.95rem', md: '1rem' },
                       position: 'relative',
                       overflow: 'hidden',
                       fontWeight: 600,
@@ -416,16 +417,17 @@ const Hero = () => {
                   </Button>
                 </motion.div>
 
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} style={{ flex: { xs: '1 1 100%', sm: '0 1 auto' } }}>
                   <Button
                     variant="outlined"
                     endIcon={<ArrowForwardIcon />}
                     href="#contact"
                     size="large"
+                    fullWidth
                     sx={{
-                      py: 1.5,
-                      px: 4,
-                      fontSize: '1rem',
+                      py: { xs: 1.25, md: 1.5 },
+                      px: { xs: 3, md: 4 },
+                      fontSize: { xs: '0.95rem', md: '1rem' },
                       position: 'relative',
                       fontWeight: 600,
                       borderRadius: 3,
@@ -468,7 +470,8 @@ const Hero = () => {
                 position: 'relative',
                 width: '100%',
                 maxWidth: 450,
-                height: 450,
+                height: 'auto',
+                aspectRatio: '1/1',
               }}
               variants={childVariants}
             >
@@ -586,21 +589,8 @@ const Hero = () => {
                 </Box>
 
                 {/* Floating tech badges */}
-                <motion.div
-                  style={{
-                    position: 'absolute',
-                    top: 20,
-                    right: -10,
-                    padding: '8px 16px',
-                    borderRadius: '8px',
-                    background: alpha(theme.palette.primary.main, 0.9),
-                    backdropFilter: 'blur(10px)',
-                    boxShadow: `0 4px 16px ${alpha(theme.palette.primary.main, 0.4)}`,
-                    fontSize: '0.75rem',
-                    fontWeight: 700,
-                    color: theme.palette.mode === 'dark' ? '#000' : '#fff',
-                    border: `1px solid ${alpha(theme.palette.primary.light, 0.5)}`,
-                  }}
+                <Box
+                  component={motion.div}
                   animate={{
                     y: [0, -10, 0],
                   }}
@@ -609,25 +599,26 @@ const Hero = () => {
                     duration: 3,
                     ease: 'easeInOut',
                   }}
+                  sx={{
+                    position: 'absolute',
+                    top: { xs: '20px', md: '20px' },
+                    right: { xs: '-5px', md: '-10px' },
+                    padding: { xs: '6px 12px', md: '8px 16px' },
+                    borderRadius: '8px',
+                    background: alpha(theme.palette.primary.main, 0.9),
+                    backdropFilter: 'blur(10px)',
+                    boxShadow: `0 4px 16px ${alpha(theme.palette.primary.main, 0.4)}`,
+                    fontSize: { xs: '0.7rem', md: '0.75rem' },
+                    fontWeight: 700,
+                    color: theme.palette.mode === 'dark' ? '#000' : '#fff',
+                    border: `1px solid ${alpha(theme.palette.primary.light, 0.5)}`,
+                  }}
                 >
                   AI/ML
-                </motion.div>
+                </Box>
 
-                <motion.div
-                  style={{
-                    position: 'absolute',
-                    bottom: 30,
-                    left: -10,
-                    padding: '8px 16px',
-                    borderRadius: '8px',
-                    background: alpha(theme.palette.secondary.main, 0.9),
-                    backdropFilter: 'blur(10px)',
-                    boxShadow: `0 4px 16px ${alpha(theme.palette.secondary.main, 0.4)}`,
-                    fontSize: '0.75rem',
-                    fontWeight: 700,
-                    color: '#fff',
-                    border: `1px solid ${alpha(theme.palette.secondary.light, 0.5)}`,
-                  }}
+                <Box
+                  component={motion.div}
                   animate={{
                     y: [0, 10, 0],
                   }}
@@ -637,9 +628,23 @@ const Hero = () => {
                     ease: 'easeInOut',
                     delay: 1.5,
                   }}
+                  sx={{
+                    position: 'absolute',
+                    bottom: { xs: '25px', md: '30px' },
+                    left: { xs: '-5px', md: '-10px' },
+                    padding: { xs: '6px 12px', md: '8px 16px' },
+                    borderRadius: '8px',
+                    background: alpha(theme.palette.secondary.main, 0.9),
+                    backdropFilter: 'blur(10px)',
+                    boxShadow: `0 4px 16px ${alpha(theme.palette.secondary.main, 0.4)}`,
+                    fontSize: { xs: '0.7rem', md: '0.75rem' },
+                    fontWeight: 700,
+                    color: '#fff',
+                    border: `1px solid ${alpha(theme.palette.secondary.light, 0.5)}`,
+                  }}
                 >
                   Data Science
-                </motion.div>
+                </Box>
               </motion.div>
             </motion.div>
           </Grid>

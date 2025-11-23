@@ -86,7 +86,7 @@ const Certifications = () => {
                     left: 0,
                     top: 0,
                     bottom: 0,
-                    width: '100px',
+                    width: { xs: '60px', md: '100px' },
                     background: `linear-gradient(to right, ${theme.palette.background.default}, transparent)`,
                     zIndex: 2,
                     pointerEvents: 'none'
@@ -98,7 +98,7 @@ const Certifications = () => {
                     right: 0,
                     top: 0,
                     bottom: 0,
-                    width: '100px',
+                    width: { xs: '60px', md: '100px' },
                     background: `linear-gradient(to left, ${theme.palette.background.default}, transparent)`,
                     zIndex: 2,
                     pointerEvents: 'none'
@@ -130,7 +130,7 @@ const Certifications = () => {
                     <Box
                         key={index}
                         sx={{
-                            width: 350,
+                            width: { xs: 300, md: 350 },
                             flexShrink: 0
                         }}
                     >

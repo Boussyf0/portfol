@@ -31,17 +31,178 @@ const lossData = [
 const AgentPlayground = () => {
   const theme = useTheme();
   const [messages, setMessages] = useState([
-    { role: 'assistant', content: 'Hi! I\'m an autonomous agent. I can analyze your request, search my knowledge base, and reason before answering. Try asking about Abderrahim\'s projects!' }
+    { role: 'assistant', content: 'Hi! I\'m an autonomous AI agent with access to Abderrahim\'s complete portfolio. I can answer questions about his projects, skills, experience, education, certifications, or contact information. What would you like to know?' }
   ]);
   const [input, setInput] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [logs, setLogs] = useState([]);
 
   const knowledgeBase = {
-    'experience': 'Brain Gen Technology (2025): Developed intelligent web platform with RAG-based chatbot. ONEEP (2024): Analyzed technical losses in electrical networks. OCP (2023): Monitored production processes.',
-    'skills': 'LLMs, RAG, Llama, Mistral, TensorFlow, PyTorch, Python, MLOps, Data Science, NLP, Computer Vision',
-    'projects': 'Energy Forecasting (LSTM/ARIMA), ML Pipeline Pro (MLOps), IoT Platform (Kubernetes), Health Trackr (ML for healthcare)',
-    'education': 'Computer Engineering at EMSI-MARRAKECH, Process Engineering at ENSA Safi, CPGE at Ad Dakhla'
+    'experience': `▸ CURRENT (2025) - Brain Gen Technology
+Intelligent Web Platform & RAG Intern
+• Developed RAG-based chatbot using Llama 3 and Mistral LLMs
+• Optimized lead qualification workflows
+• Enhanced customer interaction automation
+
+▸ 2024 - ONEEP-DAKHLA
+Technical Loss Analysis Intern
+• Analyzed electrical distribution network losses
+• Identified 3 key factors causing 40% of losses
+• Proposed strategies for 5-10% loss reduction
+
+▸ 2023 - OCP SAFI
+Process Verification Intern
+• Monitored phosphoric acid production parameters
+• Optimized industrial flows from grinding to storage
+• Conducted quality control and process optimization`,
+
+    'skills': `AI & MACHINE LEARNING
+• LLMs: GPT-4, Llama 3, Mistral, Claude
+• Frameworks: LangChain, LangGraph, AutoGPT, Agentforce
+• ML Tools: TensorFlow, PyTorch, scikit-learn, XGBoost
+• Specialties: RAG Systems, NLP, Computer Vision
+
+VECTOR DATABASES & KNOWLEDGE
+• Pinecone, ChromaDB, FAISS, Weaviate, Milvus
+• Knowledge Graphs, Hybrid Search, Re-ranking
+
+MLOPS & DEVOPS
+• MLflow, Airflow, FastAPI, Docker, Kubernetes
+• Prometheus, Grafana, GitHub Actions, CI/CD
+
+PROGRAMMING & DATA
+• Languages: Python (Advanced), JavaScript, C++, Java
+• Data Tools: Pandas, NumPy, Matplotlib, Seaborn
+• Big Data: Apache Spark, AWS (EC2, S3, Lambda)
+
+WEB & DATABASES
+• Frontend: React, Streamlit, Node.js
+• Databases: PostgreSQL, MongoDB, MySQL, Redis, InfluxDB
+• Tools: Selenium, Web Scraping, Jupyter
+
+METHODOLOGIES
+• Agile, Scrum, DevOps, MLOps`,
+
+    'projects': `▸ BRAINGEN AI + SALESFORCE AGENTFORCE (2025)
+North Africa Dreamin' 2025 Hackathon - ACCEPTED IDEA
+• AI-Powered Lead Qualification platform
+• 80% reduction in qualification time
+• 60% increase in lead quality, <2s response time
+Tech: Salesforce, Agentforce, RAG, Llama 3, Python
+
+▸ AGENT RAG & LEAD QUALIFICATION
+• Intelligent lead analysis system at Brain Gen Tech
+• Automatic qualification using LangChain and OpenAI
+Tech: Python, LangChain, OpenAI, Vector DB, Streamlit
+
+▸ AI INTERVIEW SIMULATOR
+• Local LLM-based interview preparation system
+• Generates customized questions and evaluates answers
+Tech: Python, LLMs, NLP, React
+
+▸ ENERGY CONSUMPTION FORECASTING
+• Time series prediction using LSTM and ARIMA
+• Interactive Streamlit deployment with visualizations
+Tech: Python, TensorFlow, LSTM, ARIMA, Pandas
+
+▸ ML-PIPELINE-PRO: ENTERPRISE MLOPS
+• Production-grade Customer Churn Prediction pipeline
+• Automated training, registry, serving, and monitoring
+• Airflow orchestration, MLflow registry, Prometheus/Grafana
+Tech: Python, MLflow, Airflow, FastAPI, K8s, PostgreSQL
+
+▸ CLOUD-NATIVE IOT PLATFORM
+• Scalable IoT platform on Kubernetes
+• MQTT broker, InfluxDB, Grafana, Prometheus
+• TLS security, 99.9% uptime
+Tech: Kubernetes, Docker, MQTT, InfluxDB, Grafana
+
+▸ HEALTH_TRACKR
+• Patient symptom analysis and hospitalization management
+• ML-based decision support system
+Tech: Python, Machine Learning, Healthcare Analytics
+
+▸ JOB MATCHING AGENT
+• LLM-based resume and job posting matcher
+Tech: Python, LLMs, Selenium`,
+
+    'certifications': `▸ Oracle Cloud Infrastructure 2024 Generative AI Professional
+   Oracle, 2024
+   Focus: Generative AI, OCI, LLMs, Prompt Engineering
+
+▸ Google Advanced Data Analytics
+   Google, 2024
+   Focus: Data Analysis, Python, ML, Statistics
+
+▸ AWS Cloud Practitioner CLF-C02
+   Amazon Web Services, 2024
+   Focus: Cloud Computing, AWS Services, Security
+
+▸ Mastering RAG Systems
+   AI Enhancement, 2024
+   Focus: RAG, Knowledge Graphs, Vector Databases
+
+▸ Large Language Models (LLMs)
+   H2O.ai, 2024
+   Focus: LLMs, Fine-tuning, Prompt Engineering
+
+▸ Containers: Docker, Kubernetes & OpenShift
+   IBM, 2023
+   Focus: Docker, Kubernetes, OpenShift, DevOps
+
+▸ Software Design & Project Management
+   University of Alberta, 2023
+   Focus: Software Architecture, Design Patterns, Agile`,
+
+    'education': `▸ COMPUTER ENGINEERING (2023 - Present)
+EMSI-MARRAKECH
+• Specialization: Artificial Intelligence & Digital Engineering
+• Final year student with 3+ years production AI experience
+• Focus: Advanced algorithms, distributed systems, architecture
+
+▸ ENGINEERING CYCLE - GPM (2021 - 2023)
+ENSA Safi (National School of Applied Sciences)
+• Process and Materials Engineering
+• Foundation in industrial processes and materials science
+• Applied knowledge in OCP and ONEEP internships
+
+▸ CPGE (2018 - 2020)
+Ad Dakhla - Preparatory Classes
+• Mathematics and Physics track
+• Rigorous foundation for engineering school entrance`,
+
+    'contact': `Email: boussyf0@gmail.com
+LinkedIn: linkedin.com/in/abderrahim-boussyf-167539175
+GitHub: github.com/boussyf0
+Location: Morocco
+
+CURRENTLY SEEKING:
+End-of-Studies Internship (PFE) - 4-6 months
+Roles: Data Science, ML Engineering, AI Engineering`,
+
+    'summary': `ABDERRAHIM BOUSSYF
+Final-year Computer Engineering student at EMSI-MARRAKECH
+Specializing in Agentic AI, RAG systems, and MLOps
+3+ years hands-on production AI experience
+
+KEY ACHIEVEMENTS:
+• North Africa Dreamin' 2025 Hackathon - ACCEPTED IDEA
+  (80% time reduction, 60% quality increase in lead qualification)
+• Built RAG-based chatbot systems (Llama 3, Mistral, GPT-4)
+• Created enterprise MLOps pipelines (Airflow, MLflow, Kubernetes)
+• Developed cloud-native IoT platform (99.9% uptime)
+• Reduced electrical network losses by 40%
+
+CORE SPECIALIZATIONS:
+• Autonomous AI Agents & Agentic Systems
+• RAG & Knowledge Systems (Vector DBs, embeddings, LLMs)
+• LLM Integration & Production AI deployment
+• MLOps & AI Infrastructure (automated pipelines)
+• Full-Stack AI Development (FastAPI, React, Streamlit)
+
+CURRENTLY SEEKING:
+4-6 month End-of-Studies Internship (PFE)
+Data Science | ML Engineering | AI Engineering`
   };
 
   const addLog = (step, detail) => {
@@ -68,9 +229,12 @@ const AgentPlayground = () => {
       let topic = 'unknown';
 
       if (query.includes('project')) { intent = 'query_projects'; topic = 'projects'; }
-      else if (query.includes('skill') || query.includes('tech')) { intent = 'query_skills'; topic = 'skills'; }
-      else if (query.includes('experience') || query.includes('work')) { intent = 'query_experience'; topic = 'experience'; }
-      else if (query.includes('education') || query.includes('study')) { intent = 'query_education'; topic = 'education'; }
+      else if (query.includes('skill') || query.includes('tech') || query.includes('technolog')) { intent = 'query_skills'; topic = 'skills'; }
+      else if (query.includes('experience') || query.includes('work') || query.includes('intern')) { intent = 'query_experience'; topic = 'experience'; }
+      else if (query.includes('education') || query.includes('study') || query.includes('school') || query.includes('university')) { intent = 'query_education'; topic = 'education'; }
+      else if (query.includes('certif') || query.includes('certificate') || query.includes('credential')) { intent = 'query_certifications'; topic = 'certifications'; }
+      else if (query.includes('contact') || query.includes('email') || query.includes('reach') || query.includes('linkedin')) { intent = 'query_contact'; topic = 'contact'; }
+      else if (query.includes('who') || query.includes('about') || query.includes('summary') || query.includes('tell me')) { intent = 'query_summary'; topic = 'summary'; }
 
       addLog('Intent Classification', `Detected intent: ${intent} (Confidence: 0.98)`);
       await new Promise(r => setTimeout(r, 800));
@@ -106,7 +270,7 @@ const AgentPlayground = () => {
   };
 
   return (
-    <Box sx={{ height: 500, display: 'flex', gap: 2, flexDirection: { xs: 'column', md: 'row' } }}>
+    <Box sx={{ height: { xs: 'auto', md: 500 }, minHeight: { xs: 600, md: 500 }, display: 'flex', gap: 2, flexDirection: { xs: 'column', md: 'row' } }}>
       {/* Chat Area */}
       <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         <Box sx={{
@@ -131,15 +295,23 @@ const AgentPlayground = () => {
                 mb: 2
               }}>
                 <Box sx={{
-                  maxWidth: '85%',
-                  p: 2,
+                  maxWidth: { xs: '90%', md: '85%' },
+                  p: { xs: 1.5, md: 2 },
                   borderRadius: 2,
                   bgcolor: msg.role === 'user'
                     ? theme.palette.primary.main
                     : alpha(theme.palette.secondary.main, 0.1),
                   color: msg.role === 'user' ? 'white' : 'text.primary'
                 }}>
-                  <Typography variant="body2">{msg.content}</Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      whiteSpace: 'pre-line',
+                      lineHeight: 1.6
+                    }}
+                  >
+                    {msg.content}
+                  </Typography>
                 </Box>
               </Box>
             </motion.div>
@@ -178,6 +350,8 @@ const AgentPlayground = () => {
       {/* Reasoning Log Area */}
       <Box sx={{
         width: { xs: '100%', md: 300 },
+        minHeight: { xs: 250, md: 'auto' },
+        maxHeight: { xs: 300, md: 'auto' },
         bgcolor: '#1e1e1e',
         borderRadius: 2,
         p: 2,

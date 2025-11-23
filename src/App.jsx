@@ -98,7 +98,7 @@ function ScrollTop(props) {
 function App() {
   // State for mobile drawer
   const [mobileOpen, setMobileOpen] = useState(false);
-  
+
   // Initialize theme mode from localStorage or system preference
   const [mode, setMode] = useState(() => {
     const savedMode = localStorage.getItem('themeMode');
@@ -107,7 +107,7 @@ function App() {
       ? 'dark'
       : 'light';
   });
-  
+
   // Create theme based on current mode
   const theme = createThemeMode(mode);
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
@@ -122,14 +122,14 @@ function App() {
   // Listen for system preference changes
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    
+
     const handleChange = (e) => {
       // Only update if user hasn't manually set a preference
       if (!localStorage.getItem('themeMode')) {
         setMode(e.matches ? 'dark' : 'light');
       }
     };
-    
+
     mediaQuery.addEventListener('change', handleChange);
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
@@ -151,9 +151,9 @@ function App() {
         <ScrollProgress />
         <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', overflow: 'visible' }}>
           <HideOnScroll>
-            <AppBar 
-              position="fixed" 
-              color="default" 
+            <AppBar
+              position="fixed"
+              color="default"
               elevation={0}
               sx={{
                 background: `linear-gradient(135deg, 
@@ -186,7 +186,7 @@ function App() {
                       <Button
                         color="inherit"
                         onClick={handleNavClick}
-                        sx={{ 
+                        sx={{
                           mx: 1,
                           position: 'relative',
                           overflow: 'hidden',
@@ -265,9 +265,9 @@ function App() {
             </Box>
           </Drawer>
 
-          <Box 
-            component="main" 
-            sx={{ 
+          <Box
+            component="main"
+            sx={{
               flexGrow: 1,
               mt: { xs: 7, sm: 8 }, // Add margin top to account for the AppBar
               width: '100%',
@@ -288,8 +288,8 @@ function App() {
           </Box>
 
           <ScrollTop>
-            <Fab 
-              size="medium" 
+            <Fab
+              size="medium"
               aria-label="scroll back to top"
               sx={{
                 background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
@@ -310,7 +310,7 @@ function App() {
           </ScrollTop>
 
           <ThemeToggle mode={mode} setMode={setMode} />
-          
+
           <Footer />
         </Box>
       </ThemeProvider>

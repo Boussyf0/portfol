@@ -269,8 +269,8 @@ const About = () => {
                 <Box
                   sx={{
                     position: 'absolute',
-                    top: -15,
-                    left: -15,
+                    top: { xs: -10, md: -15 },
+                    left: { xs: -10, md: -15 },
                     width: '100%',
                     height: '100%',
                     borderRadius: '16px',
@@ -284,8 +284,8 @@ const About = () => {
                 <Box
                   sx={{
                     position: 'absolute',
-                    bottom: -15,
-                    right: -15,
+                    bottom: { xs: -10, md: -15 },
+                    right: { xs: -10, md: -15 },
                     width: '100%',
                     height: '100%',
                     borderRadius: '16px',
@@ -346,9 +346,9 @@ const About = () => {
                   sx={{
                     position: 'absolute',
                     top: '5%',
-                    right: '-8%',
-                    width: { xs: '50px', sm: '60px' },
-                    height: { xs: '50px', sm: '60px' },
+                    right: { xs: '-5%', md: '-8%' },
+                    width: { xs: '45px', sm: '60px' },
+                    height: { xs: '45px', sm: '60px' },
                     borderRadius: '50%',
                     background: theme.customGradients.secondary,
                     zIndex: 2,
@@ -369,9 +369,9 @@ const About = () => {
                   sx={{
                     position: 'absolute',
                     bottom: '10%',
-                    left: '-8%',
-                    width: { xs: '40px', sm: '50px' },
-                    height: { xs: '40px', sm: '50px' },
+                    left: { xs: '-5%', md: '-8%' },
+                    width: { xs: '38px', sm: '50px' },
+                    height: { xs: '38px', sm: '50px' },
                     borderRadius: '50%',
                     background: theme.customGradients.primary,
                     zIndex: 2,
