@@ -8,11 +8,11 @@ import { NAV_ITEMS, SOCIAL_LINKS } from '../data/constants';
 const Footer = () => {
   const theme = useTheme();
   const year = new Date().getFullYear();
-  
+
   return (
-    <Box 
-      component="footer" 
-      sx={{ 
+    <Box
+      component="footer"
+      sx={{
         py: { xs: 6, md: 8 },
         background: theme.customGradients.primary,
         color: '#fff',
@@ -22,8 +22,8 @@ const Footer = () => {
       }}
     >
       {/* Decorative elements */}
-      <Box 
-        sx={{ 
+      <Box
+        sx={{
           position: 'absolute',
           top: 0,
           right: 0,
@@ -34,7 +34,7 @@ const Footer = () => {
           zIndex: 0,
         }}
       />
-      
+
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
         <Grid container spacing={4}>
           <Grid item xs={12} md={4}>
@@ -42,14 +42,14 @@ const Footer = () => {
               Abderrahim Boussyf
             </Typography>
             <Typography variant="body2" sx={{ mb: 3, opacity: 0.9 }}>
-              A 4th-year Computer Engineering student passionate about solving problems with code. Specializing in AI, data analysis, and software development.
+              A 5th-year Computer Engineering student passionate about solving problems with code. Specializing in AI, data analysis, and software development.
             </Typography>
             <Box sx={{ display: 'flex', gap: 1 }}>
-              <IconButton 
-                href={SOCIAL_LINKS.github} 
-                target="_blank" 
+              <IconButton
+                href={SOCIAL_LINKS.github}
+                target="_blank"
                 size="small"
-                sx={{ 
+                sx={{
                   color: '#fff',
                   border: '1px solid rgba(255, 255, 255, 0.2)',
                   '&:hover': {
@@ -59,11 +59,11 @@ const Footer = () => {
               >
                 <GitHubIcon fontSize="small" />
               </IconButton>
-              <IconButton 
-                href={SOCIAL_LINKS.linkedin} 
-                target="_blank" 
+              <IconButton
+                href={SOCIAL_LINKS.linkedin}
+                target="_blank"
                 size="small"
-                sx={{ 
+                sx={{
                   color: '#fff',
                   border: '1px solid rgba(255, 255, 255, 0.2)',
                   '&:hover': {
@@ -73,10 +73,10 @@ const Footer = () => {
               >
                 <LinkedInIcon fontSize="small" />
               </IconButton>
-              <IconButton 
-                href={`mailto:${SOCIAL_LINKS.email}`} 
+              <IconButton
+                href={`mailto:${SOCIAL_LINKS.email}`}
                 size="small"
-                sx={{ 
+                sx={{
                   color: '#fff',
                   border: '1px solid rgba(255, 255, 255, 0.2)',
                   '&:hover': {
@@ -88,25 +88,25 @@ const Footer = () => {
               </IconButton>
             </Box>
           </Grid>
-          
+
           <Grid item xs={12} sm={6} md={4}>
             <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
               Quick Links
             </Typography>
-            <Box 
-              component="nav" 
-              sx={{ 
+            <Box
+              component="nav"
+              sx={{
                 display: 'flex',
                 flexDirection: 'column',
                 gap: 1,
               }}
             >
               {NAV_ITEMS.map((item) => (
-                <Link 
-                  key={item} 
-                  href={`#${item.toLowerCase()}`} 
-                  sx={{ 
-                    color: 'inherit', 
+                <Link
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  sx={{
+                    color: 'inherit',
                     textDecoration: 'none',
                     opacity: 0.8,
                     transition: 'all 0.2s',
@@ -121,7 +121,7 @@ const Footer = () => {
               ))}
             </Box>
           </Grid>
-          
+
           <Grid item xs={12} sm={6} md={4}>
             <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
               Contact
@@ -129,9 +129,9 @@ const Footer = () => {
             <Typography variant="body2" sx={{ mb: 1, opacity: 0.9 }}>
               Feel free to reach out if you're looking for a developer, have a question, or just want to connect.
             </Typography>
-            <Link 
+            <Link
               href={`mailto:${SOCIAL_LINKS.email}`}
-              sx={{ 
+              sx={{
                 color: 'inherit',
                 textDecoration: 'none',
                 opacity: 0.8,
@@ -146,12 +146,12 @@ const Footer = () => {
             </Link>
           </Grid>
         </Grid>
-        
+
         <Divider sx={{ my: 4, borderColor: 'rgba(255, 255, 255, 0.1)' }} />
-        
-        <Box 
-          sx={{ 
-            display: 'flex', 
+
+        <Box
+          sx={{
+            display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
             flexDirection: { xs: 'column', sm: 'row' },
