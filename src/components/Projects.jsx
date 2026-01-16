@@ -42,12 +42,16 @@ import cvAnalyzerImage from '/assets/cv_analyzer.webp'; // Import CV analyzer im
 import ragThumbnail from '/assets/rag_thumbnail.webp'; // Import RAG Agent thumbnail
 import ragArchitecture from '/assets/rag_architecture.svg'; // Import RAG Architecture diagram
 import salesforceLogo from '/assets/salesforce.svg'; // Import Salesforce logo
+import mantisThumbnail from '/assets/MAntis.png'; // Import MANTIS thumbnail
+import aeroThumbnail from '/assets/Aero.png'; // Import AeroIntelliCAD thumbnail
 
 // Add video URLs for projects - use YouTube or other video hosting service
 const PROJECT_VIDEOS = {
   'ai-interview-simulator': 'https://www.youtube.com/embed/f9XVrOYdezg', // AI Interview Simulator demo video
   'virt-iot': 'https://www.youtube.com/embed/tXKfjhWzEew', // IoT Platform demo video
   'ml-pipeline-pro': 'https://www.youtube.com/embed/weX9Pq9YGBQ', // MLOps Platform demo video
+  'mantis': 'https://www.youtube.com/embed/W1oyX2C1gkU', // MANTIS Predictive Maintenance Platform demo video
+  'aerointellicad': 'https://www.youtube.com/embed/UGsLej-iOrY', // AeroIntelliCAD Aerospace Platform demo video
   'rag-agent': 'https://www.youtube.com/embed/VOIHbKwAkPA', // RAG Agent demo video
   'salesforce-agent': 'https://drive.google.com/file/d/1-SfIybgs1yHurukla-Wu3deggE1mpoHc5zExartZS1k/preview' // Salesforce Agent demo video
 };
@@ -78,6 +82,12 @@ const getProjectImage = (technologies, projectId) => {
   }
   if (projectId === 'salesforce-agent') {
     return salesforceLogo;
+  }
+  if (projectId === 'mantis') {
+    return mantisThumbnail;
+  }
+  if (projectId === 'aerointellicad') {
+    return aeroThumbnail;
   }
 
   // Then fall back to technology-based images
