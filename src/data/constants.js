@@ -49,6 +49,24 @@ export const SKILLS = SKILL_CATEGORIES.reduce((acc, category) => {
 // Projects
 export const PROJECTS = [
   {
+    id: 'mantis',
+    title: 'MANTIS - Industrial Predictive Maintenance Platform',
+    desc: 'Enterprise microservices platform for predictive maintenance in smart factories. Features real-time IIoT data ingestion (OPC UA, MQTT, Modbus), ML-powered anomaly detection, RUL prediction with LSTM/GRU, and intelligent maintenance orchestration. Built with Kafka streaming, TimescaleDB, MLflow, and comprehensive monitoring.',
+    technologies: ['Python', 'Kafka', 'Docker', 'Kubernetes', 'TimescaleDB', 'PostgreSQL', 'InfluxDB', 'PyTorch', 'MLflow', 'React', 'FastAPI', 'Prometheus', 'Grafana'],
+    link: 'https://github.com/Boussyf0/MANTIS',
+    video: 'https://youtu.be/W1oyX2C1gkU',
+    featured: true
+  },
+  {
+    id: 'aerointellicad',
+    title: 'AeroIntelliCAD - AI-Powered Aerospace CAD Platform',
+    desc: 'Revolutionary SaaS platform for aerospace engineering featuring AI-powered 3D model generation from text/images, automated regulatory validation (35+ FAA/EASA constraints), integrated CFD simulation with OpenFOAM, and RAG chatbot for technical assistance. Fully web-based with no installation required.',
+    technologies: ['React', 'Next.js', 'Three.js', 'AI/ML', 'Computer Vision', 'OpenFOAM', 'RAG', 'LLMs', 'Python', 'CAD', 'CFD'],
+    link: 'https://github.com/Boussyf0/AeroIntelliCAD',
+    video: 'https://www.youtube.com/watch?v=UGsLej-iOrY',
+    featured: true
+  },
+  {
     id: 'salesforce-agent',
     title: 'BrainGen AI + Salesforce Agentforce',
     desc: '🏆 North Africa Dreamin\' 2025 Hackathon Accepted Idea. AI-Powered Lead Qualification platform combining RAG chat, BANT+ qualification, and Salesforce Agentforce. Achieved 80% reduction in qualification time, 60% increase in lead quality, and <2s response time.',
@@ -122,24 +140,6 @@ export const PROJECTS = [
     technologies: ['Python', 'MLflow', 'Airflow', 'FastAPI', 'Docker', 'Kubernetes', 'Redis', 'PostgreSQL', 'Prometheus', 'Grafana'],
     link: 'https://github.com/Boussyf0/ML-Pipeline-Pro',
     video: 'https://www.youtube.com/watch?v=weX9Pq9YGBQ',
-    featured: true
-  },
-  {
-    id: 'mantis',
-    title: 'MANTIS - Industrial Predictive Maintenance Platform',
-    desc: 'Enterprise microservices platform for predictive maintenance in smart factories. Features real-time IIoT data ingestion (OPC UA, MQTT, Modbus), ML-powered anomaly detection, RUL prediction with LSTM/GRU, and intelligent maintenance orchestration. Built with Kafka streaming, TimescaleDB, MLflow, and comprehensive monitoring.',
-    technologies: ['Python', 'Kafka', 'Docker', 'Kubernetes', 'TimescaleDB', 'PostgreSQL', 'InfluxDB', 'PyTorch', 'MLflow', 'React', 'FastAPI', 'Prometheus', 'Grafana'],
-    link: 'https://github.com/Boussyf0/MANTIS',
-    video: 'https://youtu.be/W1oyX2C1gkU',
-    featured: true
-  },
-  {
-    id: 'aerointellicad',
-    title: 'AeroIntelliCAD - AI-Powered Aerospace CAD Platform',
-    desc: 'Revolutionary SaaS platform for aerospace engineering featuring AI-powered 3D model generation from text/images, automated regulatory validation (35+ FAA/EASA constraints), integrated CFD simulation with OpenFOAM, and RAG chatbot for technical assistance. Fully web-based with no installation required.',
-    technologies: ['React', 'Next.js', 'Three.js', 'AI/ML', 'Computer Vision', 'OpenFOAM', 'RAG', 'LLMs', 'Python', 'CAD', 'CFD'],
-    link: 'https://github.com/Boussyf0/AeroIntelliCAD',
-    video: 'https://www.youtube.com/watch?v=UGsLej-iOrY',
     featured: true
   },
   {
