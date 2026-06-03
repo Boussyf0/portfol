@@ -85,7 +85,7 @@ const getProjectImage = (technologies, projectId) => {
     return salesforceLogo;
   }
   if (projectId === 'medisense-ai') {
-    return `${import.meta.env.BASE_URL}assets/medisense_chat.png`;
+    return `${import.meta.env.BASE_URL}assets/medisense_banner.png`;
   }
   if (projectId === 'mantis') {
     return mantisThumbnail;
