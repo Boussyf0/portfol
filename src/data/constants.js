@@ -49,6 +49,15 @@ export const SKILLS = SKILL_CATEGORIES.reduce((acc, category) => {
 // Projects
 export const PROJECTS = [
   {
+    id: 'medisense-ai',
+    title: 'MediSense AI - Intelligent Medical Platform',
+    desc: 'Full-stack AI-powered medical platform featuring a RAG chatbot (Mistral-7B) with multilingual support (FR, AR, Darija), real-time IoT biometrics monitoring, ML-based no-show prediction (XGBoost), GDPR-compliant audit logging (AES-256), and multi-role consoles (Doctor, Secretary, Admin). Includes Flutter mobile app, FastAPI backend with SSE streaming, Grafana/Prometheus monitoring, and automated MLOps pipeline (MLflow, Airflow, Evidently drift detection).',
+    technologies: ['Python', 'FastAPI', 'Flutter', 'React', 'RAG', 'Mistral-7B', 'XGBoost', 'IoT', 'Docker', 'MLflow', 'Airflow', 'Grafana', 'Prometheus', 'PostgreSQL'],
+    link: 'https://github.com/Boussyf0',
+    demo: 'https://drive.google.com/file/d/1wGHb7PFnbUVe9YuvhA4ifCQP-4VmcHE5/view?usp=sharing',
+    featured: true
+  },
+  {
     id: 'mantis',
     title: 'MANTIS - Industrial Predictive Maintenance Platform',
     desc: 'Enterprise microservices platform for predictive maintenance in smart factories. Features real-time IIoT data ingestion (OPC UA, MQTT, Modbus), ML-powered anomaly detection, RUL prediction with LSTM/GRU, and intelligent maintenance orchestration. Built with Kafka streaming, TimescaleDB, MLflow, and comprehensive monitoring.',

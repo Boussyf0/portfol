@@ -19,7 +19,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 // Profile image path with BASE_URL
-const PROFILE_IMAGE = `${import.meta.env.BASE_URL}assets/IMG_4589.JPG`;
+const PROFILE_IMAGE = `${import.meta.env.BASE_URL}assets/about_me.png`;
 
 // Constants with dynamic base URL
 const RESUME_PATH_FR = `${import.meta.env.BASE_URL}CV_2025_Abderrahim_Boussyf.pdf`;
@@ -506,7 +506,7 @@ const About = () => {
                   mb: 2,
                 }}
               >
-                Computer Engineering Student
+                AI & Data Engineer
               </Typography>
 
               <Typography
@@ -521,7 +521,7 @@ const About = () => {
                   letterSpacing: '0.025em',
                 }}
               >
-                As a final-year Computer Engineering student at EMSI-MARRAKECH, I specialize in artificial intelligence and full-stack development with over 3 years of hands-on experience building production-ready applications. My academic foundation spans advanced algorithms, distributed systems, and software architecture patterns.
+                As a Computer Engineering graduate from EMSI-MARRAKECH, I specialize in artificial intelligence and full-stack development with over 3 years of hands-on experience building production-ready applications. My engineering background spans advanced algorithms, distributed systems, and software architecture patterns.
               </Typography>
 
               <Typography
@@ -551,7 +551,7 @@ const About = () => {
                   letterSpacing: '0.025em',
                 }}
               >
-                Currently seeking an **End-of-studies Internship (PFE)** (4-6 months) in Data Science, Machine Learning Engineering, or AI Engineering roles. I am eager to leverage my expertise in predictive analytics, deep learning, and data-driven solutions to drive innovation and deliver measurable business impact through intelligent automation and advanced analytics.
+                Open to opportunities in Data Science, Machine Learning Engineering, or AI Engineering roles. I leverage my expertise in predictive analytics, deep learning, and data-driven solutions to drive innovation and deliver measurable business impact through intelligent automation and advanced analytics.
               </Typography>
 
               {/* Skills tags */}

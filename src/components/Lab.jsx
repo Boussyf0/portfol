@@ -154,10 +154,10 @@ Tech: Python, LLMs, Selenium`,
    University of Alberta, 2023
    Focus: Software Architecture, Design Patterns, Agile`,
 
-    'education': `▸ COMPUTER ENGINEERING (2023 - Present)
+    'education': `▸ COMPUTER ENGINEERING (2023 - 2025)
 EMSI-MARRAKECH
 • Specialization: Artificial Intelligence & Digital Engineering
-• Final year student with 3+ years production AI experience
+• Graduate with 3+ years production AI experience
 • Focus: Advanced algorithms, distributed systems, architecture
 
 ▸ ENGINEERING CYCLE - GPM (2021 - 2023)
@@ -176,12 +176,11 @@ LinkedIn: linkedin.com/in/abderrahim-boussyf-167539175
 GitHub: github.com/boussyf0
 Location: Morocco
 
-CURRENTLY SEEKING:
-End-of-Studies Internship (PFE) - 4-6 months
+OPEN TO OPPORTUNITIES:
 Roles: Data Science, ML Engineering, AI Engineering`,
 
     'summary': `ABDERRAHIM BOUSSYF
-Final-year Computer Engineering student at EMSI-MARRAKECH
+Computer Engineering graduate from EMSI-MARRAKECH
 Specializing in Agentic AI, RAG systems, and MLOps
 3+ years hands-on production AI experience
 
@@ -200,8 +199,7 @@ CORE SPECIALIZATIONS:
 • MLOps & AI Infrastructure (automated pipelines)
 • Full-Stack AI Development (FastAPI, React, Streamlit)
 
-CURRENTLY SEEKING:
-4-6 month End-of-Studies Internship (PFE)
+OPEN TO OPPORTUNITIES:
 Data Science | ML Engineering | AI Engineering`
   };
 

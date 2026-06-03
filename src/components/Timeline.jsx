@@ -40,9 +40,9 @@ const Timeline = () => {
       color: theme.palette.secondary.main,
     },
     {
-      year: '2023 - Present',
-      title: 'Computer Engineering Student',
-      description: 'Specializing in Artificial Intelligence and Digital Engineering at EMSI Marrakech.',
+      year: '2023 - 2025',
+      title: 'Computer Engineering Graduate',
+      description: 'Specialized in Artificial Intelligence and Digital Engineering at EMSI Marrakech.',
       icon: <SchoolIcon />,
       color: theme.palette.primary.main,
     },

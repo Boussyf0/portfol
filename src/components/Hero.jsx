@@ -7,7 +7,7 @@ import NeuralNetwork from './UI/NeuralNetwork';
 import DataParticles from './UI/DataParticles';
 
 // Use dynamic base URL for assets
-const PROFILE_IMAGE = `${import.meta.env.BASE_URL}assets/IMG_4589.JPG`;
+const PROFILE_IMAGE = `${import.meta.env.BASE_URL}assets/IMG_4589_backup.JPG`;
 
 const Hero = () => {
   const theme = useTheme();
@@ -530,7 +530,7 @@ const Hero = () => {
                       width: '100%',
                       height: '100%',
                       objectFit: 'cover',
-                      objectPosition: 'center top',
+                      objectPosition: 'center top', // Center the face
                       filter: 'brightness(1.05) contrast(1.05)',
                     }}
                   />

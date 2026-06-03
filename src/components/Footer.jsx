@@ -42,7 +42,7 @@ const Footer = () => {
               Abderrahim Boussyf
             </Typography>
             <Typography variant="body2" sx={{ mb: 3, opacity: 0.9 }}>
-              A 5th-year Computer Engineering student passionate about solving problems with code. Specializing in AI, data analysis, and software development.
+              A Computer Engineering professional passionate about solving problems with code. Specializing in AI, data analysis, and software development.
             </Typography>
             <Box sx={{ display: 'flex', gap: 1 }}>
               <IconButton
