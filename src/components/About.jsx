@@ -19,7 +19,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 // Profile image path with BASE_URL
-const PROFILE_IMAGE = `${import.meta.env.BASE_URL}assets/about_me.png`;
+const PROFILE_IMAGE = `${import.meta.env.BASE_URL}assets/profile.png`;
 
 // Constants with dynamic base URL
 const RESUME_PATH_FR = `${import.meta.env.BASE_URL}CV_2025_Abderrahim_Boussyf.pdf`;

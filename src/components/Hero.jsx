@@ -7,7 +7,7 @@ import NeuralNetwork from './UI/NeuralNetwork';
 import DataParticles from './UI/DataParticles';
 
 // Use dynamic base URL for assets
-const PROFILE_IMAGE = `${import.meta.env.BASE_URL}assets/IMG_4589_backup.JPG`;
+const PROFILE_IMAGE = `${import.meta.env.BASE_URL}assets/profile.png`;
 
 const Hero = () => {
   const theme = useTheme();
