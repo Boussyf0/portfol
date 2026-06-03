@@ -53,7 +53,8 @@ const PROJECT_VIDEOS = {
   'mantis': 'https://www.youtube.com/embed/W1oyX2C1gkU', // MANTIS Predictive Maintenance Platform demo video
   'aerointellicad': 'https://www.youtube.com/embed/UGsLej-iOrY', // AeroIntelliCAD Aerospace Platform demo video
   'rag-agent': 'https://www.youtube.com/embed/VOIHbKwAkPA', // RAG Agent demo video
-  'salesforce-agent': 'https://drive.google.com/file/d/1-SfIybgs1yHurukla-Wu3deggE1mpoHc5zExartZS1k/preview' // Salesforce Agent demo video
+  'salesforce-agent': 'https://drive.google.com/file/d/1-SfIybgs1yHurukla-Wu3deggE1mpoHc5zExartZS1k/preview', // Salesforce Agent demo video
+  'medisense-ai': 'https://drive.google.com/file/d/1wGHb7PFnbUVe9YuvhA4ifCQP-4VmcHE5/preview' // MediSense AI demo video
 };
 
 // Filter projects by featured status
@@ -82,6 +83,9 @@ const getProjectImage = (technologies, projectId) => {
   }
   if (projectId === 'salesforce-agent') {
     return salesforceLogo;
+  }
+  if (projectId === 'medisense-ai') {
+    return '/assets/medisense_chat.png';
   }
   if (projectId === 'mantis') {
     return mantisThumbnail;
