@@ -243,7 +243,7 @@ const About = () => {
                 position: 'relative',
                 width: '100%',
                 maxWidth: { xs: '280px', sm: '340px', md: '380px' },
-                aspectRatio: '3/4',
+                aspectRatio: '1/1',
                 perspective: '1000px'
               }}
             >
@@ -273,7 +273,7 @@ const About = () => {
                     left: { xs: -10, md: -15 },
                     width: '100%',
                     height: '100%',
-                    borderRadius: '16px',
+                    borderRadius: '50%',
                     border: '2px solid',
                     borderColor: theme.palette.primary.main,
                     zIndex: 0,
@@ -288,7 +288,7 @@ const About = () => {
                     right: { xs: -10, md: -15 },
                     width: '100%',
                     height: '100%',
-                    borderRadius: '16px',
+                    borderRadius: '50%',
                     background: theme.customGradients.primary,
                     opacity: 0.7,
                     zIndex: 0,
@@ -313,7 +313,7 @@ const About = () => {
                     position: 'absolute',
                     width: '100%',
                     height: '100%',
-                    borderRadius: '16px',
+                    borderRadius: '50%',
                     background: theme.customGradients.primaryToSecondary,
                     filter: 'blur(20px)',
                     zIndex: -1,
@@ -331,7 +331,7 @@ const About = () => {
                     height: '100%',
                     objectFit: 'cover',
                     objectPosition: 'center top',
-                    borderRadius: '16px',
+                    borderRadius: '50%',
                     border: '4px solid white',
                     boxShadow: '0 20px 30px rgba(0, 0, 0, 0.1)',
                     zIndex: 1,
@@ -521,7 +521,7 @@ const About = () => {
                   letterSpacing: '0.025em',
                 }}
               >
-                As a Computer Engineering graduate from EMSI-MARRAKECH, I specialize in artificial intelligence and full-stack development with over 3 years of hands-on experience building production-ready applications. My engineering background spans advanced algorithms, distributed systems, and software architecture patterns.
+                At n.synergy, I currently develop a cognitive healthcare platform that integrates Multi-Agent architecture and an advanced RAG pipeline for clinical assistance. The platform leverages predictive modeling (XGBoost) and IoT time-series analysis, such as using smartwatches, to optimize patient flows dynamically and in real-time, adhering to Privacy by Design principles.
               </Typography>
 
               <Typography
@@ -536,7 +536,7 @@ const About = () => {
                   letterSpacing: '0.025em',
                 }}
               >
-                I've successfully delivered enterprise-level solutions in machine learning and DevOps, including predictive analytics platforms, computer vision systems, and scalable cloud-native applications. My technical expertise encompasses Python, TensorFlow/PyTorch, Kubernetes, and modern web technologies, with proven experience in Agile development methodologies.
+                Graduated in engineering from Ecole Marocaine des Sciences de l'Ingenieur, I combine expertise in predictive modeling, MLOps, and data analysis with skills in cloud performance optimization, distributed system monitoring, and Agile methodologies.
               </Typography>
 
               <Typography
@@ -551,7 +551,7 @@ const About = () => {
                   letterSpacing: '0.025em',
                 }}
               >
-                Open to opportunities in Data Science, Machine Learning Engineering, or AI Engineering roles. I leverage my expertise in predictive analytics, deep learning, and data-driven solutions to drive innovation and deliver measurable business impact through intelligent automation and advanced analytics.
+                I am motivated to design innovative, reliable, and scalable technology solutions that address complex challenges. I leverage my expertise in predictive analytics, deep learning, and data-driven solutions to drive innovation and deliver measurable business impact through intelligent automation and advanced analytics.
               </Typography>
 
               {/* Skills tags */}

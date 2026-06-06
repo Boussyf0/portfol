@@ -16,49 +16,72 @@ const Timeline = () => {
     offset: ["start end", "end start"]
   });
 
+  const BASE = import.meta.env.BASE_URL;
+
   // Timeline items
   const timelineItems = [
     {
-      year: '2025',
-      title: 'Intelligent Web Platform & RAG Intern',
-      description: 'Developed an intelligent web platform at Brain Gen Technology, integrating a RAG-based chatbot (Llama, Mistral) to optimize lead qualification and customer interaction.',
+      year: '2025 - Present',
+      title: 'AI Engineer',
+      company: 'n.synergy',
+      description: 'Developing a cognitive healthcare platform integrating Multi-Agent architecture and an advanced RAG pipeline for clinical assistance. Leveraging predictive modeling (XGBoost) and IoT time-series analysis (smartwatches) to optimize patient flows dynamically, adhering to Privacy by Design principles.',
       icon: <AutoGraphIcon />,
       color: theme.palette.secondary.main,
+      logo: `${BASE}assets/company_logos/N.synergy_logo.png`,
+    },
+    {
+      year: '2025',
+      title: 'Intelligent Web Platform & RAG Intern',
+      company: 'Brain Gen Technology',
+      description: 'Developed an intelligent web platform integrating a RAG-based chatbot (Llama, Mistral) to optimize lead qualification and customer interaction.',
+      icon: <CodeIcon />,
+      color: theme.palette.primary.main,
+      logo: `${BASE}assets/company_logos/BRAIN logo.png`,
     },
     {
       year: '2024',
       title: 'Technical Loss Analysis Intern',
-      description: 'Analyzed technical losses in the electrical distribution network at ONEEP-DAKHLA, identifying key factors responsible for 40% of losses and proposing reduction strategies.',
+      company: 'ONEE',
+      description: 'Analyzed technical losses in the electrical distribution network at ONEE-DAKHLA, identifying key factors responsible for 40% of losses and proposing reduction strategies.',
       icon: <BoltIcon />,
-      color: theme.palette.primary.main,
+      color: theme.palette.secondary.main,
+      logo: `${BASE}assets/company_logos/onee.png`,
     },
     {
       year: '2023',
       title: 'Process Verification Intern',
+      company: 'OCP Group',
       description: 'Monitored NISSAN process parameters at OCP SAFI to optimize phosphoric acid production, studying industrial flows from grinding to storage.',
       icon: <WorkIcon />,
-      color: theme.palette.secondary.main,
+      color: theme.palette.primary.main,
+      logo: `${BASE}assets/company_logos/ocp.png`,
     },
     {
       year: '2023 - 2025',
       title: 'Computer Engineering Graduate',
-      description: 'Specialized in Artificial Intelligence and Digital Engineering at EMSI Marrakech.',
+      company: 'EMSI Marrakech',
+      description: 'Specialized in Artificial Intelligence and Digital Engineering at Ecole Marocaine des Sciences de l\'Ingenieur.',
       icon: <SchoolIcon />,
-      color: theme.palette.primary.main,
+      color: theme.palette.secondary.main,
+      logo: `${BASE}assets/company_logos/emsi.png`,
     },
     {
       year: '2021 - 2023',
       title: 'Engineering Cycle (GPM)',
-      description: 'Studied Process and Materials Engineering at ENSA Safi, gaining a strong foundation in industrial processes.',
+      company: 'ENSA Safi',
+      description: 'Studied Process and Materials Engineering at Ecole Nationale des Sciences Appliquées de Safi, gaining a strong foundation in industrial processes.',
       icon: <SchoolIcon />,
       color: theme.palette.primary.main,
+      logo: `${BASE}assets/company_logos/ensa_safi.png`,
     },
     {
       year: '2018 - 2020',
       title: 'CPGE',
-      description: 'Completed Preparatory Classes for Great Engineering Schools at Ad Dakhla, focusing on Mathematics and Physics.',
+      company: 'Ad Dakhla',
+      description: 'Completed Preparatory Classes for Great Engineering Schools, focusing on Mathematics and Physics.',
       icon: <SchoolIcon />,
       color: theme.palette.secondary.main,
+      logo: `${BASE}assets/company_logos/CPGE_logo.png`,
     },
   ];
 
@@ -256,12 +279,60 @@ const TimelineItem = ({ item, index, isLeft }) => {
               variant="h6"
               sx={{
                 fontWeight: 700,
-                mb: 1,
+                mb: 0.5,
                 color: theme.palette.text.primary,
               }}
             >
               {item.title}
             </Typography>
+
+            {/* Company with logo */}
+            {item.company && (
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
+                {item.logo ? (
+                  <Box
+                    component="img"
+                    src={item.logo}
+                    alt={item.company}
+                    sx={{
+                      height: 24,
+                      width: 'auto',
+                      maxWidth: 80,
+                      objectFit: 'contain',
+                      filter: theme.palette.mode === 'dark' ? 'brightness(1.2)' : 'none',
+                    }}
+                  />
+                ) : (
+                  <Box
+                    sx={{
+                      width: 24,
+                      height: 24,
+                      borderRadius: '6px',
+                      background: `linear-gradient(135deg, ${alpha(item.color, 0.8)}, ${alpha(item.color, 0.4)})`,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '0.7rem',
+                      fontWeight: 700,
+                      color: '#fff',
+                      flexShrink: 0,
+                    }}
+                  >
+                    {item.company.charAt(0)}
+                  </Box>
+                )}
+                <Typography
+                  variant="body2"
+                  sx={{
+                    fontWeight: 600,
+                    color: alpha(theme.palette.text.primary, 0.7),
+                    fontStyle: 'italic',
+                  }}
+                >
+                  {item.company}
+                </Typography>
+              </Box>
+            )}
 
             <Typography variant="body2" color="text.secondary">
               {item.description}
