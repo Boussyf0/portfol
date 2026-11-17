@@ -18,14 +18,11 @@ import HubIcon from '@mui/icons-material/Hub';
 
 const getCategoryIcon = (category) => {
   const iconMap = {
-    'Programming Languages': <CodeIcon />,
-    'AI & Machine Learning': <SmartToyIcon />,
-    'Big Data & Cloud': <CloudIcon />,
-    'Web & Tools': <WebIcon />,
-    'Databases': <DatabaseIcon />,
-    'Methodologies': <AgilityIcon />,
-    'Data Analysis Tools': <AutoGraphIcon />,
-    'Vector Databases': <DataObjectIcon />,
+    'Generative AI, LLMs & Evaluation': <SmartToyIcon />,
+    'Machine Learning & Deep Learning': <AutoGraphIcon />,
+    'MLOps & Cloud Infrastructure': <CloudIcon />,
+    'Data & Software Engineering': <DatabaseIcon />,
+    'Responsible AI & Governance': <AgilityIcon />,
   };
 
   return iconMap[category] || <CodeIcon />;
@@ -42,10 +39,10 @@ const getCategoryColor = (index, theme) => {
 
 // Special Agentic AI Stack
 const AGENTIC_STACK = [
-  { name: 'Large Language Models', icon: <SmartToyIcon />, tools: ['GPT-4', 'Llama 3', 'Mistral', 'Claude'] },
-  { name: 'Agent Frameworks', icon: <HubIcon />, tools: ['LangChain', 'LangGraph', 'AutoGPT', 'Agentforce'] },
-  { name: 'Vector Memory', icon: <MemoryIcon />, tools: ['Pinecone', 'ChromaDB', 'FAISS', 'Weaviate'] },
-  { name: 'RAG Systems', icon: <DataObjectIcon />, tools: ['Hybrid Search', 'Re-ranking', 'Knowledge Graphs'] }
+  { name: 'LLM Serving & Alignment', icon: <SmartToyIcon />, tools: ['Qwen2.5', 'Llama 3.1', 'Mixtral', 'Ollama', 'RLHF'] },
+  { name: 'Hybrid RAG & Memory', icon: <MemoryIcon />, tools: ['Qdrant', 'ChromaDB', 'BM25 + RRF', 'Knowledge Graphs'] },
+  { name: 'Evaluation & Safety Gates', icon: <DataObjectIcon />, tools: ['Jev', 'Opik', 'LLM-as-a-Judge', 'Elo Benchmarking'] },
+  { name: 'Agentic Orchestration', icon: <HubIcon />, tools: ['LangGraph', 'Model Context Protocol (MCP)', 'Agentforce'] }
 ];
 
 const Skills = () => {
@@ -117,7 +114,7 @@ const Skills = () => {
             lineHeight: 1.7,
           }}
         >
-          Specialized in building autonomous AI agents and enterprise-grade RAG systems, supported by a strong foundation in full-stack engineering.
+          Architecting production GenAI, Hybrid RAG with automated LLM-as-a-Judge evaluation, real-time IoT streaming, and end-to-end MLOps pipelines.
         </Typography>
 
         {/* Agentic AI Stack Highlight */}

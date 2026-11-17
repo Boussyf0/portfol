@@ -22,8 +22,9 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 const PROFILE_IMAGE = `${import.meta.env.BASE_URL}assets/profile.png`;
 
 // Constants with dynamic base URL
-const RESUME_PATH_FR = `${import.meta.env.BASE_URL}CV_2025_Abderrahim_Boussyf.pdf`;
-const RESUME_PATH_EN = `${import.meta.env.BASE_URL}CV_Abderrahim_Boussyf_intern.pdf`;
+const RESUME_PATH_EN = `${import.meta.env.BASE_URL}CV_Abderrahim_Boussyf_AI_Engineer_EN.pdf`;
+const RESUME_PATH_FR = `${import.meta.env.BASE_URL}CV_Abderrahim_Boussyf_AI_FR.pdf`;
+const RESUME_PATH_DEVOPS_FR = `${import.meta.env.BASE_URL}CV_Abderrahim_Boussyf_DevOps_Data_FR.pdf`;
 
 const About = () => {
   const theme = useTheme();
@@ -108,46 +109,41 @@ const About = () => {
 
   const focusAreas = [
     {
-      title: 'Agentic AI Systems',
-      icon: <SmartToyIcon sx={{ color: 'primary.main' }} />,
-      description: 'I design and implement autonomous AI agents that can reason, plan, and execute tasks. Using frameworks like LangChain and custom architectures, I build agents that handle complex workflows from lead qualification to automated decision-making.'
-    },
-    {
-      title: 'RAG & Knowledge Systems',
+      title: 'Hybrid RAG & LLM Evaluation',
       icon: <SearchIcon sx={{ color: 'primary.main' }} />,
-      description: 'I develop Retrieval-Augmented Generation systems that combine vector databases, embeddings, and LLMs to enable intelligent information retrieval and context-aware responses for enterprise applications.'
+      description: 'Designing grounded multilingual retrieval pipelines (Qdrant, ChromaDB, BM25, RRF fusion on Qwen2.5 & Llama 3.1) paired with deterministic safety gates and automated LLM-as-a-Judge evaluation (Jev, Opik).'
     },
     {
-      title: 'LLM Integration & Production AI',
-      icon: <AutoGraphIcon sx={{ color: 'primary.main' }} />,
-      description: 'I build production-ready LLM applications with proper prompt engineering, safety guardrails, and performance optimization. From fine-tuning to deployment, I ensure AI systems are scalable and reliable.'
-    },
-    {
-      title: 'Data Science & Analytics',
-      icon: <DataObjectIcon sx={{ color: 'primary.main' }} />,
-      description: 'I extract actionable insights from complex datasets using advanced statistical methods, machine learning algorithms, and predictive modeling. From exploratory analysis to production models, I turn data into strategic business value.'
-    },
-    {
-      title: 'Data Infrastructure & Engineering',
-      icon: <ArchitectureIcon sx={{ color: 'primary.main' }} />,
-      description: 'I build scalable data pipelines and infrastructure for processing large-scale datasets. Using technologies like Apache Spark, cloud platforms, and modern data warehousing solutions, I ensure reliable and efficient data flow.'
-    },
-    {
-      title: 'MLOps & AI Infrastructure',
+      title: 'End-to-End MLOps & Observability',
       icon: <StorageIcon sx={{ color: 'primary.main' }} />,
-      description: 'I architect end-to-end MLOps pipelines with automated training, model registry, monitoring, and serving. Using tools like MLflow, Airflow, and Kubernetes, I ensure ML models transition smoothly from development to production.'
+      description: 'Automating model training, registry, feature stores, drift detection, and CI/CD across Apache Airflow, MLflow, Feast, Evidently AI, Docker, Kubernetes, and Prometheus/Grafana.'
     },
     {
-      title: 'Full-Stack AI Development',
+      title: 'Real-Time IoT Streaming & Predictive ML',
+      icon: <AutoGraphIcon sx={{ color: 'primary.main' }} />,
+      description: 'Engineering high-throughput Apache Kafka, MQTT, and BLE/GATT ingestion pipelines feeding calibrated time-series and tabular models (PyTorch BiLSTM at 0.997 AUC-ROC, XGBoost, RUL prediction, TimescaleDB).'
+    },
+    {
+      title: 'Agentic AI & RLHF Alignment',
+      icon: <SmartToyIcon sx={{ color: 'primary.main' }} />,
+      description: 'Building autonomous agentic workflows (LangGraph, MCP) and benchmarking LLM alignment, semantic search relevance, and multilingual ASR/NLP pipelines (French, Arabic, Darija) via RLHF.'
+    },
+    {
+      title: 'Compliant Microservices Architecture',
+      icon: <ArchitectureIcon sx={{ color: 'primary.main' }} />,
+      description: 'Productionizing async FastAPI and PostgreSQL (pgcrypto) microservices engineered for data residency, privacy by design, and high-risk AI governance (EU AI Act, GDPR, Moroccan Law 09-08/CNDP).'
+    },
+    {
+      title: 'Full-Stack AI Delivery',
       icon: <CodeIcon sx={{ color: 'primary.main' }} />,
-      description: 'I bridge AI and software engineering by building complete AI-powered applications. From FastAPI backends to React frontends, I create seamless user experiences that leverage cutting-edge AI capabilities.'
+      description: 'Delivering complete AI-powered products from backend inference pipelines to responsive Next.js, React, and Flutter interfaces—backed by automated testing (80%+ coverage) and Agile/BPMN 2.0 execution.'
     },
   ];
 
   const skills = [
-    "Python", "TensorFlow", "PyTorch", "Scikit-learn", "SQL", "JavaScript",
-    "React", "Node.js", "Docker", "AWS", "GCP", "Git", "MLOps",
-    "Computer Vision", "NLP", "Recommendation Systems"
+    "Python", "Hybrid RAG (Qdrant, BM25, RRF)", "Qwen2.5 & Llama 3.1", "LLM-as-a-Judge (Jev, Opik)",
+    "PyTorch & BiLSTM", "XGBoost", "FastAPI", "Apache Kafka", "MLflow", "Evidently AI",
+    "Apache Airflow", "Feast", "Docker & Kubernetes", "TimescaleDB & PostgreSQL", "EU AI Act & GDPR"
   ];
 
   return (
@@ -474,7 +470,7 @@ const About = () => {
                   onClick={handleClose}
                   sx={{ py: 1.5, px: 3 }}
                 >
-                  English Version
+                  AI & ML Engineer (EN)
                 </MenuItem>
                 <MenuItem
                   component="a"
@@ -483,7 +479,16 @@ const About = () => {
                   onClick={handleClose}
                   sx={{ py: 1.5, px: 3 }}
                 >
-                  French Version
+                  Ingénieur IA & Data Science (FR)
+                </MenuItem>
+                <MenuItem
+                  component="a"
+                  href={RESUME_PATH_DEVOPS_FR}
+                  download
+                  onClick={handleClose}
+                  sx={{ py: 1.5, px: 3 }}
+                >
+                  Ingénieur Data & MLOps (FR)
                 </MenuItem>
               </Menu>
             </motion.div>
@@ -506,7 +511,7 @@ const About = () => {
                   mb: 2,
                 }}
               >
-                AI & Data Engineer
+                AI & Machine Learning Engineer | Production GenAI & MLOps
               </Typography>
 
               <Typography
@@ -521,7 +526,7 @@ const About = () => {
                   letterSpacing: '0.025em',
                 }}
               >
-                At n.synergy, I currently develop a cognitive healthcare platform that integrates Multi-Agent architecture and an advanced RAG pipeline for clinical assistance. The platform leverages predictive modeling (XGBoost) and IoT time-series analysis, such as using smartwatches, to optimize patient flows dynamically and in real-time, adhering to Privacy by Design principles.
+                I architect and deploy production-grade AI systems end to end. At n.synergy, I spearheaded MediSense AI—a multilingual clinical triage platform (French, Arabic, Darija) combining a 7-step Hybrid RAG pipeline (Qdrant + BM25 + RRF on Qwen2.5), calibrated BiLSTM vital-sign anomaly detection (0.997 AUC-ROC), real-time Apache Kafka IoT ingestion, and automated MLOps (508 automated tests at 80% coverage).
               </Typography>
 
               <Typography
@@ -536,7 +541,7 @@ const About = () => {
                   letterSpacing: '0.025em',
                 }}
               >
-                Graduated in engineering from Ecole Marocaine des Sciences de l'Ingenieur, I combine expertise in predictive modeling, MLOps, and data analysis with skills in cloud performance optimization, distributed system monitoring, and Agile methodologies.
+                Currently, as an AI Data & NLP Specialist at Appen (CrowdGen), I benchmark LLM alignment (RLHF), semantic search relevance, and multilingual ASR/NLP pipelines. Previously at Brain Gen Technology, I built a conversational RAG and ML lead-scoring platform that delivered a 50% lead qualification uplift and a 60% reduction in Customer Acquisition Cost (CAC).
               </Typography>
 
               <Typography
@@ -551,7 +556,7 @@ const About = () => {
                   letterSpacing: '0.025em',
                 }}
               >
-                I am motivated to design innovative, reliable, and scalable technology solutions that address complex challenges. I leverage my expertise in predictive analytics, deep learning, and data-driven solutions to drive innovation and deliver measurable business impact through intelligent automation and advanced analytics.
+                With a dual engineering background in Computer Engineering (Data Science & AI) and Process Engineering, I pair statistical rigor with resilient system design—enforcing automated LLM-as-a-Judge evaluation (Jev/Opik), drift monitoring (Evidently AI, MLflow), and strict compliance (EU AI Act, GDPR, Moroccan Law 09-08/CNDP).
               </Typography>
 
               {/* Skills tags */}

@@ -34,7 +34,7 @@ const Hero = () => {
 
   // Typewriter effect - AI/ML focused
   const [typewriterText] = useTypewriter({
-    words: ['Data Scientist', 'ML Engineer', 'AI Developer', 'Deep Learning Specialist', 'MLOps Engineer'],
+    words: ['AI & ML Engineer', 'Production GenAI Architect', 'MLOps & Data Engineer', 'NLP & Hybrid RAG Specialist'],
     loop: true,
     delaySpeed: 2000,
     typeSpeed: 80,
@@ -367,9 +367,9 @@ const Hero = () => {
                     },
                   }}
                 >
-                  Building intelligent systems that <Box component="span" sx={{ color: theme.palette.primary.main, fontWeight: 600 }}>transform data into insights</Box>,
-                  {' '}<Box component="span" sx={{ color: theme.palette.secondary.main, fontWeight: 600 }}>automate complex workflows</Box>, and
-                  {' '}<Box component="span" sx={{ color: theme.palette.accent?.main || '#00ff88', fontWeight: 600 }}>drive innovation</Box> through AI & Machine Learning.
+                  Architecting and deploying production-grade AI systems end to end—from <Box component="span" sx={{ color: theme.palette.primary.main, fontWeight: 600 }}>multilingual Hybrid RAG</Box> and
+                  {' '}<Box component="span" sx={{ color: theme.palette.secondary.main, fontWeight: 600 }}>automated LLM evaluation</Box> to
+                  {' '}<Box component="span" sx={{ color: theme.palette.accent?.main || '#00ff88', fontWeight: 600 }}>real-time IoT streaming & MLOps</Box>.
                 </Typography>
               </motion.div>
 

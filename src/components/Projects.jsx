@@ -78,7 +78,7 @@ const getProjectImage = (technologies, projectId) => {
     // MLOps Platform - AI/ML pipeline with neural networks and data flow
     return 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80';
   }
-  if (projectId === 'rag-agent') {
+  if (projectId === 'rag-agent' || projectId === 'chawerni') {
     return ragThumbnail;
   }
   if (projectId === 'salesforce-agent') {
