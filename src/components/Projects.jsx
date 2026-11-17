@@ -54,7 +54,8 @@ const PROJECT_VIDEOS = {
   'aerointellicad': 'https://www.youtube.com/embed/UGsLej-iOrY', // AeroIntelliCAD Aerospace Platform demo video
   'rag-agent': 'https://www.youtube.com/embed/VOIHbKwAkPA', // RAG Agent demo video
   'salesforce-agent': 'https://drive.google.com/file/d/1-SfIybgs1yHurukla-Wu3deggE1mpoHc5zExartZS1k/preview', // Salesforce Agent demo video
-  'medisense-ai': 'https://drive.google.com/file/d/1wGHb7PFnbUVe9YuvhA4ifCQP-4VmcHE5/preview' // MediSense AI demo video
+  'medisense-ai': 'https://drive.google.com/file/d/1wGHb7PFnbUVe9YuvhA4ifCQP-4VmcHE5/preview', // MediSense AI demo video
+  'chawerni': 'https://drive.google.com/file/d/1G5N00X_OGr3346PGpaheuPfQ6o995Aov/preview' // Chawerni LegalTech RAG demo video
 };
 
 // Filter projects by featured status
@@ -78,8 +79,11 @@ const getProjectImage = (technologies, projectId) => {
     // MLOps Platform - AI/ML pipeline with neural networks and data flow
     return 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80';
   }
-  if (projectId === 'rag-agent' || projectId === 'chawerni') {
+  if (projectId === 'rag-agent') {
     return ragThumbnail;
+  }
+  if (projectId === 'chawerni') {
+    return `${import.meta.env.BASE_URL}assets/chawerni_banner.jpg`;
   }
   if (projectId === 'salesforce-agent') {
     return salesforceLogo;

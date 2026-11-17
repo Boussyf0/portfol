@@ -51,6 +51,7 @@ export const PROJECTS = [
     desc: 'Trilingual legal AI assistant (French, Arabic, Darija) grounded across 13 Moroccan legal codes. Engineered an automated non-regression LLM-as-a-Judge evaluation pipeline using Jev & Opik across a 50-question benchmark to score grounding, relevance, completeness, and legal prudence via structured outputs.',
     technologies: ['Python', 'Hybrid RAG', 'Jev', 'Opik', 'LLM-as-a-Judge', 'FastAPI', 'Qdrant', 'LLMs'],
     link: 'https://github.com/Boussyf0',
+    demo: 'https://drive.google.com/file/d/1G5N00X_OGr3346PGpaheuPfQ6o995Aov/view?usp=sharing',
     featured: true
   },
   {
