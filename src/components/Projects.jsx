@@ -325,13 +325,52 @@ const Projects = () => {
                       >
                         {project.title}
                       </Typography>
-                      <Typography
-                        variant="body1"
-                        color="text.secondary"
-                        sx={{ mb: 2 }}
-                      >
-                        {project.desc}
-                      </Typography>
+                      {project.tagline && (
+                        <Typography
+                          variant="subtitle2"
+                          sx={{
+                            fontWeight: 600,
+                            color: 'secondary.main',
+                            mb: 1.5,
+                            lineHeight: 1.4,
+                          }}
+                        >
+                          {project.tagline}
+                        </Typography>
+                      )}
+                      {project.caseStudy ? (
+                        <Box sx={{ mb: 2 }}>
+                          <Typography variant="body2" color="text.secondary" sx={{ mb: 1.5 }}>
+                            <Box component="span" sx={{ fontWeight: 700, color: 'text.primary' }}>
+                              Operational Problem:{' '}
+                            </Box>
+                            {project.caseStudy.problem}
+                          </Typography>
+                          <Stack spacing={1} sx={{ mb: 1.5 }}>
+                            {project.caseStudy.architecture.map((item) => (
+                              <Typography key={item.label} variant="body2" color="text.secondary" sx={{ fontSize: '0.85rem', lineHeight: 1.5 }}>
+                                • <Box component="span" sx={{ fontWeight: 600, color: 'text.primary' }}>{item.label}:</Box> {item.text}
+                              </Typography>
+                            ))}
+                          </Stack>
+                          {project.caseStudy.impact && (
+                            <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.85rem' }}>
+                              <Box component="span" sx={{ fontWeight: 700, color: 'primary.main' }}>
+                                Validation & Impact:{' '}
+                              </Box>
+                              {project.caseStudy.impact}
+                            </Typography>
+                          )}
+                        </Box>
+                      ) : (
+                        <Typography
+                          variant="body1"
+                          color="text.secondary"
+                          sx={{ mb: 2 }}
+                        >
+                          {project.desc}
+                        </Typography>
+                      )}
                       <Stack direction="row" spacing={1} flexWrap="wrap" gap={1} sx={{ mt: 2 }}>
                         {project.technologies?.map((tech) => (
                           <Chip
@@ -516,9 +555,48 @@ const Projects = () => {
                 {selectedProject.title}
               </Typography>
 
-              <Typography variant="body1" paragraph>
-                {selectedProject.desc}
-              </Typography>
+              {selectedProject.tagline && (
+                <Typography variant="subtitle1" sx={{ fontWeight: 600, color: 'secondary.main', mb: 2 }}>
+                  {selectedProject.tagline}
+                </Typography>
+              )}
+
+              {selectedProject.caseStudy ? (
+                <Box sx={{ mb: 3 }}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 0.5 }}>
+                    The Operational Problem
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" paragraph>
+                    {selectedProject.caseStudy.problem}
+                  </Typography>
+
+                  <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1 }}>
+                    System Architecture & Trade-Offs
+                  </Typography>
+                  <Stack spacing={1.5} sx={{ mb: 2 }}>
+                    {selectedProject.caseStudy.architecture.map((item) => (
+                      <Typography key={item.label} variant="body2" color="text.secondary">
+                        • <Box component="span" sx={{ fontWeight: 700, color: 'text.primary' }}>{item.label}:</Box> {item.text}
+                      </Typography>
+                    ))}
+                  </Stack>
+
+                  {selectedProject.caseStudy.impact && (
+                    <>
+                      <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 0.5 }}>
+                        Validation & Impact
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary" paragraph>
+                        {selectedProject.caseStudy.impact}
+                      </Typography>
+                    </>
+                  )}
+                </Box>
+              ) : (
+                <Typography variant="body1" paragraph>
+                  {selectedProject.desc}
+                </Typography>
+              )}
 
               {/* Display Architecture Diagram for RAG Agent */}
               {selectedProject.id === 'rag-agent' && (

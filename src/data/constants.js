@@ -38,34 +38,88 @@ export const SKILLS = SKILL_CATEGORIES.reduce((acc, category) => {
 export const PROJECTS = [
   {
     id: 'medisense-ai',
-    title: 'MediSense AI — Multilingual Clinical Triage & MLOps Platform',
-    desc: 'Production HealthTech platform featuring a 7-step Hybrid RAG clinical assistant (Qdrant + BM25 + RRF fusion on Qwen2.5 via Ollama) with deterministic safety gates in French, Arabic, and Darija (508 automated tests, 80% coverage). Integrates Apache Kafka + BLE/GATT wearable streaming, calibrated BiLSTM vital-sign anomaly detection (0.997 AUC-ROC, 99.2% F1, Brier 0.002), XGBoost no-show prediction (0.94 ROC-AUC), and end-to-end MLOps (Airflow, MLflow, Evidently AI) compliant with GDPR, Moroccan Law 09-08/CNDP, and the EU AI Act.',
-    technologies: ['Python', 'FastAPI', 'Qwen2.5', 'Qdrant', 'Hybrid RAG', 'BiLSTM', 'XGBoost', 'Apache Kafka', 'MLflow', 'Airflow', 'Evidently AI', 'PostgreSQL', 'Docker', 'Flutter'],
+    title: 'MediSense AI',
+    tagline: 'On-Premise Cognitive Clinical Decision Support & Hybrid Triage Engine',
+    desc: 'Clinical environments require real-time triage, anomaly detection across continuous patient telemetry, and rapid access to medical protocols—all under strict data-privacy constraints that prohibit sending sensitive patient records to external cloud LLM APIs.',
+    caseStudy: {
+      problem: 'Clinical environments require real-time triage, anomaly detection across continuous patient telemetry, and rapid access to medical protocols—all under strict data-privacy constraints that prohibit sending sensitive patient records to external cloud LLM APIs.',
+      architecture: [
+        {
+          label: 'Multi-Modal Inference Pipeline',
+          text: 'Engineered an on-premise cognitive platform pairing a PyTorch BiLSTM network for temporal vital-sign anomaly detection (0.997 AUC-ROC, 99.2% F1) with an XGBoost classifier for patient no-show risk stratification (0.94 ROC-AUC).'
+        },
+        {
+          label: 'Grounded Hybrid RAG',
+          text: 'Built a hybrid dense-sparse retrieval pipeline (Qdrant + BM25 + RRF fusion on Qwen2.5 via Ollama) to cross-reference patient context against clinical guidelines in French, Arabic, and Darija. Enforced deterministic output schemas and source-citation grounding to eliminate generative hallucinations in high-stakes clinical workflows.'
+        },
+        {
+          label: 'Clinical Decision Interface & MLOps',
+          text: 'Designed a low-latency, 3-column clinical workspace surfacing real-time Kafka/BLE risk alerts, retrieved medical evidence, and actionable triage recommendations—backed by Airflow, MLflow, Evidently AI, and 508 automated tests (80% coverage) compliant with GDPR, CNDP 09-08, and the EU AI Act.'
+        }
+      ],
+      impact: 'Production-validated with 508 automated tests (80% coverage), 0.997 AUC-ROC on vital-sign anomaly detection, and zero-external-API data residency.'
+    },
+    technologies: ['Python', 'FastAPI', 'PyTorch (BiLSTM)', 'XGBoost', 'Qdrant', 'Multi-Agent Orchestration', 'Docker', 'Apache Kafka', 'MLflow', 'Airflow'],
     link: 'https://github.com/Boussyf0',
     demo: 'https://drive.google.com/file/d/1wGHb7PFnbUVe9YuvhA4ifCQP-4VmcHE5/view?usp=sharing',
     featured: true
   },
   {
+    id: 'mantis',
+    title: 'MANTIS',
+    tagline: 'Real-Time Event-Driven Predictive Maintenance for Industrial Manufacturing',
+    desc: 'Unplanned equipment downtime in heavy manufacturing (such as concrete production) causes severe operational bottlenecks, while traditional threshold-based alarms trigger high rates of false positives and miss subtle pre-failure degradation patterns.',
+    caseStudy: {
+      problem: 'Unplanned equipment downtime in heavy manufacturing (such as concrete production) causes severe operational bottlenecks, while traditional threshold-based alarms trigger high rates of false positives and miss subtle pre-failure degradation patterns.',
+      architecture: [
+        {
+          label: 'High-Throughput Streaming Ingestion',
+          text: 'Architected an asynchronous, event-driven backbone using Apache Kafka to ingest, buffer, and decouple high-frequency industrial sensor telemetry from downstream inference workers.'
+        },
+        {
+          label: 'Dual-Layer Anomaly Detection',
+          text: 'Combined deep sequence modeling (PyTorch LSTM, RMSE 12.5 on NASA C-MAPSS) for temporal drift and RUL forecasting with statistical outlier detection (PyOD) to catch both gradual mechanical wear and sudden sensor spikes.'
+        },
+        {
+          label: 'Time-Series Persistence & Live Telemetry',
+          text: 'Stored high-resolution sensor streams in TimescaleDB for fast historical window queries and exposed real-time health indices on a React / Next.js operator dashboard.'
+        }
+      ],
+      impact: 'Field-tested in an active Moroccan concrete pole manufacturing facility (batching plants & overhead cranes), validating end-to-end stream processing, real-time alert generation, and actionable maintenance scheduling targeting a 30–50% reduction in unplanned downtime.'
+    },
+    technologies: ['Apache Kafka', 'PyTorch (LSTM)', 'PyOD', 'TimescaleDB', 'FastAPI', 'React / Next.js', 'Docker', 'MLflow', 'Prometheus', 'Grafana'],
+    link: 'https://github.com/Boussyf0/MANTIS',
+    video: 'https://youtu.be/W1oyX2C1gkU',
+    featured: true
+  },
+  {
     id: 'chawerni',
-    title: 'Chawerni — Moroccan LegalTech RAG & Automated Evaluation (Jev/Opik)',
-    desc: 'Trilingual legal AI assistant (French, Arabic, Darija) grounded across 13 Moroccan legal codes. Engineered an automated non-regression LLM-as-a-Judge evaluation pipeline using Jev & Opik across a 50-question benchmark to score grounding, relevance, completeness, and legal prudence via structured outputs.',
+    title: 'Chawerni',
+    tagline: 'Trilingual Moroccan LegalTech Hybrid RAG & Automated LLM-as-a-Judge Evaluation',
+    desc: 'Legal consultation across Moroccan statutory codes requires high-precision retrieval across French, Arabic, and Darija, where ungrounded LLM responses or misquoted articles create unacceptable legal liability.',
+    caseStudy: {
+      problem: 'Legal consultation across Moroccan statutory codes requires high-precision retrieval across French, Arabic, and Darija, where ungrounded LLM responses or misquoted articles create unacceptable legal liability.',
+      architecture: [
+        {
+          label: 'Multi-Code Legal Knowledge Graph & Hybrid RAG',
+          text: 'Indexed and structured 13 Moroccan legal codes into a trilingual retrieval pipeline (French, Arabic, Darija) enforcing strict article-level citation grounding.'
+        },
+        {
+          label: 'Automated Non-Regression Evaluation (Jev / Opik)',
+          text: 'Engineered an automated LLM-as-a-Judge evaluation harness using Jev and Opik across a 50-question legal benchmark to score grounding, relevance, completeness, and legal prudence via structured outputs.'
+        }
+      ],
+      impact: 'Eliminated unverified legal citations and established a reproducible CI evaluation gate before prompt or model updates.'
+    },
     technologies: ['Python', 'Hybrid RAG', 'Jev', 'Opik', 'LLM-as-a-Judge', 'FastAPI', 'Qdrant', 'LLMs'],
     link: 'https://github.com/Boussyf0',
     demo: 'https://drive.google.com/file/d/1G5N00X_OGr3346PGpaheuPfQ6o995Aov/view?usp=sharing',
     featured: true
   },
   {
-    id: 'mantis',
-    title: 'MANTIS — Industrial Predictive Maintenance (Factory Floor Deployment)',
-    desc: 'Deep learning Remaining Useful Life (RUL) prediction pipeline (RMSE 12.5 on NASA C-MAPSS) deployed on a Moroccan concrete pole manufacturing floor. Monitors batching plants and overhead cranes in real time via Apache Kafka, TimescaleDB, PyTorch, and FastAPI, targeting a 30–50% reduction in unplanned downtime.',
-    technologies: ['Python', 'PyTorch', 'Apache Kafka', 'TimescaleDB', 'FastAPI', 'Docker', 'Kubernetes', 'MLflow', 'Prometheus', 'Grafana'],
-    link: 'https://github.com/Boussyf0/MANTIS',
-    video: 'https://youtu.be/W1oyX2C1gkU',
-    featured: true
-  },
-  {
     id: 'ml-pipeline-pro',
-    title: 'ML-Pipeline-Pro — Enterprise Churn MLOps Platform',
+    title: 'ML-Pipeline-Pro',
+    tagline: 'End-to-End Enterprise Churn MLOps & Feature Store Platform',
     desc: 'Production-grade MLOps pipeline (0.87 AUC-ROC) with automated feature engineering and serving (Feast, Redis), DAG orchestration (Airflow), experiment tracking and model registry (MLflow), data/concept drift monitoring (Evidently AI), FastAPI serving, and Prometheus/Grafana observability with GitHub Actions CI/CD.',
     technologies: ['Python', 'Airflow', 'MLflow', 'Feast', 'Evidently AI', 'FastAPI', 'Redis', 'Docker', 'Kubernetes', 'Prometheus', 'Grafana'],
     link: 'https://github.com/Boussyf0/ML-Pipeline-Pro',
@@ -74,7 +128,8 @@ export const PROJECTS = [
   },
   {
     id: 'aerointellicad',
-    title: 'AeroIntelliCAD — AI-Powered Aerospace CAD & CFD Platform',
+    title: 'AeroIntelliCAD',
+    tagline: 'AI-Powered Aerospace CAD Generation & Automated CFD Simulation Platform',
     desc: 'Microservices aerospace CAD/CFD platform integrating Llama 3.1 and YOLOv8 for 3D model generation and visual inspection, automated regulatory validation (35+ FAA/EASA constraints), and OpenFOAM CFD simulation served via FastAPI and Next.js.',
     technologies: ['Next.js', 'FastAPI', 'Llama 3.1', 'YOLOv8', 'OpenFOAM', 'Three.js', 'RAG', 'Python', 'Docker'],
     link: 'https://github.com/Boussyf0/AeroIntelliCAD',
@@ -83,7 +138,8 @@ export const PROJECTS = [
   },
   {
     id: 'rag-agent',
-    title: 'BrainGen Conversational RAG & ML Lead Scoring Platform',
+    title: 'BrainGen Conversational RAG',
+    tagline: 'Enterprise Conversational RAG & Automated ML Lead Qualification Engine',
     desc: 'Production RAG conversational platform (ChromaDB, FastAPI, Groq Llama-3.1) achieving 90.4% semantic accuracy and paired with an ML lead-scoring pipeline—delivering a +50% uplift in lead qualification, +40% lead conversion, and 60% Customer Acquisition Cost (CAC) reduction.',
     technologies: ['Python', 'FastAPI', 'ChromaDB', 'Llama 3.1', 'RAG', 'Scikit-learn'],
     link: 'https://github.com/Boussyf0',
